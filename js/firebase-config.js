@@ -61,6 +61,7 @@ export async function createUser(username) {
     const userData = {
         displayName: username,
         completedLessons: [],
+        lessonData: {},
         createdAt: serverTimestamp(),
         lastUpdated: serverTimestamp()
     };
@@ -174,8 +175,92 @@ export async function resetProgress(username) {
     const userRef = doc(db, "users", username.toLowerCase());
     await updateDoc(userRef, {
         completedLessons: [],
+        lessonData: {},
         lastUpdated: serverTimestamp()
     });
+}
+
+// ===== Lesson Data Functions =====
+
+/**
+ * Get all lesson data for a specific lesson
+ * @param {string} username - The username
+ * @param {string} lessonId - The lesson identifier (e.g., "lesson1")
+ * @returns {Promise<Object>} - Lesson data object
+ */
+export async function getLessonData(username, lessonId) {
+    const userData = await getUser(username);
+    
+    if (userData && userData.lessonData && userData.lessonData[lessonId]) {
+        return userData.lessonData[lessonId];
+    }
+    
+    // Return default empty structure
+    return {
+        notes: {},
+        sorting: { formal: [], informal: [], bank: [] },
+        revealedTopics: [],
+        matching: {},
+        flippedCards: [],
+        selectedScenario: null
+    };
+}
+
+/**
+ * Save all lesson data for a specific lesson
+ * @param {string} username - The username
+ * @param {string} lessonId - The lesson identifier (e.g., "lesson1")
+ * @param {Object} data - The lesson data to save
+ * @returns {Promise<void>}
+ */
+export async function saveLessonData(username, lessonId, data) {
+    const userRef = doc(db, "users", username.toLowerCase());
+    
+    // Use dot notation to update nested field
+    const updateData = {
+        [`lessonData.${lessonId}`]: data,
+        lastUpdated: serverTimestamp()
+    };
+    
+    await updateDoc(userRef, updateData);
+}
+
+/**
+ * Save a specific part of lesson data
+ * @param {string} username - The username
+ * @param {string} lessonId - The lesson identifier (e.g., "lesson1")
+ * @param {string} field - The field to update (e.g., "notes", "sorting")
+ * @param {any} value - The value to save
+ * @returns {Promise<void>}
+ */
+export async function saveLessonField(username, lessonId, field, value) {
+    const userRef = doc(db, "users", username.toLowerCase());
+    
+    const updateData = {
+        [`lessonData.${lessonId}.${field}`]: value,
+        lastUpdated: serverTimestamp()
+    };
+    
+    await updateDoc(userRef, updateData);
+}
+
+/**
+ * Save a note for a specific lesson
+ * @param {string} username - The username
+ * @param {string} lessonId - The lesson identifier
+ * @param {string} noteIndex - The note index (e.g., "0", "1")
+ * @param {string} content - The note content
+ * @returns {Promise<void>}
+ */
+export async function saveNote(username, lessonId, noteIndex, content) {
+    const userRef = doc(db, "users", username.toLowerCase());
+    
+    const updateData = {
+        [`lessonData.${lessonId}.notes.${noteIndex}`]: content,
+        lastUpdated: serverTimestamp()
+    };
+    
+    await updateDoc(userRef, updateData);
 }
 
 // Export db for advanced usage if needed

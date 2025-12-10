@@ -1,50 +1,183 @@
+// ===== Lesson 1 Activities with Firebase =====
+
+import { 
+    loadLessonData, 
+    saveFieldDebounced, 
+    saveNoteDebounced,
+    saveFieldImmediate,
+    getCurrentUser 
+} from './lesson-utils.js';
+
+const LESSON_ID = 'lesson1';
+
+// Current lesson data (loaded from Firebase)
+let lessonData = {
+    notes: {},
+    sorting: { formal: [], informal: [], bank: [] },
+    revealedTopics: [],
+    matching: {},
+    flippedCards: [],
+    selectedScenario: null
+};
+
+// Track if data has been loaded
+let dataLoaded = false;
+
+// ===== Initialize on Page Load =====
+document.addEventListener('DOMContentLoaded', async function() {
+    console.log('Initializing lesson activities...');
+    
+    // Load data from Firebase
+    await loadSavedData();
+    
+    // Initialize all activities
+    initSortingActivity();
+    initDragAndDrop();
+    initNotesInputs();
+    
+    // Apply saved states
+    applySavedStates();
+    
+    // Add entrance animations
+    addEntranceAnimations();
+});
+
+// ===== Load Saved Data from Firebase =====
+async function loadSavedData() {
+    const username = getCurrentUser();
+    if (!username) {
+        console.log('No user logged in, using defaults');
+        dataLoaded = true;
+        return;
+    }
+    
+    try {
+        lessonData = await loadLessonData(LESSON_ID);
+        dataLoaded = true;
+        console.log('Lesson data loaded:', lessonData);
+    } catch (error) {
+        console.error('Error loading lesson data:', error);
+        dataLoaded = true;
+    }
+}
+
+// ===== Apply Saved States to UI =====
+function applySavedStates() {
+    if (!dataLoaded) return;
+    
+    // Apply sorting state
+    applySortingState();
+    
+    // Apply revealed topics
+    applyRevealedTopics();
+    
+    // Apply matching state
+    applyMatchingState();
+    
+    // Apply flipped cards
+    applyFlippedCards();
+    
+    // Apply selected scenario
+    applySelectedScenario();
+    
+    // Apply notes
+    applyNotes();
+}
+
 // ===== Activity 1: Sorting Formal/Informal Phrases =====
 
 let selectedPhrase = null;
 
-// Initialize phrase click handlers
-document.querySelectorAll('#phraseBank .phrase').forEach(phrase => {
-    phrase.addEventListener('click', function() {
-        if (selectedPhrase === this) {
-            // Deselect if clicking the same phrase
-            this.classList.remove('selected');
-            selectedPhrase = null;
-        } else {
-            // Select new phrase
-            if (selectedPhrase) {
-                selectedPhrase.classList.remove('selected');
-            }
-            this.classList.add('selected');
-            selectedPhrase = this;
-        }
+function initSortingActivity() {
+    // Initialize phrase click handlers
+    document.querySelectorAll('#phraseBank .phrase').forEach(phrase => {
+        phrase.addEventListener('click', handlePhraseClick);
     });
-});
+    
+    // Initialize zone click handlers
+    document.querySelectorAll('.sort-zone').forEach(zone => {
+        zone.addEventListener('click', handleZoneClick);
+    });
+    
+    // Allow clicking phrases in zones to move them back
+    document.querySelectorAll('.zone-content').forEach(zone => {
+        zone.addEventListener('click', handleZoneContentClick);
+    });
+}
 
-// Initialize zone click handlers
-document.querySelectorAll('.sort-zone').forEach(zone => {
-    zone.addEventListener('click', function(e) {
-        if (selectedPhrase && e.target === this || e.target.classList.contains('zone-content') || e.target === this.querySelector('h4') || e.target === this.querySelector('.zone-hint')) {
-            const zoneContent = this.querySelector('.zone-content');
-            zoneContent.appendChild(selectedPhrase);
+function handlePhraseClick(e) {
+    const phrase = e.currentTarget;
+    if (selectedPhrase === phrase) {
+        phrase.classList.remove('selected');
+        selectedPhrase = null;
+    } else {
+        if (selectedPhrase) {
             selectedPhrase.classList.remove('selected');
-            selectedPhrase = null;
         }
-    });
-});
+        phrase.classList.add('selected');
+        selectedPhrase = phrase;
+    }
+}
 
-// Allow clicking phrases in zones to move them back
-document.querySelectorAll('.zone-content').forEach(zone => {
-    zone.addEventListener('click', function(e) {
-        if (e.target.classList.contains('phrase') && !selectedPhrase) {
-            // Move phrase back to bank
-            const phraseBank = document.getElementById('phraseBank');
-            phraseBank.appendChild(e.target);
-            e.target.classList.remove('correct', 'incorrect');
+function handleZoneClick(e) {
+    const zone = e.currentTarget;
+    if (selectedPhrase && (e.target === zone || e.target.classList.contains('zone-content') || e.target.tagName === 'H4' || e.target.classList.contains('zone-hint'))) {
+        const zoneContent = zone.querySelector('.zone-content');
+        zoneContent.appendChild(selectedPhrase);
+        selectedPhrase.classList.remove('selected');
+        selectedPhrase = null;
+        saveSortingState();
+    }
+}
+
+function handleZoneContentClick(e) {
+    if (e.target.classList.contains('phrase') && !selectedPhrase) {
+        const phraseBank = document.getElementById('phraseBank');
+        phraseBank.appendChild(e.target);
+        e.target.classList.remove('correct', 'incorrect');
+        saveSortingState();
+    }
+}
+
+function saveSortingState() {
+    const formalZone = document.querySelector('#formalZone .zone-content');
+    const informalZone = document.querySelector('#informalZone .zone-content');
+    const phraseBank = document.getElementById('phraseBank');
+    
+    const sortingState = {
+        formal: Array.from(formalZone.querySelectorAll('.phrase')).map(p => p.textContent),
+        informal: Array.from(informalZone.querySelectorAll('.phrase')).map(p => p.textContent),
+        bank: Array.from(phraseBank.querySelectorAll('.phrase')).map(p => p.textContent)
+    };
+    
+    lessonData.sorting = sortingState;
+    saveFieldDebounced(LESSON_ID, 'sorting', sortingState);
+}
+
+function applySortingState() {
+    if (!lessonData.sorting) return;
+    
+    const { formal, informal } = lessonData.sorting;
+    const formalZone = document.querySelector('#formalZone .zone-content');
+    const informalZone = document.querySelector('#informalZone .zone-content');
+    const phraseBank = document.getElementById('phraseBank');
+    
+    // Get all phrases
+    const allPhrases = document.querySelectorAll('.phrase');
+    
+    // Move phrases to correct zones
+    allPhrases.forEach(phrase => {
+        const text = phrase.textContent;
+        if (formal && formal.includes(text)) {
+            formalZone.appendChild(phrase);
+        } else if (informal && informal.includes(text)) {
+            informalZone.appendChild(phrase);
         }
+        // Otherwise stays in bank
     });
-});
+}
 
-function checkSorting() {
+window.checkSorting = function() {
     const formalZone = document.querySelector('#formalZone .zone-content');
     const informalZone = document.querySelector('#informalZone .zone-content');
     const feedback = document.getElementById('sortingFeedback');
@@ -52,7 +185,6 @@ function checkSorting() {
     let correct = 0;
     let total = 0;
     
-    // Check formal zone
     formalZone.querySelectorAll('.phrase').forEach(phrase => {
         total++;
         if (phrase.dataset.formality === 'formal') {
@@ -65,7 +197,6 @@ function checkSorting() {
         }
     });
     
-    // Check informal zone
     informalZone.querySelectorAll('.phrase').forEach(phrase => {
         total++;
         if (phrase.dataset.formality === 'informal') {
@@ -78,7 +209,6 @@ function checkSorting() {
         }
     });
     
-    // Show feedback
     feedback.classList.add('show');
     if (total === 0) {
         feedback.textContent = 'Please sort some phrases first!';
@@ -93,33 +223,50 @@ function checkSorting() {
         feedback.textContent = `${correct}/${total} correct. The highlighted phrases need to be moved.`;
         feedback.className = 'feedback show error';
     }
-}
+};
 
-function resetSorting() {
+window.resetSorting = function() {
     const phraseBank = document.getElementById('phraseBank');
     const feedback = document.getElementById('sortingFeedback');
     
-    // Move all phrases back to bank
     document.querySelectorAll('.zone-content .phrase').forEach(phrase => {
         phrase.classList.remove('correct', 'incorrect', 'selected');
         phraseBank.appendChild(phrase);
     });
     
-    // Hide feedback
     feedback.classList.remove('show');
     
-    // Clear selection
     if (selectedPhrase) {
         selectedPhrase.classList.remove('selected');
         selectedPhrase = null;
     }
-}
+    
+    saveSortingState();
+};
 
 
 // ===== Activity 3: Small Talk Topics =====
 
-function revealTopic(card) {
+window.revealTopic = function(card) {
     card.classList.add('revealed');
+    
+    // Save revealed state
+    const topicText = card.querySelector('.topic-text').textContent;
+    if (!lessonData.revealedTopics.includes(topicText)) {
+        lessonData.revealedTopics.push(topicText);
+        saveFieldDebounced(LESSON_ID, 'revealedTopics', lessonData.revealedTopics);
+    }
+};
+
+function applyRevealedTopics() {
+    if (!lessonData.revealedTopics || lessonData.revealedTopics.length === 0) return;
+    
+    document.querySelectorAll('.topic-card').forEach(card => {
+        const topicText = card.querySelector('.topic-text').textContent;
+        if (lessonData.revealedTopics.includes(topicText)) {
+            card.classList.add('revealed');
+        }
+    });
 }
 
 
@@ -127,16 +274,10 @@ function revealTopic(card) {
 
 let draggedResponse = null;
 
-// Initialize drag and drop
-document.addEventListener('DOMContentLoaded', function() {
-    initDragAndDrop();
-});
-
 function initDragAndDrop() {
     const responses = document.querySelectorAll('.draggable-response');
     const dropZones = document.querySelectorAll('.drop-zone');
     
-    // Draggable responses
     responses.forEach(response => {
         response.addEventListener('dragstart', handleDragStart);
         response.addEventListener('dragend', handleDragEnd);
@@ -147,14 +288,12 @@ function initDragAndDrop() {
         response.addEventListener('touchend', handleTouchEnd);
     });
     
-    // Drop zones
     dropZones.forEach(zone => {
         zone.addEventListener('dragover', handleDragOver);
         zone.addEventListener('dragleave', handleDragLeave);
         zone.addEventListener('drop', handleDrop);
     });
     
-    // Also allow dropping back to response bank
     const responseBank = document.getElementById('responseBank');
     if (responseBank) {
         responseBank.addEventListener('dragover', handleDragOver);
@@ -169,7 +308,7 @@ function handleDragStart(e) {
     e.dataTransfer.setData('text/html', this.innerHTML);
 }
 
-function handleDragEnd(e) {
+function handleDragEnd() {
     this.classList.remove('dragging');
     document.querySelectorAll('.drop-zone').forEach(zone => {
         zone.classList.remove('drag-over');
@@ -182,7 +321,7 @@ function handleDragOver(e) {
     this.classList.add('drag-over');
 }
 
-function handleDragLeave(e) {
+function handleDragLeave() {
     this.classList.remove('drag-over');
 }
 
@@ -191,23 +330,21 @@ function handleDrop(e) {
     this.classList.remove('drag-over');
     
     if (draggedResponse) {
-        // Check if zone already has a response
         const existingResponse = this.querySelector('.draggable-response');
         if (existingResponse) {
-            // Move existing response back to bank
             const bank = document.getElementById('responseBank');
             bank.appendChild(existingResponse);
         }
         
-        // Hide placeholder
         const placeholder = this.querySelector('.drop-placeholder');
         if (placeholder) {
             placeholder.style.display = 'none';
         }
         
-        // Add dragged response to zone
         this.appendChild(draggedResponse);
         draggedResponse.classList.remove('dragging');
+        
+        saveMatchingState();
     }
 }
 
@@ -217,7 +354,6 @@ function handleDropToBank(e) {
         this.appendChild(draggedResponse);
         draggedResponse.classList.remove('dragging');
         
-        // Show placeholder again in original zone
         document.querySelectorAll('.drop-zone').forEach(zone => {
             if (!zone.querySelector('.draggable-response')) {
                 const placeholder = zone.querySelector('.drop-placeholder');
@@ -226,10 +362,12 @@ function handleDropToBank(e) {
                 }
             }
         });
+        
+        saveMatchingState();
     }
 }
 
-// Touch support for mobile
+// Touch support
 let touchStartX, touchStartY, touchClone;
 
 function handleTouchStart(e) {
@@ -241,7 +379,6 @@ function handleTouchStart(e) {
     touchStartX = touch.clientX;
     touchStartY = touch.clientY;
     
-    // Create clone for visual feedback
     touchClone = this.cloneNode(true);
     touchClone.classList.add('touch-clone');
     touchClone.style.position = 'fixed';
@@ -261,7 +398,6 @@ function handleTouchMove(e) {
     touchClone.style.left = (touch.clientX - 100) + 'px';
     touchClone.style.top = (touch.clientY - 20) + 'px';
     
-    // Highlight drop zone under finger
     const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
     document.querySelectorAll('.drop-zone').forEach(zone => {
         zone.classList.remove('drag-over');
@@ -281,17 +417,14 @@ function handleTouchEnd(e) {
     const touch = e.changedTouches[0];
     const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
     
-    // Remove clone
     if (touchClone.parentNode) {
         touchClone.parentNode.removeChild(touchClone);
     }
     touchClone = null;
     
-    // Find drop zone
     if (elementBelow) {
         const dropZone = elementBelow.closest('.drop-zone');
         if (dropZone) {
-            // Check if zone already has a response
             const existingResponse = dropZone.querySelector('.draggable-response');
             if (existingResponse) {
                 const bank = document.getElementById('responseBank');
@@ -312,9 +445,44 @@ function handleTouchEnd(e) {
         zone.classList.remove('drag-over');
     });
     draggedResponse = null;
+    
+    saveMatchingState();
 }
 
-function checkDragMatching() {
+function saveMatchingState() {
+    const matchingState = {};
+    
+    document.querySelectorAll('.drop-zone').forEach(zone => {
+        const response = zone.querySelector('.draggable-response');
+        if (response) {
+            matchingState[zone.dataset.match] = response.dataset.match;
+        }
+    });
+    
+    lessonData.matching = matchingState;
+    saveFieldDebounced(LESSON_ID, 'matching', matchingState);
+}
+
+function applyMatchingState() {
+    if (!lessonData.matching || Object.keys(lessonData.matching).length === 0) return;
+    
+    const responseBank = document.getElementById('responseBank');
+    
+    Object.entries(lessonData.matching).forEach(([zoneMatch, responseMatch]) => {
+        const zone = document.querySelector(`.drop-zone[data-match="${zoneMatch}"]`);
+        const response = document.querySelector(`.draggable-response[data-match="${responseMatch}"]`);
+        
+        if (zone && response) {
+            const placeholder = zone.querySelector('.drop-placeholder');
+            if (placeholder) {
+                placeholder.style.display = 'none';
+            }
+            zone.appendChild(response);
+        }
+    });
+}
+
+window.checkDragMatching = function() {
     const feedback = document.getElementById('dragMatchingFeedback');
     const dropZones = document.querySelectorAll('.drop-zone');
     
@@ -353,14 +521,13 @@ function checkDragMatching() {
         feedback.textContent = `${correct}/${total} correct. The red ones need to be moved.`;
         feedback.className = 'feedback show error';
     }
-}
+};
 
-function resetDragMatching() {
+window.resetDragMatching = function() {
     const feedback = document.getElementById('dragMatchingFeedback');
     const responseBank = document.getElementById('responseBank');
     const dropZones = document.querySelectorAll('.drop-zone');
     
-    // Move all responses back to bank
     dropZones.forEach(zone => {
         const response = zone.querySelector('.draggable-response');
         if (response) {
@@ -369,7 +536,6 @@ function resetDragMatching() {
         }
         zone.classList.remove('correct', 'incorrect');
         
-        // Show placeholder
         const placeholder = zone.querySelector('.drop-placeholder');
         if (placeholder) {
             placeholder.style.display = 'block';
@@ -377,27 +543,102 @@ function resetDragMatching() {
     });
     
     feedback.classList.remove('show');
+    
+    // Clear saved matching state
+    lessonData.matching = {};
+    saveFieldDebounced(LESSON_ID, 'matching', {});
+};
+
+
+// ===== Flip Cards =====
+
+// Add click handlers for flip cards
+document.querySelectorAll('.flip-card').forEach((card, index) => {
+    card.addEventListener('click', function() {
+        this.classList.toggle('flipped');
+        saveFlippedCardsState();
+    });
+});
+
+function saveFlippedCardsState() {
+    const flippedCards = [];
+    document.querySelectorAll('.flip-card').forEach((card, index) => {
+        if (card.classList.contains('flipped')) {
+            flippedCards.push(index);
+        }
+    });
+    
+    lessonData.flippedCards = flippedCards;
+    saveFieldDebounced(LESSON_ID, 'flippedCards', flippedCards);
+}
+
+function applyFlippedCards() {
+    if (!lessonData.flippedCards || lessonData.flippedCards.length === 0) return;
+    
+    document.querySelectorAll('.flip-card').forEach((card, index) => {
+        if (lessonData.flippedCards.includes(index)) {
+            card.classList.add('flipped');
+        }
+    });
 }
 
 
 // ===== Reveal Box Toggle =====
 
-function toggleRevealBox(header) {
+window.toggleRevealBox = function(header) {
     const box = header.closest('.reveal-box');
     box.classList.toggle('revealed');
-}
+};
 
 
 // ===== Activity 5: Scenario Selection =====
 
-function selectScenario(card) {
-    // Remove selection from all cards
+window.selectScenario = function(card) {
     document.querySelectorAll('.scenario-card').forEach(c => {
         c.classList.remove('selected');
     });
     
-    // Add selection to clicked card
     card.classList.add('selected');
+    
+    // Save selected scenario
+    const scenarioIndex = Array.from(document.querySelectorAll('.scenario-card')).indexOf(card);
+    lessonData.selectedScenario = scenarioIndex;
+    saveFieldDebounced(LESSON_ID, 'selectedScenario', scenarioIndex);
+};
+
+function applySelectedScenario() {
+    if (lessonData.selectedScenario === null || lessonData.selectedScenario === undefined) return;
+    
+    const scenarioCards = document.querySelectorAll('.scenario-card');
+    if (scenarioCards[lessonData.selectedScenario]) {
+        scenarioCards[lessonData.selectedScenario].classList.add('selected');
+    }
+}
+
+
+// ===== Notes =====
+
+function initNotesInputs() {
+    const notesInputs = document.querySelectorAll('.notes-input');
+    
+    notesInputs.forEach((input, index) => {
+        input.addEventListener('input', function() {
+            lessonData.notes[index] = this.value;
+            saveNoteDebounced(LESSON_ID, index.toString(), this.value);
+        });
+    });
+}
+
+function applyNotes() {
+    if (!lessonData.notes || Object.keys(lessonData.notes).length === 0) return;
+    
+    const notesInputs = document.querySelectorAll('.notes-input');
+    
+    notesInputs.forEach((input, index) => {
+        if (lessonData.notes[index] !== undefined) {
+            input.value = lessonData.notes[index];
+        }
+    });
 }
 
 
@@ -417,28 +658,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 
-// ===== Save Notes to Local Storage =====
+// ===== Entrance Animations =====
 
-const notesInputs = document.querySelectorAll('.notes-input');
-
-// Load saved notes
-notesInputs.forEach((input, index) => {
-    const saved = localStorage.getItem(`lesson1-notes-${index}`);
-    if (saved) {
-        input.value = saved;
-    }
-    
-    // Save on input
-    input.addEventListener('input', function() {
-        localStorage.setItem(`lesson1-notes-${index}`, this.value);
-    });
-});
-
-
-// ===== Initialize =====
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Add entrance animations
+function addEntranceAnimations() {
     const sections = document.querySelectorAll('.section');
     sections.forEach((section, index) => {
         section.style.opacity = '0';
@@ -450,4 +672,4 @@ document.addEventListener('DOMContentLoaded', function() {
             section.style.transform = 'translateY(0)';
         }, 100 + (index * 100));
     });
-});
+}

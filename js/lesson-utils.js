@@ -4,11 +4,17 @@ import {
     markLessonComplete as firebaseMarkComplete,
     markLessonIncomplete as firebaseMarkIncomplete,
     getCompletedLessons,
-    getUser
+    getUser,
+    getLessonData,
+    saveLessonField,
+    saveNote
 } from './firebase-config.js';
 
 // Session storage key for current user
 const SESSION_KEY = 'businessEnglish_currentUser';
+
+// Debounce timers
+const debounceTimers = {};
 
 /**
  * Get the current logged-in username
@@ -107,4 +113,128 @@ export function requireLogin() {
         return false;
     }
     return true;
+}
+
+// ===== Lesson Data Functions =====
+
+/**
+ * Load all lesson data for a specific lesson
+ * @param {string} lessonId - The lesson identifier (e.g., "lesson1")
+ * @returns {Promise<Object>}
+ */
+export async function loadLessonData(lessonId) {
+    const username = getCurrentUser();
+    if (!username) {
+        console.log('No user logged in, returning defaults');
+        return getDefaultLessonData();
+    }
+    
+    try {
+        const data = await getLessonData(username, lessonId);
+        console.log(`Loaded lesson data for ${lessonId}:`, data);
+        return data;
+    } catch (error) {
+        console.error('Error loading lesson data:', error);
+        return getDefaultLessonData();
+    }
+}
+
+/**
+ * Get default empty lesson data structure
+ * @returns {Object}
+ */
+function getDefaultLessonData() {
+    return {
+        notes: {},
+        sorting: { formal: [], informal: [], bank: [] },
+        revealedTopics: [],
+        matching: {},
+        flippedCards: [],
+        selectedScenario: null
+    };
+}
+
+/**
+ * Save a specific field with debouncing
+ * @param {string} lessonId - The lesson identifier
+ * @param {string} field - The field to save
+ * @param {any} value - The value to save
+ * @param {number} delay - Debounce delay in ms (default 1000)
+ */
+export function saveFieldDebounced(lessonId, field, value, delay = 1000) {
+    const username = getCurrentUser();
+    if (!username) {
+        console.log('No user logged in, not saving');
+        return;
+    }
+    
+    const timerKey = `${lessonId}-${field}`;
+    
+    // Clear existing timer
+    if (debounceTimers[timerKey]) {
+        clearTimeout(debounceTimers[timerKey]);
+    }
+    
+    // Set new timer
+    debounceTimers[timerKey] = setTimeout(async () => {
+        try {
+            await saveLessonField(username, lessonId, field, value);
+            console.log(`Saved ${field} for ${lessonId}`);
+        } catch (error) {
+            console.error(`Error saving ${field}:`, error);
+        }
+    }, delay);
+}
+
+/**
+ * Save a note with debouncing
+ * @param {string} lessonId - The lesson identifier
+ * @param {string} noteIndex - The note index
+ * @param {string} content - The note content
+ * @param {number} delay - Debounce delay in ms (default 1000)
+ */
+export function saveNoteDebounced(lessonId, noteIndex, content, delay = 1000) {
+    const username = getCurrentUser();
+    if (!username) {
+        console.log('No user logged in, not saving note');
+        return;
+    }
+    
+    const timerKey = `${lessonId}-note-${noteIndex}`;
+    
+    // Clear existing timer
+    if (debounceTimers[timerKey]) {
+        clearTimeout(debounceTimers[timerKey]);
+    }
+    
+    // Set new timer
+    debounceTimers[timerKey] = setTimeout(async () => {
+        try {
+            await saveNote(username, lessonId, noteIndex, content);
+            console.log(`Saved note ${noteIndex} for ${lessonId}`);
+        } catch (error) {
+            console.error(`Error saving note:`, error);
+        }
+    }, delay);
+}
+
+/**
+ * Save immediately without debouncing (for important saves)
+ * @param {string} lessonId - The lesson identifier
+ * @param {string} field - The field to save
+ * @param {any} value - The value to save
+ */
+export async function saveFieldImmediate(lessonId, field, value) {
+    const username = getCurrentUser();
+    if (!username) {
+        console.log('No user logged in, not saving');
+        return;
+    }
+    
+    try {
+        await saveLessonField(username, lessonId, field, value);
+        console.log(`Saved ${field} for ${lessonId} immediately`);
+    } catch (error) {
+        console.error(`Error saving ${field}:`, error);
+    }
 }

@@ -105,7 +105,7 @@
                 <p class="activity-instruction">These phrases help you explain what you do professionally. Click each card to reveal example sentences.</p>
 
                 <div class="phrase-cards">
-                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <span class="phrase-label">I'm responsible for...</span>
@@ -116,7 +116,7 @@
                         </div>
                     </div>
 
-                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <span class="phrase-label">My role involves...</span>
@@ -127,7 +127,7 @@
                         </div>
                     </div>
 
-                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <span class="phrase-label">I work closely with...</span>
@@ -136,9 +136,9 @@
                                 <p>"I work closely with the finance department on budget planning."</p>
                             </div>
                         </div>
-                        </div>
+                    </div>
 
-                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <span class="phrase-label">I'm based in...</span>
@@ -149,7 +149,7 @@
                         </div>
                     </div>
 
-                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <span class="phrase-label">I've been with the company for...</span>
@@ -160,7 +160,7 @@
                         </div>
                     </div>
 
-                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <span class="phrase-label">I report to...</span>
@@ -398,25 +398,23 @@
         <p>Business English Course by English in Doses</p>
     </footer>
 
-    <script src="js/script.js"></script>
+    <!-- Load script.js as ES module -->
+    <script type="module" src="js/script.js"></script>
+    
+    <!-- Lesson completion functionality -->
     <script type="module">
-        // ===== Lesson Completion Functionality with Firebase =====
         import { 
             isLessonComplete, 
             markLessonComplete, 
             markLessonIncomplete,
-            getCurrentUser,
-            requireLogin
+            getCurrentUser
         } from './js/lesson-utils.js';
         
         const LESSON_NUMBER = 1;
         let isComplete = false;
         
-        // Check if user is logged in
+        // Initialize on page load
         document.addEventListener('DOMContentLoaded', async function() {
-            // Optional: Uncomment the next line to require login for lesson pages
-            // if (!requireLogin()) return;
-            
             await initializeCompletion();
         });
         
