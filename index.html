@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business English Course | 12-Week Syllabus</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="homepage.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Login Modal -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-modal">
+            <div class="login-icon">👋</div>
+            <h2>Welcome to Business English</h2>
+            <p>Please enter your name to track your progress through the course.</p>
+            <form id="loginForm">
+                <input type="text" id="studentName" class="login-input" placeholder="Your name" required minlength="2" maxlength="50">
+                <button type="submit" class="login-btn">Start Learning</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">12-Week Course</div>
+            <h1>Business English</h1>
+            <p class="hero-tagline">Professional Communication for Advanced Learners</p>
+            <div class="hero-details">
+                <span class="hero-detail"><span class="detail-icon">📊</span> B2-C2 Level</span>
+                <span class="hero-detail"><span class="detail-icon">⏱️</span> 60-min Lessons</span>
+                <span class="hero-detail"><span class="detail-icon">🎯</span> Practical Focus</span>
+            </div>
+        </div>
+        <div class="hero-decoration hero-decoration-1"></div>
+        <div class="hero-decoration hero-decoration-2"></div>
+    </header>
+
+    <!-- Welcome Banner (shows after login) -->
+    <div class="welcome-banner" id="welcomeBanner" style="display: none;">
+        <div class="container">
+            <div class="welcome-content">
+                <span class="welcome-text">Welcome back, <strong id="displayName"></strong>!</span>
+                <button class="change-profile-btn" onclick="showLoginModal()">Change Profile</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Overview -->
+    <section class="overview">
+        <div class="container">
+            <div class="overview-card">
+                <h2>Course Overview</h2>
+                <p>This course is designed for advanced English learners who want to improve their professional communication skills. Each lesson is self-contained and focuses on practical language that can be used immediately in the workplace.</p>
+                <div class="overview-features">
+                    <div class="feature">
+                        <div class="feature-icon">💬</div>
+                        <div class="feature-text">
+                            <strong>Expressions & Idioms</strong>
+                            <span>Professional phrases for every situation</span>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🎭</div>
+                        <div class="feature-text">
+                            <strong>Formality Levels</strong>
+                            <span>Know when to be formal or casual</span>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🔧</div>
+                        <div class="feature-text">
+                            <strong>Phrasal Verbs</strong>
+                            <span>Essential business phrasal verbs</span>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">📝</div>
+                        <div class="feature-text">
+                            <strong>Integrated Grammar</strong>
+                            <span>Grammar that supports communication</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lessons Grid -->
+    <main class="lessons-section">
+        <div class="container">
+            <h2 class="lessons-title">Course Lessons</h2>
+            <p class="lessons-subtitle">Click on a lesson to view the worksheet</p>
+
+            <div class="lessons-grid">
+                <!-- Week 1 -->
+                <a href="lesson1.html" class="lesson-card available" data-lesson="1">
+                    <div class="completion-badge" title="Completed">✓</div>
+                    <div class="lesson-week">Week 1</div>
+                    <div class="lesson-icon">🤝</div>
+                    <h3>Making a Strong First Impression</h3>
+                    <p>Professional introductions, networking, and building confidence in workplace settings.</p>
+                    <div class="lesson-tags">
+                        <span class="tag">Introductions</span>
+                        <span class="tag">Small Talk</span>
+                        <span class="tag">Networking</span>
+                    </div>
+                    <div class="lesson-status">
+                        <span class="status-available">View Lesson →</span>
+                    </div>
+                </a>
+
+                <!-- Week 2 -->
+                <div class="lesson-card" data-lesson="2">
+                    <div class="completion-badge" title="Completed">✓</div>
+                    <div class="lesson-week">Week 2</div>
+                    <div class="lesson-icon">✉️</div>
+                    <h3>Professional Email Communication</h3>
+                    <p>Master clear, professional email writing that gets results and maintains positive relationships.</p>
+                    <div class="lesson-tags">
+                        <span class="tag">Email Writing</span>
+                        <span class="tag">Tone</span>
+                        <span class="tag">Requests</span>
+                    </div>
+                    <div class="lesson-status">
+                        <span class="status-coming">Coming Soon</span>
+                    </div>
+                </div>
+
+                <!-- Week 3 -->
+                <div class="lesson-card" data-lesson="3">
+                    <div class="completion-badge" title="Completed">✓</div>
+                    <div class="lesson-week">Week 3</div>
+                    <div class="lesson-icon">🗣️</div>
+                    <h3>Speaking Up in Meetings (Part 1)</h3>
+                    <p>Develop confidence to contribute effectively by giving opinions and responding diplomatically.</p>
+                    <div class="lesson-tags">
+                        <span class="tag">Opinions</span>
+                        <span class="tag">Diplomacy</span>
+                        <span class="tag">Hedging</span>
+                    </div>
+                    <div class="lesson-status">
+                        <span class="status-coming">Coming Soon</span>
+                    </div>
+                </div>
+
+                <!-- Week 4 -->
+                <div class="lesson-card" data-lesson="4">
+                    <div class="completion-badge" title="Completed">✓</div>
+                    <div class="lesson-week">Week 4</div>
+                    <div class="lesson-icon">👥</div>
+                    <h3>Speaking Up in Meetings (Part 2)</h3>
+                    <p>Advanced meeting skills including turn-taking, seeking clarification, and keeping discussions on track.</p>
+                    <div class="lesson-tags">
+                        <span class="tag">Interrupting</span>
+                        <span class="tag">Clarification</span>
+                        <span class="tag">Summarising</span>
+                    </div>
+                    <div class="lesson-status">
+                        <span class="status-coming">Coming Soon</span>
+                    </div>
+                </div>
+
+                <!-- Week 5 -->
+                <div class="lesson-card" data-lesson="5">
+                    <div class="completion-badge" title="Completed">✓</div>
+                    <div class="lesson-week">Week 5</div>
+                    <div class="lesson-icon">📊</div>
+                    <h3>Presenting Ideas with Clarity</h3>
+                    <p>Structure and deliver spoken ideas clearly in formal presentations or informal explanations.</p>
+                    <div class="lesson-tags">
+                        <span class="tag">Signposting</span>
+                        <span class="tag">Structure</span>
+                        <span class="tag">Transitions</span>
+                    </div>
+                    <div class="lesson-status">
+                        <span class="status-coming">Coming Soon</span>
+                    </div>
+                </div>
+
+                <!-- Week 6 -->
+                <div class="lesson-card" data-lesson="6">
+                    <div class="completion-badge" title="Completed">✓</div>
+                    <div class="lesson-week">Week 6</div>
+                    <div class="lesson-icon">☕</div>
+                    <h3>Building Professional Relationships</h3>
+                    <p>Develop skills for building rapport, maintaining relationships, and navigating social situations.</p>
+                    <div class="lesson-tags">
+                        <span class="tag">Small Talk</span>
+                        <span class="tag">Rapport</span>
+                        <span class="tag">Networking</span>
+                    </div>
+                    <div class="lesson-status">
+                        <span class="status-coming">Coming Soon</span>
+                    </div>
+                </div>
+
+                <!-- Week 7 -->
+                <div class="lesson-card" data-lesson="7">
+                    <div class="completion-badge" title="Completed">✓</div>
+                    <div class="lesson-week">Week 7</div>
+                    <div class="lesson-icon">📞</div>
+                    <h3>Phone and Video Call Communication</h3>
+                    <p>Build confidence and clarity in telephone and video conference communication.</p>
+                    <div class="lesson-tags">
+                        <span class="tag">Phone Calls</span>
+                        <span class="tag">Video Calls</span>
+                        <span class="tag">Technical Issues</span>
+                    </div>
+                    <div class="lesson-status">
+                        <span class="status-coming">Coming Soon</span>
+                    </div>
+                </div>
+
+                <!-- Week 8 -->
+                <div class="lesson-card" data-lesson="8">
+                    <div class="completion-badge" title="Completed">✓</div>
+                    <div class="lesson-week">Week 8</div>
+                    <div class="lesson-icon">✍️</div>
+                    <h3>Persuasive Writing</h3>
+                    <p>Write compelling emails, proposals, and requests that motivate action.</p>
+                    <div class="lesson-tags">
+                        <span class="tag">Persuasion</span>
+                        <span class="tag">Proposals</span>
+                        <span class="tag">Call to Action</span>
+                    </div>
+                    <div class="lesson-status">
+                        <span class="status-coming">Coming Soon</span>
+                    </div>
+                </div>
+
+                <!-- Week 9 -->
+                <div class="lesson-card" data-lesson="9">
+                    <div class="completion-badge" title="Completed">✓</div>
+                    <div class="lesson-week">Week 9</div>
+                    <div class="lesson-icon">⚡</div>
+                    <h3>Navigating Difficult Conversations</h3>
+                    <p>Strategies and language for handling challenging workplace conversations professionally.</p>
+                    <div class="lesson-tags">
+                        <span class="tag">Feedback</span>
+                        <span class="tag">Declining</span>
+                        <span class="tag">Bad News</span>
+                    </div>
+                    <div class="lesson-status">
+                        <span class="status-coming">Coming Soon</span>
+                    </div>
+                </div>
+
+                <!-- Week 10 -->
+                <div class="lesson-card" data-lesson="10">
+                    <div class="completion-badge" title="Completed">✓</div>
+                    <div class="lesson-week">Week 10</div>
+                    <div class="lesson-icon">💼</div>
+                    <h3>Interview Skills</h3>
+                    <p>Prepare for job interviews with strategies for answering questions and showcasing strengths.</p>
+                    <div class="lesson-tags">
+                        <span class="tag">STAR Method</span>
+                        <span class="tag">Questions</span>
+                        <span class="tag">Confidence</span>
+                    </div>
+                    <div class="lesson-status">
+                        <span class="status-coming">Coming Soon</span>
+                    </div>
+                </div>
+
+                <!-- Week 11 -->
+                <div class="lesson-card" data-lesson="11">
+                    <div class="completion-badge" title="Completed">✓</div>
+                    <div class="lesson-week">Week 11</div>
+                    <div class="lesson-icon">🎯</div>
+                    <h3>Negotiation and Influence</h3>
+                    <p>Negotiate effectively, make proposals, and reach mutually beneficial agreements.</p>
+                    <div class="lesson-tags">
+                        <span class="tag">Proposals</span>
+                        <span class="tag">Compromise</span>
+                        <span class="tag">Agreements</span>
+                    </div>
+                    <div class="lesson-status">
+                        <span class="status-coming">Coming Soon</span>
+                    </div>
+                </div>
+
+                <!-- Week 12 -->
+                <div class="lesson-card" data-lesson="12">
+                    <div class="completion-badge" title="Completed">✓</div>
+                    <div class="lesson-week">Week 12</div>
+                    <div class="lesson-icon">🏆</div>
+                    <h3>Consolidation and Confidence Building</h3>
+                    <p>Review key language, practice in realistic scenarios, and build confidence for real-world application.</p>
+                    <div class="lesson-tags">
+                        <span class="tag">Review</span>
+                        <span class="tag">Practice</span>
+                        <span class="tag">Goals</span>
+                    </div>
+                    <div class="lesson-status">
+                        <span class="status-coming">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Progress Section -->
+    <section class="progress-section" id="progressSection">
+        <div class="container">
+            <div class="progress-card">
+                <h2>📈 Your Progress</h2>
+                <div class="progress-content">
+                    <div class="progress-stats">
+                        <div class="progress-circle-container">
+                            <svg class="progress-circle" viewBox="0 0 120 120">
+                                <circle class="progress-bg" cx="60" cy="60" r="54"></circle>
+                                <circle class="progress-fill" cx="60" cy="60" r="54" id="progressCircle"></circle>
+                            </svg>
+                            <div class="progress-number">
+                                <span id="completedCount">0</span>
+                                <span class="progress-separator">/</span>
+                                <span>12</span>
+                            </div>
+                        </div>
+                        <div class="progress-label">Lessons Completed</div>
+                    </div>
+                    <div class="progress-details">
+                        <div class="progress-message" id="progressMessage">
+                            <p>Start your first lesson to begin tracking your progress!</p>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill" id="progressBarFill"></div>
+                            </div>
+                            <span class="progress-percentage" id="progressPercentage">0%</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="reset-progress-btn" onclick="confirmResetProgress()">Reset Progress</button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>Business English Course by English in Doses</p>
+    </footer>
+
+    <script src="homepage.js"></script>
+</body>
+</html>

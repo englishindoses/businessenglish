@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business English | First Impressions</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="back-link">← Back to Course</a>
+        <div class="header-content">
+            <div class="header-badge">Lesson 1</div>
+            <h1>Making a Strong First Impression</h1>
+            <p class="header-subtitle">Professional introductions, networking & building confidence</p>
+        </div>
+        <div class="header-decoration"></div>
+    </header>
+
+    <main class="container">
+        <!-- Activity 1: Getting to Know You -->
+        <section class="section" id="activity1">
+            <div class="section-header">
+                <span class="section-number">Activity 1/5</span>
+                <h2>Getting to Know You</h2>
+            </div>
+            <p class="section-intro">Let's start by learning about you and your English goals. Discuss these questions with your teacher.</p>
+
+            <div class="discussion-grid">
+                <div class="discussion-card">
+                    <div class="card-icon">💼</div>
+                    <h3>About Your Work</h3>
+                    <ul class="discussion-questions">
+                        <li>What do you do? Can you describe your role?</li>
+                        <li>What does a typical day look like for you?</li>
+                        <li>Who do you work with most often?</li>
+                    </ul>
+                </div>
+
+                <div class="discussion-card">
+                    <div class="card-icon">🌍</div>
+                    <h3>Your English Use</h3>
+                    <ul class="discussion-questions">
+                        <li>When do you need to use English at work?</li>
+                        <li>Do you communicate more in writing or speaking?</li>
+                        <li>Who do you speak English with? (colleagues, clients, etc.)</li>
+                    </ul>
+                </div>
+
+                <div class="discussion-card">
+                    <div class="card-icon">🎯</div>
+                    <h3>Goals & Challenges</h3>
+                    <ul class="discussion-questions">
+                        <li>What feels most challenging about using English professionally?</li>
+                        <li>Are there any upcoming situations you want to prepare for?</li>
+                        <li>What would "success" in this course look like for you?</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity 2: Formality Levels -->
+        <section class="section" id="activity2">
+            <div class="section-header">
+                <span class="section-number">Activity 2/5</span>
+                <h2>Formal vs. Informal Introductions</h2>
+            </div>
+            <p class="section-intro">Click on each phrase to sort it into the correct category. Consider: Would you use this with a CEO or a close colleague?</p>
+            
+            <div class="sorting-activity">
+                <div class="phrase-bank" id="phraseBank">
+                    <div class="phrase" data-formality="formal" draggable="true">It's a pleasure to meet you.</div>
+                    <div class="phrase" data-formality="informal" draggable="true">Hey, I'm Sarah!</div>
+                    <div class="phrase" data-formality="formal" draggable="true">Allow me to introduce myself.</div>
+                    <div class="phrase" data-formality="informal" draggable="true">Nice to meet you! I'm in marketing.</div>
+                    <div class="phrase" data-formality="formal" draggable="true">How do you do?</div>
+                    <div class="phrase" data-formality="informal" draggable="true">So, what do you do here?</div>
+                    <div class="phrase" data-formality="formal" draggable="true">I don't believe we've been introduced.</div>
+                    <div class="phrase" data-formality="informal" draggable="true">Great to finally put a face to the name!</div>
+                </div>
+                
+                <div class="sorting-zones">
+                    <div class="sort-zone" id="formalZone" data-formality="formal">
+                        <h4>🎩 Formal</h4>
+                        <p class="zone-hint">First meetings, senior colleagues, clients</p>
+                        <div class="zone-content"></div>
+                    </div>
+                    <div class="sort-zone" id="informalZone" data-formality="informal">
+                        <h4>😊 Informal</h4>
+                        <p class="zone-hint">Close colleagues, casual settings</p>
+                        <div class="zone-content"></div>
+                    </div>
+                </div>
+            </div>
+            <button class="check-btn" onclick="checkSorting()">Check Answers</button>
+            <button class="reset-btn" onclick="resetSorting()">Reset</button>
+            <div class="feedback" id="sortingFeedback"></div>
+
+            <!-- Describing Your Role Sub-section -->
+            <div class="subsection" id="describingRole">
+                <h3>Describing Your Role</h3>
+                <p class="activity-instruction">These phrases help you explain what you do professionally. Click each card to reveal example sentences.</p>
+
+                <div class="phrase-cards">
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <span class="phrase-label">I'm responsible for...</span>
+                            </div>
+                            <div class="flip-card-back">
+                                <p>"I'm responsible for managing client relationships in the APAC region."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <span class="phrase-label">My role involves...</span>
+                            </div>
+                            <div class="flip-card-back">
+                                <p>"My role involves coordinating between the design and development teams."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <span class="phrase-label">I work closely with...</span>
+                            </div>
+                            <div class="flip-card-back">
+                                <p>"I work closely with the finance department on budget planning."</p>
+                            </div>
+                        </div>
+                        </div>
+
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <span class="phrase-label">I'm based in...</span>
+                            </div>
+                            <div class="flip-card-back">
+                                <p>"I'm based in our London office, but I travel to Berlin regularly."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <span class="phrase-label">I've been with the company for...</span>
+                            </div>
+                            <div class="flip-card-back">
+                                <p>"I've been with the company for three years now, originally in sales."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <span class="phrase-label">I report to...</span>
+                            </div>
+                            <div class="flip-card-back">
+                                <p>"I report to the Head of Operations, but I also work with the CEO directly on special projects."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="practice-prompt">
+                    <h4>💬 Your Turn</h4>
+                    <p>Use 2-3 of these phrases to introduce yourself and your role to your teacher.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity 3: Small Talk Topics -->
+        <section class="section" id="activity3">
+            <div class="section-header">
+                <span class="section-number">Activity 3/5</span>
+                <h2>Safe Small Talk Topics</h2>
+            </div>
+            <p class="section-intro">In professional settings, some topics are "safe" and some should be avoided. Click each topic to see if it's appropriate.</p>
+
+            <div class="topics-grid">
+                <div class="topic-card" onclick="revealTopic(this)" data-safe="true">
+                    <span class="topic-text">The weather</span>
+                    <span class="topic-verdict safe">✓ Safe</span>
+                </div>
+                <div class="topic-card" onclick="revealTopic(this)" data-safe="false">
+                    <span class="topic-text">Salary</span>
+                    <span class="topic-verdict avoid">✗ Avoid</span>
+                </div>
+                <div class="topic-card" onclick="revealTopic(this)" data-safe="true">
+                    <span class="topic-text">Recent travel</span>
+                    <span class="topic-verdict safe">✓ Safe</span>
+                </div>
+                <div class="topic-card" onclick="revealTopic(this)" data-safe="false">
+                    <span class="topic-text">Political opinions</span>
+                    <span class="topic-verdict avoid">✗ Avoid</span>
+                </div>
+                <div class="topic-card" onclick="revealTopic(this)" data-safe="true">
+                    <span class="topic-text">Weekend plans</span>
+                    <span class="topic-verdict safe">✓ Safe</span>
+                </div>
+                <div class="topic-card" onclick="revealTopic(this)" data-safe="false">
+                    <span class="topic-text">Someone's age</span>
+                    <span class="topic-verdict avoid">✗ Avoid</span>
+                </div>
+                <div class="topic-card" onclick="revealTopic(this)" data-safe="true">
+                    <span class="topic-text">Industry news</span>
+                    <span class="topic-verdict safe">✓ Safe</span>
+                </div>
+                <div class="topic-card" onclick="revealTopic(this)" data-safe="false">
+                    <span class="topic-text">Religious beliefs</span>
+                    <span class="topic-verdict avoid">✗ Avoid</span>
+                </div>
+                <div class="topic-card" onclick="revealTopic(this)" data-safe="true">
+                    <span class="topic-text">The event/conference</span>
+                    <span class="topic-verdict safe">✓ Safe</span>
+                </div>
+                <div class="topic-card" onclick="revealTopic(this)" data-safe="true">
+                    <span class="topic-text">Hobbies</span>
+                    <span class="topic-verdict safe">✓ Safe</span>
+                </div>
+                <div class="topic-card" onclick="revealTopic(this)" data-safe="true">
+                    <span class="topic-text">Local restaurants</span>
+                    <span class="topic-verdict safe">✓ Safe</span>
+                </div>
+                <div class="topic-card" onclick="revealTopic(this)" data-safe="false">
+                    <span class="topic-text">Relationship status</span>
+                    <span class="topic-verdict avoid">✗ Avoid</span>
+                </div>
+            </div>
+
+            <div class="discussion-note">
+                <h4>🤔 Discussion</h4>
+                <p>Are there any topics here that might be different in your culture or industry?</p>
+            </div>
+        </section>
+
+        <!-- Activity 4: Active Listening -->
+        <section class="section" id="activity4">
+            <div class="section-header">
+                <span class="section-number">Activity 4/5</span>
+                <h2>Showing Interest & Active Listening</h2>
+            </div>
+            <p class="section-intro">Good conversation is about showing genuine interest. Drag each response and drop it next to the matching statement.</p>
+
+            <div class="drag-match-activity">
+                <div class="statements-container">
+                    <div class="statement-row" data-match="1">
+                        <div class="statement-text">"I just got back from a conference in Tokyo."</div>
+                        <div class="drop-zone" data-match="1">
+                            <span class="drop-placeholder">Drop response here</span>
+                        </div>
+                    </div>
+                    <div class="statement-row" data-match="2">
+                        <div class="statement-text">"We're launching a new product next month."</div>
+                        <div class="drop-zone" data-match="2">
+                            <span class="drop-placeholder">Drop response here</span>
+                        </div>
+                    </div>
+                    <div class="statement-row" data-match="3">
+                        <div class="statement-text">"I've been working on this project for six months."</div>
+                        <div class="drop-zone" data-match="3">
+                            <span class="drop-placeholder">Drop response here</span>
+                        </div>
+                    </div>
+                    <div class="statement-row" data-match="4">
+                        <div class="statement-text">"I moved to this department recently."</div>
+                        <div class="drop-zone" data-match="4">
+                            <span class="drop-placeholder">Drop response here</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="draggable-responses" id="responseBank">
+                    <div class="draggable-response" draggable="true" data-match="3">"That sounds like a significant undertaking. How's it going?"</div>
+                    <div class="draggable-response" draggable="true" data-match="1">"Oh really? How was it? I've heard their tech scene is impressive."</div>
+                    <div class="draggable-response" draggable="true" data-match="4">"How are you finding it so far? Quite a change?"</div>
+                    <div class="draggable-response" draggable="true" data-match="2">"That's exciting! What kind of product is it, if you don't mind me asking?"</div>
+                </div>
+            </div>
+            <button class="check-btn" onclick="checkDragMatching()">Check Matches</button>
+            <button class="reset-btn" onclick="resetDragMatching()">Reset</button>
+            <div class="feedback" id="dragMatchingFeedback"></div>
+
+            <div class="reveal-box" id="followUpPhrases">
+                <div class="reveal-header" onclick="toggleRevealBox(this)">
+                    <h4>📝 Useful Follow-up Phrases</h4>
+                    <span class="reveal-hint">Think of some phrases first, then click to reveal →</span>
+                </div>
+                <div class="reveal-content">
+                    <ul>
+                        <li><strong>That sounds interesting!</strong> — Shows enthusiasm</li>
+                        <li><strong>Really? Tell me more about that.</strong> — Invites elaboration</li>
+                        <li><strong>How did that go?</strong> — Asks for details</li>
+                        <li><strong>That must be [challenging/exciting/rewarding].</strong> — Shows empathy</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity 5: Role Play -->
+        <section class="section" id="activity5">
+            <div class="section-header">
+                <span class="section-number">Activity 5/5</span>
+                <h2>Role Play: Networking Scenario</h2>
+            </div>
+            <p class="section-intro">Choose a scenario card and practise a 2-3 minute conversation with your teacher.</p>
+
+            <div class="scenario-cards">
+                <div class="scenario-card" onclick="selectScenario(this)">
+                    <div class="scenario-icon">🎪</div>
+                    <h4>Industry Conference</h4>
+                    <p>You're at a coffee break during a conference. Start a conversation with someone from another company in your field.</p>
+                    <div class="scenario-goals">
+                        <span>Goals:</span> Introduce yourself, find common ground, exchange contact details
+                    </div>
+                </div>
+
+                <div class="scenario-card" onclick="selectScenario(this)">
+                    <div class="scenario-icon">🏢</div>
+                    <h4>New Team Member</h4>
+                    <p>A new colleague has joined your department. Welcome them and help them feel comfortable.</p>
+                    <div class="scenario-goals">
+                        <span>Goals:</span> Make them feel welcome, explain your role, offer help
+                    </div>
+                </div>
+
+                <div class="scenario-card" onclick="selectScenario(this)">
+                    <div class="scenario-icon">🤝</div>
+                    <h4>Client Meeting</h4>
+                    <p>You're meeting a new client for the first time. Build rapport before the formal meeting begins.</p>
+                    <div class="scenario-goals">
+                        <span>Goals:</span> Create a positive impression, find common interests, transition smoothly to business
+                    </div>
+                </div>
+            </div>
+
+            <div class="roleplay-tips">
+                <h4>💡 Remember to:</h4>
+                <ul>
+                    <li>Choose appropriate formality for the situation</li>
+                    <li>Ask follow-up questions to show interest</li>
+                    <li>Use the phrases from today's lesson</li>
+                    <li>End the conversation naturally</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Wrap Up -->
+        <section class="section wrap-up" id="wrapup">
+            <div class="section-header">
+                <span class="section-number">Wrap Up</span>
+                <h2>Reflection & Next Steps</h2>
+            </div>
+            
+            <div class="reflection-grid">
+                <div class="reflection-card">
+                    <h4>🌟 Key Phrases to Remember</h4>
+                    <p>Which 2-3 phrases from today will be most useful for you?</p>
+                    <textarea class="notes-input" placeholder="Write your favourite phrases here..."></textarea>
+                </div>
+                <div class="reflection-card">
+                    <h4>📋 Action Point</h4>
+                    <p>Is there a real situation coming up where you could practise these skills?</p>
+                    <textarea class="notes-input" placeholder="Your notes..."></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lesson Completion Section -->
+        <section class="section lesson-completion" id="completion">
+            <div class="completion-content">
+                <div class="completion-icon" id="completionIcon">📚</div>
+                <h3 id="completionTitle">You've reached the end of Lesson 1!</h3>
+                <p id="completionText">Well done on completing the activities. If you're happy with your progress, mark this lesson as complete to track your journey through the course.</p>
+                <div class="completion-buttons">
+                    <button class="complete-lesson-btn" id="completeBtn" onclick="toggleLessonCompletion()">
+                        <span class="btn-icon">✓</span>
+                        <span class="btn-text">Mark as Complete</span>
+                    </button>
+                    <a href="#" class="nav-btn" onclick="scrollToTop(event)">↑ Back to Top</a>
+                    <a href="index.html" class="nav-btn nav-btn-primary">🏠 Home</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>Business English Course by English in Doses</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // ===== Lesson Completion Functionality =====
+        const LESSON_NUMBER = 1;
+        const STORAGE_KEY = 'businessEnglish_completedLessons';
+        
+        function getCompletedLessons() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            return stored ? JSON.parse(stored) : [];
+        }
+        
+        function saveCompletedLessons(lessons) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(lessons));
+        }
+        
+        function isLessonComplete() {
+            const completed = getCompletedLessons();
+            return completed.includes(LESSON_NUMBER);
+        }
+        
+        function updateCompletionUI() {
+            const icon = document.getElementById('completionIcon');
+            const title = document.getElementById('completionTitle');
+            const text = document.getElementById('completionText');
+            const btn = document.getElementById('completeBtn');
+            const section = document.querySelector('.lesson-completion');
+            
+            if (isLessonComplete()) {
+                icon.textContent = '🎉';
+                title.textContent = 'Lesson Complete!';
+                text.textContent = 'Fantastic work! You\'ve completed Lesson 1. Keep up the momentum and continue to the next lesson when you\'re ready.';
+                btn.innerHTML = '<span class="btn-icon">↩</span><span class="btn-text">Mark as Incomplete</span>';
+                btn.classList.add('completed');
+                section.classList.add('is-complete');
+            } else {
+                icon.textContent = '📚';
+                title.textContent = 'You\'ve reached the end of Lesson 1!';
+                text.textContent = 'Well done on completing the activities. If you\'re happy with your progress, mark this lesson as complete to track your journey through the course.';
+                btn.innerHTML = '<span class="btn-icon">✓</span><span class="btn-text">Mark as Complete</span>';
+                btn.classList.remove('completed');
+                section.classList.remove('is-complete');
+            }
+        }
+        
+        function toggleLessonCompletion() {
+            let completed = getCompletedLessons();
+            
+            if (completed.includes(LESSON_NUMBER)) {
+                completed = completed.filter(num => num !== LESSON_NUMBER);
+            } else {
+                completed.push(LESSON_NUMBER);
+            }
+            
+            saveCompletedLessons(completed);
+            updateCompletionUI();
+            
+            const btn = document.getElementById('completeBtn');
+            btn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                btn.style.transform = '';
+            }, 150);
+        }
+        
+        function scrollToTop(event) {
+            event.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCompletionUI();
+        });
+    </script>
+</body>
+</html>
