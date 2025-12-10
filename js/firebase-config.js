@@ -70,7 +70,7 @@ export async function createUser(username) {
 }
 
 /**
- * Login or create user - returns user data
+ * Login existing user - returns user data or null if not found
  * @param {string} username - The username
  * @returns {Promise<Object>}
  */
@@ -84,10 +84,18 @@ export async function loginUser(username) {
             lastUpdated: serverTimestamp()
         });
         return existingUser;
-    } else {
-        // Create new user
-        return await createUser(username);
     }
+    
+    return null;
+}
+
+/**
+ * Sign up new user - creates a new account
+ * @param {string} username - The username
+ * @returns {Promise<Object>}
+ */
+export async function signUpUser(username) {
+    return await createUser(username);
 }
 
 /**

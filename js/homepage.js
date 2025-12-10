@@ -2,6 +2,8 @@
 
 import { 
     loginUser, 
+    signUpUser,
+    userExists,
     getUser,
     getCompletedLessons,
     resetProgress as firebaseResetProgress 
@@ -9,6 +11,9 @@ import {
 
 // ===== Session Storage Key =====
 const SESSION_KEY = 'businessEnglish_currentUser';
+
+// ===== Auth Mode: 'login' or 'signup' =====
+let authMode = 'login';
 
 // ===== Get Current User =====
 function getCurrentUser() {
@@ -33,11 +38,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 async function initializeApp() {
+    // Setup form handler first
+    setupLoginForm();
+    
     const username = getCurrentUser();
     console.log('Current user from session:', username);
-    
-    // Setup form handler first (so it works even if Firebase fails)
-    setupLoginForm();
     
     if (username) {
         // User is logged in - verify they exist in Firebase
@@ -54,16 +59,16 @@ async function initializeApp() {
                 // User doesn't exist in Firebase anymore
                 console.log('User not found in Firebase, showing login');
                 clearCurrentUser();
-                displayLoginModal();
+                showLoginModal();
             }
         } catch (error) {
             console.error('Error checking user:', error);
-            displayLoginModal();
+            showLoginModal();
         }
     } else {
         // Show login modal
         console.log('No user in session, showing login');
-        displayLoginModal();
+        showLoginModal();
     }
 }
 
@@ -71,61 +76,161 @@ function setupLoginForm() {
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         console.log('Setting up login form handler');
-        loginForm.addEventListener('submit', handleLoginSubmit);
+        loginForm.addEventListener('submit', handleFormSubmit);
     } else {
         console.error('Login form not found!');
     }
 }
 
-async function handleLoginSubmit(e) {
+async function handleFormSubmit(e) {
     e.preventDefault();
-    console.log('Form submitted');
+    console.log('Form submitted, mode:', authMode);
     
     const nameInput = document.getElementById('studentName');
-    const submitBtn = document.querySelector('.login-btn');
+    const submitBtn = document.getElementById('submitBtn');
+    const errorMessage = document.getElementById('errorMessage');
     const name = nameInput.value.trim();
     
-    console.log('Name entered:', name);
+    // Clear previous errors
+    errorMessage.textContent = '';
+    errorMessage.classList.remove('show');
     
-    if (name.length >= 2) {
-        // Show loading state
-        submitBtn.textContent = 'Loading...';
-        submitBtn.disabled = true;
-        
-        try {
-            console.log('Calling loginUser...');
-            // Login or create user in Firebase
+    if (name.length < 2) {
+        showError('Username must be at least 2 characters.');
+        return;
+    }
+    
+    // Show loading state
+    submitBtn.disabled = true;
+    submitBtn.textContent = authMode === 'login' ? 'Logging in...' : 'Creating account...';
+    
+    try {
+        if (authMode === 'login') {
+            // LOGIN MODE: Check if user exists first
+            const exists = await userExists(name);
+            
+            if (!exists) {
+                showError('Username not found. Please check spelling or create a new account.');
+                resetSubmitButton();
+                return;
+            }
+            
+            // User exists, log them in
             const userData = await loginUser(name);
             console.log('Login successful:', userData);
             
-            // Store username in session
             setCurrentUser(name.toLowerCase());
-            
             hideLoginModal();
             showWelcomeBanner(userData.displayName);
             await loadProgress(name.toLowerCase());
             updateProgressDisplay();
             
-            // Reset form for next use
-            nameInput.value = '';
-            submitBtn.textContent = 'Start Learning';
-            submitBtn.disabled = false;
+        } else {
+            // SIGNUP MODE: Check if user already exists
+            const exists = await userExists(name);
             
-        } catch (error) {
-            console.error('Login error:', error);
-            alert('There was an error connecting to the server. Please check your internet connection and try again.\n\nError: ' + error.message);
-            submitBtn.textContent = 'Start Learning';
-            submitBtn.disabled = false;
+            if (exists) {
+                showError('Username already taken. Please choose a different name or log in.');
+                resetSubmitButton();
+                return;
+            }
+            
+            // Create new user
+            const userData = await signUpUser(name);
+            console.log('Sign up successful:', userData);
+            
+            setCurrentUser(name.toLowerCase());
+            hideLoginModal();
+            showWelcomeBanner(userData.displayName);
+            cachedCompletedLessons = [];
+            updateLessonCards();
+            updateProgressDisplay();
         }
-    } else {
-        console.log('Name too short');
-        alert('Please enter a name with at least 2 characters.');
+        
+        // Reset form
+        nameInput.value = '';
+        resetSubmitButton();
+        
+    } catch (error) {
+        console.error('Auth error:', error);
+        showError('Connection error. Please check your internet and try again.');
+        resetSubmitButton();
     }
 }
 
-function displayLoginModal() {
+function showError(message) {
+    const errorMessage = document.getElementById('errorMessage');
+    errorMessage.textContent = message;
+    errorMessage.classList.add('show');
+}
+
+function resetSubmitButton() {
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = false;
+    submitBtn.textContent = authMode === 'login' ? 'Log In' : 'Create Account';
+}
+
+// Toggle between Login and Sign Up modes
+window.toggleAuthMode = function() {
+    const modalTitle = document.getElementById('modalTitle');
+    const modalSubtitle = document.getElementById('modalSubtitle');
+    const submitBtn = document.getElementById('submitBtn');
+    const toggleText = document.getElementById('toggleText');
+    const toggleBtn = document.getElementById('toggleBtn');
+    const errorMessage = document.getElementById('errorMessage');
+    const nameInput = document.getElementById('studentName');
+    
+    // Clear errors and input
+    errorMessage.textContent = '';
+    errorMessage.classList.remove('show');
+    nameInput.value = '';
+    
+    if (authMode === 'login') {
+        // Switch to Sign Up mode
+        authMode = 'signup';
+        modalTitle.textContent = 'Create Account';
+        modalSubtitle.textContent = 'Choose a username to start tracking your progress.';
+        submitBtn.textContent = 'Create Account';
+        toggleText.textContent = 'Already have an account?';
+        toggleBtn.textContent = 'Log In';
+    } else {
+        // Switch to Login mode
+        authMode = 'login';
+        modalTitle.textContent = 'Welcome Back';
+        modalSubtitle.textContent = 'Enter your username to continue your progress.';
+        submitBtn.textContent = 'Log In';
+        toggleText.textContent = 'New here?';
+        toggleBtn.textContent = 'Create Account';
+    }
+};
+
+function showLoginModal() {
     const overlay = document.getElementById('loginOverlay');
     const welcomeBanner = document.getElementById('welcomeBanner');
+    
+    // Reset to login mode
+    authMode = 'login';
+    const modalTitle = document.getElementById('modalTitle');
+    const modalSubtitle = document.getElementById('modalSubtitle');
+    const submitBtn = document.getElementById('submitBtn');
+    const toggleText = document.getElementById('toggleText');
+    const toggleBtn = document.getElementById('toggleBtn');
+    const errorMessage = document.getElementById('errorMessage');
+    const nameInput = document.getElementById('studentName');
+    
+    if (modalTitle) modalTitle.textContent = 'Welcome Back';
+    if (modalSubtitle) modalSubtitle.textContent = 'Enter your username to continue your progress.';
+    if (submitBtn) {
+        submitBtn.textContent = 'Log In';
+        submitBtn.disabled = false;
+    }
+    if (toggleText) toggleText.textContent = 'New here?';
+    if (toggleBtn) toggleBtn.textContent = 'Create Account';
+    if (errorMessage) {
+        errorMessage.textContent = '';
+        errorMessage.classList.remove('show');
+    }
+    if (nameInput) nameInput.value = '';
     
     if (overlay) {
         overlay.classList.remove('hidden');
@@ -156,17 +261,17 @@ function showWelcomeBanner(name) {
     }
 }
 
-// Global function for the Change Profile button
-window.showLoginModal = function() {
-    console.log('Change Profile clicked');
+// Logout function
+window.logout = function() {
+    console.log('Logging out...');
     
-    // Clear the current user session
+    // Clear session
     clearCurrentUser();
     
     // Clear cached progress
     cachedCompletedLessons = [];
     
-    // Update UI to show no progress
+    // Update UI
     updateLessonCards();
     updateProgressDisplay();
     
@@ -176,19 +281,8 @@ window.showLoginModal = function() {
         welcomeBanner.style.display = 'none';
     }
     
-    // Reset the login form
-    const nameInput = document.getElementById('studentName');
-    const submitBtn = document.querySelector('.login-btn');
-    if (nameInput) {
-        nameInput.value = '';
-    }
-    if (submitBtn) {
-        submitBtn.textContent = 'Start Learning';
-        submitBtn.disabled = false;
-    }
-    
     // Show login modal
-    displayLoginModal();
+    showLoginModal();
 };
 
 
@@ -277,7 +371,7 @@ function getProgressMessage(completed, total) {
     }
 }
 
-// Make this globally accessible
+// Reset progress function
 window.confirmResetProgress = async function() {
     if (cachedCompletedLessons.length === 0) {
         alert('No progress to reset!');
@@ -372,21 +466,6 @@ document.querySelectorAll('.lesson-card.available').forEach((card, index) => {
             this.click();
         }
     });
-});
-
-
-// ===== Easter Egg: Konami Code =====
-let konamiCode = [];
-const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-
-document.addEventListener('keydown', function(e) {
-    konamiCode.push(e.key);
-    konamiCode = konamiCode.slice(-10);
-    
-    if (konamiCode.join(',') === konamiSequence.join(',')) {
-        alert('🎉 You found the secret! Good luck with your learning journey!');
-        konamiCode = [];
-    }
 });
 
 

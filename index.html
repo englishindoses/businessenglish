@@ -11,16 +11,25 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Login Modal -->
+    <!-- Login/Signup Modal -->
     <div class="login-overlay" id="loginOverlay">
         <div class="login-modal">
             <div class="login-icon">👋</div>
-            <h2>Welcome to Business English</h2>
-            <p>Please enter your name to track your progress through the course.</p>
+            <h2 id="modalTitle">Welcome Back</h2>
+            <p id="modalSubtitle">Enter your username to continue your progress.</p>
+            
+            <!-- Login Form -->
             <form id="loginForm">
-                <input type="text" id="studentName" class="login-input" placeholder="Your name" required minlength="2" maxlength="50">
-                <button type="submit" class="login-btn">Start Learning</button>
+                <input type="text" id="studentName" class="login-input" placeholder="Username" required minlength="2" maxlength="50" autocomplete="username">
+                <div class="error-message" id="errorMessage"></div>
+                <button type="submit" class="login-btn" id="submitBtn">Log In</button>
             </form>
+            
+            <!-- Toggle between Login and Sign Up -->
+            <div class="auth-toggle">
+                <span id="toggleText">New here?</span>
+                <button type="button" class="toggle-btn" id="toggleBtn" onclick="toggleAuthMode()">Create Account</button>
+            </div>
         </div>
     </div>
 
@@ -45,7 +54,7 @@
         <div class="container">
             <div class="welcome-content">
                 <span class="welcome-text">Welcome back, <strong id="displayName"></strong>!</span>
-                <button class="change-profile-btn" onclick="showLoginModal()">Change Profile</button>
+                <button class="logout-btn" onclick="logout()">Log Out</button>
             </div>
         </div>
     </div>
