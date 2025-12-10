@@ -616,15 +616,22 @@ function applySelectedScenario() {
 }
 
 
-// ===== Notes =====
+// ===== Notes (using unique IDs) =====
 
 function initNotesInputs() {
     const notesInputs = document.querySelectorAll('.notes-input');
     
-    notesInputs.forEach((input, index) => {
+    notesInputs.forEach((input) => {
+        const noteId = input.dataset.noteId;
+        
+        if (!noteId) {
+            console.warn('Notes input missing data-note-id attribute:', input);
+            return;
+        }
+        
         input.addEventListener('input', function() {
-            lessonData.notes[index] = this.value;
-            saveNoteDebounced(LESSON_ID, index.toString(), this.value);
+            lessonData.notes[noteId] = this.value;
+            saveNoteDebounced(LESSON_ID, noteId, this.value);
         });
     });
 }
@@ -634,9 +641,11 @@ function applyNotes() {
     
     const notesInputs = document.querySelectorAll('.notes-input');
     
-    notesInputs.forEach((input, index) => {
-        if (lessonData.notes[index] !== undefined) {
-            input.value = lessonData.notes[index];
+    notesInputs.forEach((input) => {
+        const noteId = input.dataset.noteId;
+        
+        if (noteId && lessonData.notes[noteId] !== undefined) {
+            input.value = lessonData.notes[noteId];
         }
     });
 }
