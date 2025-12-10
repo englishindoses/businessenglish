@@ -1,31 +1,58 @@
-// ===== Homepage JavaScript =====
+// ===== Homepage JavaScript with Firebase =====
 
-// ===== Profile / Login System =====
-const STORAGE_KEYS = {
-    studentName: 'businessEnglish_studentName',
-    completedLessons: 'businessEnglish_completedLessons'
-};
+import { 
+    loginUser, 
+    getUser,
+    getCompletedLessons,
+    resetProgress as firebaseResetProgress 
+} from './firebase-config.js';
 
-// Check if user is logged in on page load
+// ===== Local Storage Keys (for session only) =====
+const SESSION_KEY = 'businessEnglish_currentUser';
+
+// ===== Get Current User =====
+function getCurrentUser() {
+    return sessionStorage.getItem(SESSION_KEY);
+}
+
+function setCurrentUser(username) {
+    sessionStorage.setItem(SESSION_KEY, username);
+}
+
+function clearCurrentUser() {
+    sessionStorage.removeItem(SESSION_KEY);
+}
+
+// ===== Initialize App =====
 document.addEventListener('DOMContentLoaded', function() {
     initializeApp();
 });
 
-function initializeApp() {
-    const studentName = localStorage.getItem(STORAGE_KEYS.studentName);
+async function initializeApp() {
+    const username = getCurrentUser();
     
-    if (studentName) {
-        // User is logged in
-        hideLoginModal();
-        showWelcomeBanner(studentName);
+    if (username) {
+        // User is logged in - verify they exist in Firebase
+        try {
+            const userData = await getUser(username);
+            if (userData) {
+                hideLoginModal();
+                showWelcomeBanner(userData.displayName);
+                await loadProgress(username);
+                updateProgressDisplay();
+            } else {
+                // User doesn't exist in Firebase anymore
+                clearCurrentUser();
+                showLoginModal();
+            }
+        } catch (error) {
+            console.error('Error checking user:', error);
+            showLoginModal();
+        }
     } else {
         // Show login modal
         showLoginModal();
     }
-    
-    // Load progress
-    loadProgress();
-    updateProgressDisplay();
     
     // Setup form handler
     setupLoginForm();
@@ -34,15 +61,34 @@ function initializeApp() {
 function setupLoginForm() {
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
-        loginForm.addEventListener('submit', function(e) {
+        loginForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             const nameInput = document.getElementById('studentName');
+            const submitBtn = loginForm.querySelector('.login-btn');
             const name = nameInput.value.trim();
             
             if (name.length >= 2) {
-                localStorage.setItem(STORAGE_KEYS.studentName, name);
-                hideLoginModal();
-                showWelcomeBanner(name);
+                // Show loading state
+                submitBtn.textContent = 'Loading...';
+                submitBtn.disabled = true;
+                
+                try {
+                    // Login or create user in Firebase
+                    const userData = await loginUser(name);
+                    
+                    // Store username in session
+                    setCurrentUser(name.toLowerCase());
+                    
+                    hideLoginModal();
+                    showWelcomeBanner(userData.displayName);
+                    await loadProgress(name.toLowerCase());
+                    updateProgressDisplay();
+                } catch (error) {
+                    console.error('Login error:', error);
+                    alert('There was an error connecting to the server. Please try again.');
+                    submitBtn.textContent = 'Start Learning';
+                    submitBtn.disabled = false;
+                }
             }
         });
     }
@@ -81,46 +127,43 @@ function showWelcomeBanner(name) {
     }
 }
 
+// Make this function globally accessible for the button onclick
+window.showLoginModal = function() {
+    clearCurrentUser();
+    showLoginModal();
+    
+    // Reset the login form
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.reset();
+        const submitBtn = loginForm.querySelector('.login-btn');
+        submitBtn.textContent = 'Start Learning';
+        submitBtn.disabled = false;
+    }
+};
+
 
 // ===== Progress Tracking =====
 
-function getCompletedLessons() {
-    const stored = localStorage.getItem(STORAGE_KEYS.completedLessons);
-    return stored ? JSON.parse(stored) : [];
-}
+// Store completed lessons locally for quick access
+let cachedCompletedLessons = [];
 
-function saveCompletedLessons(lessons) {
-    localStorage.setItem(STORAGE_KEYS.completedLessons, JSON.stringify(lessons));
-}
-
-function markLessonComplete(lessonNumber) {
-    const completed = getCompletedLessons();
-    if (!completed.includes(lessonNumber)) {
-        completed.push(lessonNumber);
-        saveCompletedLessons(completed);
+async function loadProgress(username) {
+    try {
+        cachedCompletedLessons = await getCompletedLessons(username);
+        updateLessonCards();
+    } catch (error) {
+        console.error('Error loading progress:', error);
+        cachedCompletedLessons = [];
     }
-    return completed;
 }
 
-function markLessonIncomplete(lessonNumber) {
-    let completed = getCompletedLessons();
-    completed = completed.filter(num => num !== lessonNumber);
-    saveCompletedLessons(completed);
-    return completed;
-}
-
-function isLessonComplete(lessonNumber) {
-    const completed = getCompletedLessons();
-    return completed.includes(lessonNumber);
-}
-
-function loadProgress() {
-    const completed = getCompletedLessons();
+function updateLessonCards() {
     const lessonCards = document.querySelectorAll('.lesson-card');
     
     lessonCards.forEach(card => {
         const lessonNum = parseInt(card.dataset.lesson);
-        if (completed.includes(lessonNum)) {
+        if (cachedCompletedLessons.includes(lessonNum)) {
             card.classList.add('completed');
         } else {
             card.classList.remove('completed');
@@ -129,7 +172,7 @@ function loadProgress() {
 }
 
 function updateProgressDisplay() {
-    const completed = getCompletedLessons();
+    const completed = cachedCompletedLessons;
     const total = 12;
     const count = completed.length;
     const percentage = Math.round((count / total) * 100);
@@ -168,7 +211,10 @@ function updateProgressDisplay() {
 }
 
 function getProgressMessage(completed, total) {
-    const studentName = localStorage.getItem(STORAGE_KEYS.studentName) || 'Student';
+    const username = getCurrentUser();
+    // Get display name from welcome banner if available
+    const displayNameEl = document.getElementById('displayName');
+    const studentName = displayNameEl ? displayNameEl.textContent : (username || 'Student');
     
     if (completed === 0) {
         return `<p>Welcome, ${studentName}! Start your first lesson to begin tracking your progress.</p>`;
@@ -185,23 +231,29 @@ function getProgressMessage(completed, total) {
     }
 }
 
-function confirmResetProgress() {
-    const completed = getCompletedLessons();
-    if (completed.length === 0) {
+// Make this globally accessible
+window.confirmResetProgress = async function() {
+    if (cachedCompletedLessons.length === 0) {
         alert('No progress to reset!');
         return;
     }
     
     if (confirm('Are you sure you want to reset all your progress? This cannot be undone.')) {
-        resetProgress();
+        const username = getCurrentUser();
+        if (username) {
+            try {
+                await firebaseResetProgress(username);
+                cachedCompletedLessons = [];
+                updateLessonCards();
+                updateProgressDisplay();
+                alert('Progress has been reset.');
+            } catch (error) {
+                console.error('Error resetting progress:', error);
+                alert('There was an error resetting your progress. Please try again.');
+            }
+        }
     }
-}
-
-function resetProgress() {
-    saveCompletedLessons([]);
-    loadProgress();
-    updateProgressDisplay();
-}
+};
 
 
 // ===== Smooth Scroll =====
@@ -293,11 +345,12 @@ document.addEventListener('keydown', function(e) {
 
 
 // ===== Export functions for use in lesson pages =====
-// These can be called from lesson pages to mark completion
+// These will be available globally via window.BusinessEnglish
 window.BusinessEnglish = {
-    markLessonComplete,
-    markLessonIncomplete,
-    isLessonComplete,
-    getCompletedLessons,
-    getStudentName: () => localStorage.getItem(STORAGE_KEYS.studentName)
+    getCurrentUser,
+    getCompletedLessons: () => cachedCompletedLessons,
+    getStudentName: () => {
+        const displayNameEl = document.getElementById('displayName');
+        return displayNameEl ? displayNameEl.textContent : getCurrentUser();
+    }
 };

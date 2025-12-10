@@ -399,23 +399,33 @@
     </footer>
 
     <script src="js/script.js"></script>
-    <script>
-        // ===== Lesson Completion Functionality =====
+    <script type="module">
+        // ===== Lesson Completion Functionality with Firebase =====
+        import { 
+            isLessonComplete, 
+            markLessonComplete, 
+            markLessonIncomplete,
+            getCurrentUser,
+            requireLogin
+        } from './js/lesson-utils.js';
+        
         const LESSON_NUMBER = 1;
-        const STORAGE_KEY = 'businessEnglish_completedLessons';
+        let isComplete = false;
         
-        function getCompletedLessons() {
-            const stored = localStorage.getItem(STORAGE_KEY);
-            return stored ? JSON.parse(stored) : [];
-        }
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Optional: Uncomment the next line to require login for lesson pages
+            // if (!requireLogin()) return;
+            
+            await initializeCompletion();
+        });
         
-        function saveCompletedLessons(lessons) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(lessons));
-        }
-        
-        function isLessonComplete() {
-            const completed = getCompletedLessons();
-            return completed.includes(LESSON_NUMBER);
+        async function initializeCompletion() {
+            const username = getCurrentUser();
+            if (username) {
+                isComplete = await isLessonComplete(LESSON_NUMBER);
+                updateCompletionUI();
+            }
         }
         
         function updateCompletionUI() {
@@ -425,7 +435,7 @@
             const btn = document.getElementById('completeBtn');
             const section = document.querySelector('.lesson-completion');
             
-            if (isLessonComplete()) {
+            if (isComplete) {
                 icon.textContent = '🎉';
                 title.textContent = 'Lesson Complete!';
                 text.textContent = 'Fantastic work! You\'ve completed Lesson 1. Keep up the momentum and continue to the next lesson when you\'re ready.';
@@ -442,37 +452,52 @@
             }
         }
         
-        function toggleLessonCompletion() {
-            let completed = getCompletedLessons();
+        // Make toggle function globally accessible
+        window.toggleLessonCompletion = async function() {
+            const btn = document.getElementById('completeBtn');
+            const username = getCurrentUser();
             
-            if (completed.includes(LESSON_NUMBER)) {
-                completed = completed.filter(num => num !== LESSON_NUMBER);
-            } else {
-                completed.push(LESSON_NUMBER);
+            if (!username) {
+                alert('Please log in on the homepage first to track your progress.');
+                return;
             }
             
-            saveCompletedLessons(completed);
-            updateCompletionUI();
+            // Disable button during operation
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
             
-            const btn = document.getElementById('completeBtn');
-            btn.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                btn.style.transform = '';
-            }, 150);
-        }
+            try {
+                if (isComplete) {
+                    await markLessonIncomplete(LESSON_NUMBER);
+                    isComplete = false;
+                } else {
+                    await markLessonComplete(LESSON_NUMBER);
+                    isComplete = true;
+                }
+                
+                updateCompletionUI();
+                
+                // Visual feedback
+                btn.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    btn.style.transform = '';
+                }, 150);
+            } catch (error) {
+                console.error('Error toggling completion:', error);
+                alert('There was an error saving your progress. Please try again.');
+            } finally {
+                btn.disabled = false;
+                btn.style.opacity = '1';
+            }
+        };
         
-        function scrollToTop(event) {
+        window.scrollToTop = function(event) {
             event.preventDefault();
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
-        }
-        
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            updateCompletionUI();
-        });
+        };
     </script>
 </body>
 </html>
