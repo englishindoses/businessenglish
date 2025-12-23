@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business English | Building Professional Relationships</title>
+    <link rel="stylesheet" href="css/lessons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body data-lesson="2">
+    <header class="header">
+        <a href="index.html" class="back-link">← Back to Course</a>
+        <div class="header-content">
+            <div class="header-badge">Lesson 2</div>
+            <h1>Building Professional Relationships</h1>
+            <p class="header-subtitle">Small talk, rapport building & navigating social situations</p>
+        </div>
+        <div class="header-decoration"></div>
+    </header>
+
+    <main class="container">
+        <!-- Activity 1: Discussion Warm-up -->
+        <section class="section" id="activity1">
+            <div class="section-header">
+                <span class="section-number">Activity 1/5</span>
+                <h2>Warm-up: Your Experiences</h2>
+            </div>
+            <p class="section-intro">Think about your own experiences with workplace small talk and relationship building. Discuss these questions with your teacher.</p>
+
+            <div class="discussion-grid">
+                <div class="discussion-card">
+                    <div class="card-icon">💬</div>
+                    <h3>Small Talk Situations</h3>
+                    <ul class="discussion-questions">
+                        <li>Where do you typically make small talk at work? (lift, kitchen, before meetings?)</li>
+                        <li>Do you find small talk easy or challenging? Why?</li>
+                        <li>Is small talk different in your culture compared to British/American workplaces?</li>
+                    </ul>
+                </div>
+
+                <div class="discussion-card">
+                    <div class="card-icon">🤝</div>
+                    <h3>Building Relationships</h3>
+                    <ul class="discussion-questions">
+                        <li>How important are personal relationships in your workplace?</li>
+                        <li>Have you ever built a good professional relationship through small talk?</li>
+                        <li>What makes someone easy to talk to?</li>
+                    </ul>
+                </div>
+
+                <div class="discussion-card">
+                    <div class="card-icon">😬</div>
+                    <h3>Awkward Moments</h3>
+                    <ul class="discussion-questions">
+                        <li>Have you ever had an awkward small talk moment? What happened?</li>
+                        <li>What topics do you try to avoid?</li>
+                        <li>How do you end a conversation when you need to leave?</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity 2: Safe Topics Sorting -->
+        <section class="section" id="activity2">
+            <div class="section-header">
+                <span class="section-number">Activity 2/5</span>
+                <h2>Small Talk Topics: Safe or Risky?</h2>
+            </div>
+            <p class="section-intro">Some topics are generally safe for workplace small talk, while others can be risky or inappropriate. Sort these topics into the correct category.</p>
+            
+            <div class="sorting-activity">
+                <div class="phrase-bank" id="phraseBank">
+                    <div class="phrase" data-category="safe" draggable="true">How was your weekend?</div>
+                    <div class="phrase" data-category="risky" draggable="true">Who did you vote for?</div>
+                    <div class="phrase" data-category="safe" draggable="true">Have you tried the new café downstairs?</div>
+                    <div class="phrase" data-category="risky" draggable="true">How much do you earn?</div>
+                    <div class="phrase" data-category="safe" draggable="true">Did you see the match last night?</div>
+                    <div class="phrase" data-category="risky" draggable="true">Why aren't you married yet?</div>
+                    <div class="phrase" data-category="safe" draggable="true">Any holiday plans coming up?</div>
+                    <div class="phrase" data-category="risky" draggable="true">You look tired, are you okay?</div>
+                    <div class="phrase" data-category="safe" draggable="true">How's that project going?</div>
+                    <div class="phrase" data-category="risky" draggable="true">Are you planning to have children?</div>
+                </div>
+                
+                <div class="sorting-zones">
+                    <div class="sort-zone" id="safeZone" data-category="safe">
+                        <h4>✅ Safe Topics</h4>
+                        <p class="zone-hint">Neutral, positive, appropriate for most situations</p>
+                        <div class="zone-content"></div>
+                    </div>
+                    <div class="sort-zone" id="riskyZone" data-category="risky">
+                        <h4>⚠️ Risky Topics</h4>
+                        <p class="zone-hint">Too personal, controversial, or potentially offensive</p>
+                        <div class="zone-content"></div>
+                    </div>
+                </div>
+            </div>
+            <button class="check-btn" onclick="checkSorting()">Check Answers</button>
+            <button class="reset-btn" onclick="resetSorting()">Reset</button>
+            <div class="feedback" id="sortingFeedback"></div>
+
+            <div class="discussion-note">
+                <h4>🤔 Discussion</h4>
+                <p>Are any of these topics different in your culture? What makes a topic "risky" in professional settings?</p>
+            </div>
+        </section>
+
+        <!-- Activity 3: Follow-up Questions -->
+        <section class="section" id="activity3">
+            <div class="section-header">
+                <span class="section-number">Activity 3/5</span>
+                <h2>Keeping Conversations Going</h2>
+            </div>
+            <p class="section-intro">Good conversationalists ask follow-up questions to show genuine interest. Click each card to see examples of how to extend a conversation.</p>
+
+            <div class="phrase-cards">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="phrase-label">Show interest</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <p>"That sounds really interesting!"<br>"Oh really? Tell me more."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="phrase-label">Ask for details</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <p>"What was that like?"<br>"How did that go?"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="phrase-label">Show empathy</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <p>"That must have been challenging."<br>"I can imagine how exciting that was!"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="phrase-label">Find common ground</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <p>"I've had a similar experience..."<br>"I know what you mean!"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="phrase-label">Ask opinions</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <p>"What did you think of it?"<br>"Would you recommend it?"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="phrase-label">Echo and expand</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <p>"Italy! I've always wanted to go there. Which part did you visit?"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Matching Activity -->
+            <div class="subsection">
+                <h3>Practice: Match the Follow-ups</h3>
+                <p class="activity-instruction">Drag the best follow-up question to match each conversation starter.</p>
+
+                <div class="drag-match-activity">
+                    <div class="statements-container">
+                        <div class="statement-row" data-match="1">
+                            <div class="statement-text">"I went hiking in Scotland last weekend."</div>
+                            <div class="drop-zone" data-match="1">
+                                <span class="drop-placeholder">Drop response here</span>
+                            </div>
+                        </div>
+                        <div class="statement-row" data-match="2">
+                            <div class="statement-text">"We finally finished the website redesign."</div>
+                            <div class="drop-zone" data-match="2">
+                                <span class="drop-placeholder">Drop response here</span>
+                            </div>
+                        </div>
+                        <div class="statement-row" data-match="3">
+                            <div class="statement-text">"I'm thinking of doing a course in data analytics."</div>
+                            <div class="drop-zone" data-match="3">
+                                <span class="drop-placeholder">Drop response here</span>
+                            </div>
+                        </div>
+                        <div class="statement-row" data-match="4">
+                            <div class="statement-text">"My daughter just started university."</div>
+                            <div class="drop-zone" data-match="4">
+                                <span class="drop-placeholder">Drop response here</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="draggable-responses" id="responseBank">
+                        <div class="draggable-response" draggable="true" data-match="4">"How exciting! What's she studying?"</div>
+                        <div class="draggable-response" draggable="true" data-match="2">"That must be a relief! How long did it take in the end?"</div>
+                        <div class="draggable-response" draggable="true" data-match="1">"That sounds lovely! Whereabouts did you go?"</div>
+                        <div class="draggable-response" draggable="true" data-match="3">"That's a great idea. What made you interested in that?"</div>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkDragMatching()">Check Matches</button>
+                <button class="reset-btn" onclick="resetDragMatching()">Reset</button>
+                <div class="feedback" id="dragMatchingFeedback"></div>
+            </div>
+        </section>
+
+        <!-- Activity 4: Ending Conversations -->
+        <section class="section" id="activity4">
+            <div class="section-header">
+                <span class="section-number">Activity 4/5</span>
+                <h2>Ending Conversations Gracefully</h2>
+            </div>
+            <p class="section-intro">Knowing how to exit a conversation politely is just as important as starting one. Click each topic to see if it's an appropriate way to end a conversation.</p>
+
+            <div class="topics-grid">
+                <div class="topic-card" onclick="revealTopic(this)" data-safe="true">
+                    <span class="topic-text">"I should let you get back to work."</span>
+                    <span class="topic-verdict safe">✓ Polite</span>
+                </div>
+                <div class="topic-card" onclick="revealTopic(this)" data-safe="false">
+                    <span class="topic-text">"Okay, bye." (walks away)</span>
+                    <span class="topic-verdict avoid">✗ Too abrupt</span>
+                </div>
+                <div class="topic-card" onclick="revealTopic(this)" data-safe="true">
+                    <span class="topic-text">"It's been great chatting. I'd better head to my meeting."</span>
+                    <span class="topic-verdict safe">✓ Polite</span>
+                </div>
+                <div class="topic-card" onclick="revealTopic(this)" data-safe="false">
+                    <span class="topic-text">"I'm bored, I'm going to find someone else to talk to."</span>
+                    <span class="topic-verdict avoid">✗ Rude</span>
+                </div>
+                <div class="topic-card" onclick="revealTopic(this)" data-safe="true">
+                    <span class="topic-text">"Let me know how that project goes!"</span>
+                    <span class="topic-verdict safe">✓ Polite</span>
+                </div>
+                <div class="topic-card" onclick="revealTopic(this)" data-safe="true">
+                    <span class="topic-text">"I need to grab a coffee. Shall I get you one?"</span>
+                    <span class="topic-verdict safe">✓ Polite</span>
+                </div>
+                <div class="topic-card" onclick="revealTopic(this)" data-safe="true">
+                    <span class="topic-text">"Anyway, I won't keep you any longer."</span>
+                    <span class="topic-verdict safe">✓ Polite</span>
+                </div>
+                <div class="topic-card" onclick="revealTopic(this)" data-safe="false">
+                    <span class="topic-text">(Checking phone repeatedly while they're talking)</span>
+                    <span class="topic-verdict avoid">✗ Rude</span>
+                </div>
+            </div>
+
+            <div class="reveal-box">
+                <div class="reveal-header" onclick="toggleRevealBox(this)">
+                    <h4>📝 More Phrases for Ending Conversations</h4>
+                    <span class="reveal-hint">Click to reveal →</span>
+                </div>
+                <div class="reveal-content">
+                    <ul>
+                        <li><strong>"Well, it was lovely catching up."</strong> — Warm and friendly</li>
+                        <li><strong>"I'll let you get on."</strong> — Considerate of their time</li>
+                        <li><strong>"We should do this more often."</strong> — Shows you enjoyed it</li>
+                        <li><strong>"Right, I'd better get back to it."</strong> — Casual but polite</li>
+                        <li><strong>"Let's grab a coffee sometime and continue this chat."</strong> — Leaves door open</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity 5: Role Play -->
+        <section class="section" id="activity5">
+            <div class="section-header">
+                <span class="section-number">Activity 5/5</span>
+                <h2>Role Play: Building Rapport</h2>
+            </div>
+            <p class="section-intro">Choose a scenario and practise a natural conversation with your teacher. Focus on asking follow-up questions and ending gracefully.</p>
+
+            <div class="scenario-cards">
+                <div class="scenario-card" onclick="selectScenario(this)">
+                    <div class="scenario-icon">☕</div>
+                    <h4>Kitchen Chat</h4>
+                    <p>You bump into a colleague from another department while making coffee. You've seen them around but never really talked.</p>
+                    <div class="scenario-goals">
+                        <span>Goals:</span> Start a conversation, find something in common, end naturally when your coffee is ready
+                    </div>
+                </div>
+
+                <div class="scenario-card" onclick="selectScenario(this)">
+                    <div class="scenario-icon">🚶</div>
+                    <h4>Walking to a Meeting</h4>
+                    <p>You're walking to a meeting room with a client you've just met. You have 2-3 minutes to chat.</p>
+                    <div class="scenario-goals">
+                        <span>Goals:</span> Build rapport quickly, keep it light, transition smoothly when you arrive
+                    </div>
+                </div>
+
+                <div class="scenario-card" onclick="selectScenario(this)">
+                    <div class="scenario-icon">🍽️</div>
+                    <h4>Team Lunch</h4>
+                    <p>You're at a team lunch sitting next to someone you don't know well. The conversation has gone quiet.</p>
+                    <div class="scenario-goals">
+                        <span>Goals:</span> Restart the conversation, ask engaging questions, avoid awkward silences
+                    </div>
+                </div>
+            </div>
+
+            <div class="roleplay-tips">
+                <h4>💡 Conversation Tips:</h4>
+                <ul>
+                    <li>Start with a safe topic (weekend, work project, the venue)</li>
+                    <li>Ask open questions that need more than yes/no answers</li>
+                    <li>Listen actively and respond to what they say</li>
+                    <li>Look for common ground to build connection</li>
+                    <li>End with a positive comment or future reference</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Wrap Up -->
+        <section class="section wrap-up" id="wrapup">
+            <div class="section-header">
+                <span class="section-number">Wrap Up</span>
+                <h2>Reflection & Next Steps</h2>
+            </div>
+            
+            <div class="reflection-grid">
+                <div class="reflection-card">
+                    <h4>🌟 Key Phrases to Remember</h4>
+                    <p>Which phrases from today will you try to use this week?</p>
+                    <textarea class="notes-input" placeholder="Write your favourite phrases here..."></textarea>
+                </div>
+                <div class="reflection-card">
+                    <h4>📋 Action Point</h4>
+                    <p>Think of one colleague you could practise small talk with. What topic might you start with?</p>
+                    <textarea class="notes-input" placeholder="Your notes..."></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lesson Completion Section -->
+        <section class="section lesson-completion" id="completion">
+            <div class="completion-content">
+                <div class="completion-icon" id="completionIcon">📚</div>
+                <h3 id="completionTitle">You've reached the end of Lesson 2!</h3>
+                <p id="completionText">Well done on completing the activities. If you're happy with your progress, mark this lesson as complete to track your journey through the course.</p>
+                <div class="completion-buttons">
+                    <a href="lesson1.html" class="nav-btn">← Previous Lesson</a>
+                    <button class="complete-lesson-btn" id="completeBtn" onclick="toggleLessonCompletion()">
+                        <span class="btn-icon">✓</span>
+                        <span class="btn-text">Mark as Complete</span>
+                    </button>
+                    <a href="lesson3.html" class="nav-btn nav-btn-primary">Next Lesson →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>Business English Course by English in Doses</p>
+    </footer>
+
+    <!-- Load activities.js as ES module -->
+    <script type="module" src="js/activities.js"></script>
+    
+    <!-- Lesson completion functionality -->
+    <script type="module">
+        import { 
+            isLessonComplete, 
+            markLessonComplete, 
+            markLessonIncomplete,
+            getCurrentUser
+        } from './js/lesson-utils.js';
+        
+        const LESSON_NUMBER = parseInt(document.body.dataset.lesson);
+        let isComplete = false;
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', async function() {
+            await initializeCompletion();
+        });
+        
+        async function initializeCompletion() {
+            const username = getCurrentUser();
+            if (username) {
+                isComplete = await isLessonComplete(LESSON_NUMBER);
+                updateCompletionUI();
+            }
+        }
+        
+        function updateCompletionUI() {
+            const icon = document.getElementById('completionIcon');
+            const title = document.getElementById('completionTitle');
+            const text = document.getElementById('completionText');
+            const btn = document.getElementById('completeBtn');
+            const section = document.querySelector('.lesson-completion');
+            
+            if (isComplete) {
+                icon.textContent = '🎉';
+                title.textContent = 'Lesson Complete!';
+                text.textContent = 'Fantastic work! You\'ve completed this lesson. Keep up the momentum and continue to the next lesson when you\'re ready.';
+                btn.innerHTML = '<span class="btn-icon">↩</span><span class="btn-text">Mark as Incomplete</span>';
+                btn.classList.add('completed');
+                section.classList.add('is-complete');
+            } else {
+                icon.textContent = '📚';
+                title.textContent = `You've reached the end of Lesson ${LESSON_NUMBER}!`;
+                text.textContent = 'Well done on completing the activities. If you\'re happy with your progress, mark this lesson as complete to track your journey through the course.';
+                btn.innerHTML = '<span class="btn-icon">✓</span><span class="btn-text">Mark as Complete</span>';
+                btn.classList.remove('completed');
+                section.classList.remove('is-complete');
+            }
+        }
+        
+        // Make toggle function globally accessible
+        window.toggleLessonCompletion = async function() {
+            const btn = document.getElementById('completeBtn');
+            const username = getCurrentUser();
+            
+            if (!username) {
+                alert('Please log in on the homepage first to track your progress.');
+                return;
+            }
+            
+            // Disable button during operation
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
+            
+            try {
+                if (isComplete) {
+                    await markLessonIncomplete(LESSON_NUMBER);
+                    isComplete = false;
+                } else {
+                    await markLessonComplete(LESSON_NUMBER);
+                    isComplete = true;
+                }
+                
+                updateCompletionUI();
+                
+                // Visual feedback
+                btn.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    btn.style.transform = '';
+                }, 150);
+            } catch (error) {
+                console.error('Error toggling completion:', error);
+                alert('There was an error saving your progress. Please try again.');
+            } finally {
+                btn.disabled = false;
+                btn.style.opacity = '1';
+            }
+        };
+        
+        window.scrollToTop = function(event) {
+            event.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        };
+    </script>
+</body>
+</html>

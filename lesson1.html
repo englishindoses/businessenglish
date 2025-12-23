@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Business English | First Impressions</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/lessons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body data-lesson="1">
     <header class="header">
         <a href="index.html" class="back-link">← Back to Course</a>
         <div class="header-content">
@@ -72,23 +72,23 @@
             
             <div class="sorting-activity">
                 <div class="phrase-bank" id="phraseBank">
-                    <div class="phrase" data-formality="formal" draggable="true">It's a pleasure to meet you.</div>
-                    <div class="phrase" data-formality="informal" draggable="true">Hey, I'm Sarah!</div>
-                    <div class="phrase" data-formality="formal" draggable="true">Allow me to introduce myself.</div>
-                    <div class="phrase" data-formality="informal" draggable="true">Nice to meet you! I'm in marketing.</div>
-                    <div class="phrase" data-formality="formal" draggable="true">How do you do?</div>
-                    <div class="phrase" data-formality="informal" draggable="true">So, what do you do here?</div>
-                    <div class="phrase" data-formality="formal" draggable="true">I don't believe we've been introduced.</div>
-                    <div class="phrase" data-formality="informal" draggable="true">Great to finally put a face to the name!</div>
+                    <div class="phrase" data-category="formal" draggable="true">It's a pleasure to meet you.</div>
+                    <div class="phrase" data-category="informal" draggable="true">Hey, I'm Sarah!</div>
+                    <div class="phrase" data-category="formal" draggable="true">Allow me to introduce myself.</div>
+                    <div class="phrase" data-category="informal" draggable="true">Nice to meet you! I'm in marketing.</div>
+                    <div class="phrase" data-category="formal" draggable="true">How do you do?</div>
+                    <div class="phrase" data-category="informal" draggable="true">So, what do you do here?</div>
+                    <div class="phrase" data-category="formal" draggable="true">I don't believe we've been introduced.</div>
+                    <div class="phrase" data-category="informal" draggable="true">Great to finally put a face to the name!</div>
                 </div>
                 
                 <div class="sorting-zones">
-                    <div class="sort-zone" id="formalZone" data-formality="formal">
+                    <div class="sort-zone" id="formalZone" data-category="formal">
                         <h4>🎩 Formal</h4>
                         <p class="zone-hint">First meetings, senior colleagues, clients</p>
                         <div class="zone-content"></div>
                     </div>
-                    <div class="sort-zone" id="informalZone" data-formality="informal">
+                    <div class="sort-zone" id="informalZone" data-category="informal">
                         <h4>😊 Informal</h4>
                         <p class="zone-hint">Close colleagues, casual settings</p>
                         <div class="zone-content"></div>
@@ -175,70 +175,6 @@
                 <div class="practice-prompt">
                     <h4>💬 Your Turn</h4>
                     <p>Use 2-3 of these phrases to introduce yourself and your role to your teacher.</p>
-                </div>
-            </div>
-
-            <!-- Emphasising What You Enjoy Sub-section -->
-            <div class="subsection" id="emphasisStructure">
-                <h3>Emphasising What You Enjoy</h3>
-                <p class="activity-instruction">This structure helps you sound more expressive and engaged when talking about your job. It's a great way to add personality to professional introductions.</p>
-
-                <div class="language-box">
-                    <h4>📐 Grammar Pattern</h4>
-                    <p style="margin-bottom: 0.75rem; color: var(--color-text);"><strong>What + subject + verb + (the) most + is...</strong></p>
-                    <ul>
-                        <li><strong>Structure:</strong> What I [verb] (the) most about [noun] is [noun/gerund].</li>
-                        <li><strong>Formality:</strong> Neutral to semi-formal — perfect for interviews, networking, and professional conversations.</li>
-                        <li><strong>Purpose:</strong> Emphasises one thing above all others. It sounds more thoughtful than simply saying "I like..."</li>
-                    </ul>
-                </div>
-
-                <div class="activity" style="margin-top: 1.5rem;">
-                    <div class="activity-header">
-                        <span class="activity-number">Examples</span>
-                        <h3>Using the Structure</h3>
-                    </div>
-                    
-                    <div class="phrase-cards">
-                        <div class="flip-card">
-                            <div class="flip-card-inner">
-                                <div class="flip-card-front">
-                                    <span class="phrase-label">like</span>
-                                </div>
-                                <div class="flip-card-back">
-                                    <p>"What I like the most about my job is the variety — no two days are the same."</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flip-card">
-                            <div class="flip-card-inner">
-                                <div class="flip-card-front">
-                                    <span class="phrase-label">enjoy</span>
-                                </div>
-                                <div class="flip-card-back">
-                                    <p>"What I enjoy most about working here is collaborating with people from different backgrounds."</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flip-card">
-                            <div class="flip-card-inner">
-                                <div class="flip-card-front">
-                                    <span class="phrase-label">appreciate</span>
-                                </div>
-                                <div class="flip-card-back">
-                                    <p>"What I appreciate most about this role is the flexibility to manage my own schedule."</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="reflection-card" style="margin-top: 1.5rem;">
-                    <h4>📝 My Notes</h4>
-                    <p>Write your own sentence using this structure. What do you like/enjoy/appreciate most about your job or studies?</p>
-                    <textarea class="notes-input" data-note-id="emphasis-structure" placeholder="What I like the most about my job is..."></textarea>
                 </div>
             </div>
         </section>
@@ -430,12 +366,12 @@
                 <div class="reflection-card">
                     <h4>🌟 Key Phrases to Remember</h4>
                     <p>Which 2-3 phrases from today will be most useful for you?</p>
-                    <textarea class="notes-input" data-note-id="key-phrases" placeholder="Write your favourite phrases here..."></textarea>
+                    <textarea class="notes-input" placeholder="Write your favourite phrases here..."></textarea>
                 </div>
                 <div class="reflection-card">
                     <h4>📋 Action Point</h4>
                     <p>Is there a real situation coming up where you could practise these skills?</p>
-                    <textarea class="notes-input" data-note-id="action-point" placeholder="Your notes..."></textarea>
+                    <textarea class="notes-input" placeholder="Your notes..."></textarea>
                 </div>
             </div>
         </section>
@@ -451,8 +387,7 @@
                         <span class="btn-icon">✓</span>
                         <span class="btn-text">Mark as Complete</span>
                     </button>
-                    <a href="#" class="nav-btn" onclick="scrollToTop(event)">↑ Back to Top</a>
-                    <a href="index.html" class="nav-btn nav-btn-primary">🏠 Home</a>
+                    <a href="lesson2.html" class="nav-btn nav-btn-primary">Next Lesson →</a>
                 </div>
             </div>
         </section>
@@ -462,8 +397,8 @@
         <p>Business English Course by English in Doses</p>
     </footer>
 
-    <!-- Load script.js as ES module -->
-    <script type="module" src="js/script.js"></script>
+    <!-- Load activities.js as ES module -->
+    <script type="module" src="js/activities.js"></script>
     
     <!-- Lesson completion functionality -->
     <script type="module">
@@ -474,7 +409,7 @@
             getCurrentUser
         } from './js/lesson-utils.js';
         
-        const LESSON_NUMBER = 1;
+        const LESSON_NUMBER = parseInt(document.body.dataset.lesson);
         let isComplete = false;
         
         // Initialize on page load
@@ -500,13 +435,13 @@
             if (isComplete) {
                 icon.textContent = '🎉';
                 title.textContent = 'Lesson Complete!';
-                text.textContent = 'Fantastic work! You\'ve completed Lesson 1. Keep up the momentum and continue to the next lesson when you\'re ready.';
+                text.textContent = 'Fantastic work! You\'ve completed this lesson. Keep up the momentum and continue to the next lesson when you\'re ready.';
                 btn.innerHTML = '<span class="btn-icon">↩</span><span class="btn-text">Mark as Incomplete</span>';
                 btn.classList.add('completed');
                 section.classList.add('is-complete');
             } else {
                 icon.textContent = '📚';
-                title.textContent = 'You\'ve reached the end of Lesson 1!';
+                title.textContent = `You've reached the end of Lesson ${LESSON_NUMBER}!`;
                 text.textContent = 'Well done on completing the activities. If you\'re happy with your progress, mark this lesson as complete to track your journey through the course.';
                 btn.innerHTML = '<span class="btn-icon">✓</span><span class="btn-text">Mark as Complete</span>';
                 btn.classList.remove('completed');

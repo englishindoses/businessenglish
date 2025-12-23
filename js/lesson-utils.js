@@ -146,7 +146,7 @@ export async function loadLessonData(lessonId) {
 function getDefaultLessonData() {
     return {
         notes: {},
-        sorting: { formal: [], informal: [], bank: [] },
+        sorting: { zone1: [], zone2: [], bank: [] },
         revealedTopics: [],
         matching: {},
         flippedCards: [],

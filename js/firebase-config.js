@@ -198,7 +198,7 @@ export async function getLessonData(username, lessonId) {
     // Return default empty structure
     return {
         notes: {},
-        sorting: { formal: [], informal: [], bank: [] },
+        sorting: { zone1: [], zone2: [], bank: [] },
         revealedTopics: [],
         matching: {},
         flippedCards: [],

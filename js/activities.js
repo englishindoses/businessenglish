@@ -1,4 +1,5 @@
-// ===== Lesson 1 Activities with Firebase =====
+// ===== Activities JavaScript with Firebase =====
+// Reusable across all lessons - auto-detects lesson from data-lesson attribute
 
 import { 
     loadLessonData, 
@@ -8,12 +9,16 @@ import {
     getCurrentUser 
 } from './lesson-utils.js';
 
-const LESSON_ID = 'lesson1';
+// ===== AUTO-DETECT LESSON ID =====
+const LESSON_NUMBER = document.body.dataset.lesson || '1';
+const LESSON_ID = `lesson${LESSON_NUMBER}`;
+
+console.log(`Initializing activities for ${LESSON_ID}`);
 
 // Current lesson data (loaded from Firebase)
 let lessonData = {
     notes: {},
-    sorting: { formal: [], informal: [], bank: [] },
+    sorting: { zone1: [], zone2: [], bank: [] },
     revealedTopics: [],
     matching: {},
     flippedCards: [],
@@ -30,10 +35,14 @@ document.addEventListener('DOMContentLoaded', async function() {
     // Load data from Firebase
     await loadSavedData();
     
-    // Initialize all activities
+    // Initialize all activities that exist on the page
     initSortingActivity();
     initDragAndDrop();
+    initFlipCards();
+    initTopicCards();
+    initScenarioCards();
     initNotesInputs();
+    initRevealBoxes();
     
     // Apply saved states
     applySavedStates();
@@ -65,30 +74,23 @@ async function loadSavedData() {
 function applySavedStates() {
     if (!dataLoaded) return;
     
-    // Apply sorting state
     applySortingState();
-    
-    // Apply revealed topics
     applyRevealedTopics();
-    
-    // Apply matching state
     applyMatchingState();
-    
-    // Apply flipped cards
     applyFlippedCards();
-    
-    // Apply selected scenario
     applySelectedScenario();
-    
-    // Apply notes
     applyNotes();
 }
 
-// ===== Activity 1: Sorting Formal/Informal Phrases =====
+
+// ===== SORTING ACTIVITY =====
 
 let selectedPhrase = null;
 
 function initSortingActivity() {
+    const phraseBank = document.getElementById('phraseBank');
+    if (!phraseBank) return; // Activity not on this page
+    
     // Initialize phrase click handlers
     document.querySelectorAll('#phraseBank .phrase').forEach(phrase => {
         phrase.addEventListener('click', handlePhraseClick);
@@ -140,80 +142,84 @@ function handleZoneContentClick(e) {
 }
 
 function saveSortingState() {
-    const formalZone = document.querySelector('#formalZone .zone-content');
-    const informalZone = document.querySelector('#informalZone .zone-content');
+    const sortZones = document.querySelectorAll('.sort-zone');
     const phraseBank = document.getElementById('phraseBank');
     
     const sortingState = {
-        formal: Array.from(formalZone.querySelectorAll('.phrase')).map(p => p.textContent),
-        informal: Array.from(informalZone.querySelectorAll('.phrase')).map(p => p.textContent),
         bank: Array.from(phraseBank.querySelectorAll('.phrase')).map(p => p.textContent)
     };
+    
+    // Save each zone's contents dynamically
+    sortZones.forEach(zone => {
+        const zoneId = zone.id;
+        sortingState[zoneId] = Array.from(zone.querySelectorAll('.zone-content .phrase')).map(p => p.textContent);
+    });
     
     lessonData.sorting = sortingState;
     saveFieldDebounced(LESSON_ID, 'sorting', sortingState);
 }
 
 function applySortingState() {
-    if (!lessonData.sorting) return;
+    if (!lessonData.sorting || Object.keys(lessonData.sorting).length === 0) return;
     
-    const { formal, informal } = lessonData.sorting;
-    const formalZone = document.querySelector('#formalZone .zone-content');
-    const informalZone = document.querySelector('#informalZone .zone-content');
     const phraseBank = document.getElementById('phraseBank');
+    if (!phraseBank) return;
     
-    // Get all phrases
     const allPhrases = document.querySelectorAll('.phrase');
     
-    // Move phrases to correct zones
+    // Move phrases to correct zones based on saved state
     allPhrases.forEach(phrase => {
         const text = phrase.textContent;
-        if (formal && formal.includes(text)) {
-            formalZone.appendChild(phrase);
-        } else if (informal && informal.includes(text)) {
-            informalZone.appendChild(phrase);
+        
+        // Check each zone in saved state
+        for (const [zoneId, phrases] of Object.entries(lessonData.sorting)) {
+            if (zoneId === 'bank') continue;
+            if (phrases && phrases.includes(text)) {
+                const zone = document.getElementById(zoneId);
+                if (zone) {
+                    const zoneContent = zone.querySelector('.zone-content');
+                    if (zoneContent) {
+                        zoneContent.appendChild(phrase);
+                    }
+                }
+            }
         }
-        // Otherwise stays in bank
     });
 }
 
+// Generic check sorting function - reads correct answers from data attributes
 window.checkSorting = function() {
-    const formalZone = document.querySelector('#formalZone .zone-content');
-    const informalZone = document.querySelector('#informalZone .zone-content');
+    const sortZones = document.querySelectorAll('.sort-zone');
     const feedback = document.getElementById('sortingFeedback');
     
     let correct = 0;
     let total = 0;
     
-    formalZone.querySelectorAll('.phrase').forEach(phrase => {
-        total++;
-        if (phrase.dataset.formality === 'formal') {
-            phrase.classList.add('correct');
-            phrase.classList.remove('incorrect');
-            correct++;
-        } else {
-            phrase.classList.add('incorrect');
-            phrase.classList.remove('correct');
-        }
+    sortZones.forEach(zone => {
+        const expectedCategory = zone.dataset.category; // e.g., "formal", "safe"
+        
+        zone.querySelectorAll('.zone-content .phrase').forEach(phrase => {
+            total++;
+            const phraseCategory = phrase.dataset.category; // e.g., data-category="formal"
+            
+            if (phraseCategory === expectedCategory) {
+                phrase.classList.add('correct');
+                phrase.classList.remove('incorrect');
+                correct++;
+            } else {
+                phrase.classList.add('incorrect');
+                phrase.classList.remove('correct');
+            }
+        });
     });
     
-    informalZone.querySelectorAll('.phrase').forEach(phrase => {
-        total++;
-        if (phrase.dataset.formality === 'informal') {
-            phrase.classList.add('correct');
-            phrase.classList.remove('incorrect');
-            correct++;
-        } else {
-            phrase.classList.add('incorrect');
-            phrase.classList.remove('correct');
-        }
-    });
+    const totalPhrases = document.querySelectorAll('.phrase').length;
     
     feedback.classList.add('show');
     if (total === 0) {
         feedback.textContent = 'Please sort some phrases first!';
         feedback.className = 'feedback show error';
-    } else if (correct === total && total === 8) {
+    } else if (correct === total && total === totalPhrases) {
         feedback.textContent = `Excellent! All ${correct} phrases sorted correctly! 🎉`;
         feedback.className = 'feedback show success';
     } else if (correct === total) {
@@ -245,13 +251,27 @@ window.resetSorting = function() {
 };
 
 
-// ===== Activity 3: Small Talk Topics =====
+// ===== TOPIC CARDS (Reveal on Click) =====
+
+function initTopicCards() {
+    // Topic cards are initialized via onclick in HTML, but we can add handlers here too
+    document.querySelectorAll('.topic-card').forEach(card => {
+        if (!card.onclick) {
+            card.addEventListener('click', function() {
+                revealTopic(this);
+            });
+        }
+    });
+}
 
 window.revealTopic = function(card) {
     card.classList.add('revealed');
     
     // Save revealed state
     const topicText = card.querySelector('.topic-text').textContent;
+    if (!lessonData.revealedTopics) {
+        lessonData.revealedTopics = [];
+    }
     if (!lessonData.revealedTopics.includes(topicText)) {
         lessonData.revealedTopics.push(topicText);
         saveFieldDebounced(LESSON_ID, 'revealedTopics', lessonData.revealedTopics);
@@ -270,11 +290,14 @@ function applyRevealedTopics() {
 }
 
 
-// ===== Activity 4: Drag and Drop Matching =====
+// ===== DRAG AND DROP MATCHING =====
 
 let draggedResponse = null;
 
 function initDragAndDrop() {
+    const responseBank = document.getElementById('responseBank');
+    if (!responseBank) return; // Activity not on this page
+    
     const responses = document.querySelectorAll('.draggable-response');
     const dropZones = document.querySelectorAll('.drop-zone');
     
@@ -294,11 +317,8 @@ function initDragAndDrop() {
         zone.addEventListener('drop', handleDrop);
     });
     
-    const responseBank = document.getElementById('responseBank');
-    if (responseBank) {
-        responseBank.addEventListener('dragover', handleDragOver);
-        responseBank.addEventListener('drop', handleDropToBank);
-    }
+    responseBank.addEventListener('dragover', handleDragOver);
+    responseBank.addEventListener('drop', handleDropToBank);
 }
 
 function handleDragStart(e) {
@@ -467,6 +487,7 @@ function applyMatchingState() {
     if (!lessonData.matching || Object.keys(lessonData.matching).length === 0) return;
     
     const responseBank = document.getElementById('responseBank');
+    if (!responseBank) return;
     
     Object.entries(lessonData.matching).forEach(([zoneMatch, responseMatch]) => {
         const zone = document.querySelector(`.drop-zone[data-match="${zoneMatch}"]`);
@@ -488,6 +509,7 @@ window.checkDragMatching = function() {
     
     let correct = 0;
     let total = 0;
+    let totalZones = dropZones.length;
     
     dropZones.forEach(zone => {
         const response = zone.querySelector('.draggable-response');
@@ -511,7 +533,7 @@ window.checkDragMatching = function() {
     if (total === 0) {
         feedback.textContent = 'Drag the responses and drop them next to the matching statements.';
         feedback.className = 'feedback show error';
-    } else if (correct === 4) {
+    } else if (correct === totalZones) {
         feedback.textContent = 'Perfect! All responses matched correctly! 🎉';
         feedback.className = 'feedback show success';
     } else if (correct === total) {
@@ -550,15 +572,16 @@ window.resetDragMatching = function() {
 };
 
 
-// ===== Flip Cards =====
+// ===== FLIP CARDS =====
 
-// Add click handlers for flip cards
-document.querySelectorAll('.flip-card').forEach((card, index) => {
-    card.addEventListener('click', function() {
-        this.classList.toggle('flipped');
-        saveFlippedCardsState();
+function initFlipCards() {
+    document.querySelectorAll('.flip-card').forEach((card, index) => {
+        card.addEventListener('click', function() {
+            this.classList.toggle('flipped');
+            saveFlippedCardsState();
+        });
     });
-});
+}
 
 function saveFlippedCardsState() {
     const flippedCards = [];
@@ -583,7 +606,11 @@ function applyFlippedCards() {
 }
 
 
-// ===== Reveal Box Toggle =====
+// ===== REVEAL BOXES =====
+
+function initRevealBoxes() {
+    // Reveal boxes are initialized via onclick in HTML
+}
 
 window.toggleRevealBox = function(header) {
     const box = header.closest('.reveal-box');
@@ -591,7 +618,17 @@ window.toggleRevealBox = function(header) {
 };
 
 
-// ===== Activity 5: Scenario Selection =====
+// ===== SCENARIO CARDS =====
+
+function initScenarioCards() {
+    document.querySelectorAll('.scenario-card').forEach(card => {
+        if (!card.onclick) {
+            card.addEventListener('click', function() {
+                selectScenario(this);
+            });
+        }
+    });
+}
 
 window.selectScenario = function(card) {
     document.querySelectorAll('.scenario-card').forEach(c => {
@@ -616,22 +653,16 @@ function applySelectedScenario() {
 }
 
 
-// ===== Notes (using unique IDs) =====
+// ===== NOTES =====
 
 function initNotesInputs() {
     const notesInputs = document.querySelectorAll('.notes-input');
     
-    notesInputs.forEach((input) => {
-        const noteId = input.dataset.noteId;
-        
-        if (!noteId) {
-            console.warn('Notes input missing data-note-id attribute:', input);
-            return;
-        }
-        
+    notesInputs.forEach((input, index) => {
         input.addEventListener('input', function() {
-            lessonData.notes[noteId] = this.value;
-            saveNoteDebounced(LESSON_ID, noteId, this.value);
+            if (!lessonData.notes) lessonData.notes = {};
+            lessonData.notes[index] = this.value;
+            saveNoteDebounced(LESSON_ID, index.toString(), this.value);
         });
     });
 }
@@ -641,17 +672,15 @@ function applyNotes() {
     
     const notesInputs = document.querySelectorAll('.notes-input');
     
-    notesInputs.forEach((input) => {
-        const noteId = input.dataset.noteId;
-        
-        if (noteId && lessonData.notes[noteId] !== undefined) {
-            input.value = lessonData.notes[noteId];
+    notesInputs.forEach((input, index) => {
+        if (lessonData.notes[index] !== undefined) {
+            input.value = lessonData.notes[index];
         }
     });
 }
 
 
-// ===== Smooth Scroll for Navigation =====
+// ===== SMOOTH SCROLL =====
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
@@ -667,7 +696,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 
-// ===== Entrance Animations =====
+// ===== ENTRANCE ANIMATIONS =====
 
 function addEntranceAnimations() {
     const sections = document.querySelectorAll('.section');
@@ -682,3 +711,9 @@ function addEntranceAnimations() {
         }, 100 + (index * 100));
     });
 }
+
+
+// ===== LESSON COMPLETION (loaded separately in each lesson HTML) =====
+// Export lesson info for completion module
+window.currentLessonNumber = parseInt(LESSON_NUMBER);
+window.currentLessonId = LESSON_ID;
