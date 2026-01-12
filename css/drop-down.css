@@ -1,0 +1,163 @@
+/* ===== Drop-down Gap-fill Activity Styles ===== */
+/* Reusable component for sentence completion with dropdown menus */
+
+.dropdown-activity {
+    margin-bottom: 1.5rem;
+}
+
+.dropdown-sentence {
+    background: var(--color-white);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.8;
+    transition: var(--transition);
+}
+
+.dropdown-sentence:hover {
+    border-color: var(--color-primary-light);
+}
+
+.dropdown-sentence.correct {
+    background: var(--color-success-light);
+    border-color: var(--color-success);
+}
+
+.dropdown-sentence.incorrect {
+    background: var(--color-error-light);
+    border-color: var(--color-error);
+}
+
+/* Sentence number/label */
+.sentence-number {
+    display: inline-block;
+    background: var(--color-primary);
+    color: var(--color-white);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-right: 0.75rem;
+}
+
+/* The dropdown select element */
+.gap-dropdown {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: var(--color-primary-pale);
+    border: 2px solid var(--color-primary);
+    border-radius: 6px;
+    padding: 0.4rem 2rem 0.4rem 0.75rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--color-primary);
+    cursor: pointer;
+    min-width: 180px;
+    transition: var(--transition);
+    
+    /* Custom dropdown arrow */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%232d6a6a' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+}
+
+.gap-dropdown:hover {
+    background-color: var(--color-white);
+    border-color: var(--color-primary-light);
+}
+
+.gap-dropdown:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(45, 106, 106, 0.2);
+}
+
+.gap-dropdown.answered {
+    background-color: var(--color-white);
+    font-weight: 500;
+}
+
+.gap-dropdown.correct {
+    background-color: var(--color-success-light);
+    border-color: var(--color-success);
+    color: var(--color-success);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234a9d7c' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+}
+
+.gap-dropdown.incorrect {
+    background-color: var(--color-error-light);
+    border-color: var(--color-error);
+    color: var(--color-error);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23c75050' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+}
+
+/* Placeholder option styling */
+.gap-dropdown option {
+    background: var(--color-white);
+    color: var(--color-text);
+    padding: 0.5rem;
+}
+
+.gap-dropdown option:disabled {
+    color: var(--color-text-light);
+}
+
+/* Context label above sentence */
+.sentence-context {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+/* Correct answer reveal */
+.correct-answer-text {
+    display: none;
+    font-size: 0.85rem;
+    color: var(--color-success);
+    margin-top: 0.5rem;
+    padding-left: 2rem;
+}
+
+.dropdown-sentence.incorrect .correct-answer-text {
+    display: block;
+}
+
+/* Score display */
+.dropdown-score {
+    display: inline-block;
+    background: var(--color-primary-pale);
+    color: var(--color-primary);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .gap-dropdown {
+        min-width: 150px;
+        font-size: 0.9rem;
+        padding: 0.35rem 1.75rem 0.35rem 0.5rem;
+    }
+    
+    .dropdown-sentence {
+        padding: 1rem;
+        font-size: 0.95rem;
+        line-height: 2;
+    }
+}
+
+/* Print styles */
+@media print {
+    .gap-dropdown {
+        border: 1px solid #000;
+        background: #fff;
+    }
+}

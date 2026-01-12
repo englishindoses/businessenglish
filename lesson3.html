@@ -5,9 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Business English | Interview Skills</title>
     <link rel="stylesheet" href="css/lessons.css">
+    <link rel="stylesheet" href="css/drop-down.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Compact warm-up styles for this lesson */
+        .warmup-compact {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .warmup-question {
+            background: var(--color-bg);
+            border-radius: var(--radius-sm);
+            padding: 1rem 1.25rem;
+            border-left: 4px solid var(--color-primary);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        .warmup-question .question-icon {
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+        .warmup-question p {
+            margin: 0;
+            color: var(--color-text);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        /* 4-column sorting grid */
+        .sorting-zones-4 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        @media (max-width: 600px) {
+            .sorting-zones-4 {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* Taller notes box */
+        .notes-input-tall {
+            min-height: 160px;
+        }
+    </style>
 </head>
 <body data-lesson="3">
     <header class="header">
@@ -15,257 +58,265 @@
         <div class="header-content">
             <div class="header-badge">Lesson 3</div>
             <h1>Interview Skills</h1>
-            <p class="header-subtitle">Strategies for answering questions & showcasing your strengths</p>
+            <p class="header-subtitle">Essential expressions for confident interview answers</p>
         </div>
         <div class="header-decoration"></div>
     </header>
 
     <main class="container">
-        <!-- Activity 1: Discussion Warm-up -->
+        <!-- Activity 1: Discussion Warm-up (Compact) -->
         <section class="section" id="activity1">
             <div class="section-header">
                 <span class="section-number">Activity 1/5</span>
-                <h2>Warm-up: Interview Experiences</h2>
+                <h2>Warm-up: Your Interview Experience</h2>
             </div>
-            <p class="section-intro">Think about your past interview experiences. Discuss these questions with your teacher.</p>
+            <p class="section-intro">Discuss these questions with your teacher.</p>
 
-            <div class="discussion-grid">
-                <div class="discussion-card">
-                    <div class="card-icon">🎯</div>
-                    <h3>Your Experience</h3>
-                    <ul class="discussion-questions">
-                        <li>When was your last job interview? How did it go?</li>
-                        <li>What type of interviews have you had? (phone, video, panel, one-to-one?)</li>
-                        <li>Do you prepare differently for different types of interviews?</li>
-                    </ul>
+            <div class="warmup-compact">
+                <div class="warmup-question">
+                    <span class="question-icon">🎯</span>
+                    <p>Think back to a job interview you've had. What went well? What would you do differently?</p>
                 </div>
-
-                <div class="discussion-card">
-                    <div class="card-icon">😰</div>
-                    <h3>Challenges</h3>
-                    <ul class="discussion-questions">
-                        <li>What do you find most challenging about interviews?</li>
-                        <li>Are there any questions you dread being asked?</li>
-                        <li>How do you manage interview nerves?</li>
-                    </ul>
+                <div class="warmup-question">
+                    <span class="question-icon">😰</span>
+                    <p>What do you find most difficult about interviews in English? Is it finding the right words, structuring your answers, or something else?</p>
                 </div>
+                <div class="warmup-question">
+                    <span class="question-icon">💼</span>
+                    <p>Are you preparing for any interviews at the moment? What kind of role or company are you interested in?</p>
+                </div>
+            </div>
+        </section>
 
-                <div class="discussion-card">
-                    <div class="card-icon">💡</div>
-                    <h3>From the Other Side</h3>
-                    <ul class="discussion-questions">
-                        <li>Have you ever interviewed someone else? What impressed you?</li>
-                        <li>What makes a candidate memorable (in a good way)?</li>
-                        <li>What mistakes have you seen candidates make?</li>
+        <!-- Activity 2: Sorting Expressions -->
+        <section class="section" id="activity2">
+            <div class="section-header">
+                <span class="section-number">Activity 2/5</span>
+                <h2>Key Interview Expressions</h2>
+            </div>
+            <p class="section-intro">These expressions will help you sound confident and professional in interviews. Sort them into the correct categories.</p>
+            
+            <div class="sorting-activity">
+                <div class="phrase-bank" id="phraseBank">
+                    <div class="phrase" data-category="experience" draggable="true">I was responsible for...</div>
+                    <div class="phrase" data-category="thinking" draggable="true">That's a great question.</div>
+                    <div class="phrase" data-category="experience" draggable="true">One of my key achievements was...</div>
+                    <div class="phrase" data-category="softening" draggable="true">I would say that...</div>
+                    <div class="phrase" data-category="structuring" draggable="true">To give you an example...</div>
+                    <div class="phrase" data-category="thinking" draggable="true">Let me think about that for a moment.</div>
+                    <div class="phrase" data-category="softening" draggable="true">I tend to...</div>
+                    <div class="phrase" data-category="structuring" draggable="true">This led to...</div>
+                    <div class="phrase" data-category="experience" draggable="true">I successfully managed to...</div>
+                    <div class="phrase" data-category="softening" draggable="true">I believe I'm quite good at...</div>
+                    <div class="phrase" data-category="structuring" draggable="true">As a result...</div>
+                    <div class="phrase" data-category="thinking" draggable="true">If I had to choose, I'd say...</div>
+                </div>
+                
+                <div class="sorting-zones sorting-zones-4">
+                    <div class="sort-zone" id="experienceZone" data-category="experience">
+                        <h4>💼 Describing Experience</h4>
+                        <p class="zone-hint">Talking about your past work and achievements</p>
+                        <div class="zone-content"></div>
+                    </div>
+                    <div class="sort-zone" id="thinkingZone" data-category="thinking">
+                        <h4>⏱️ Buying Thinking Time</h4>
+                        <p class="zone-hint">Phrases to use while you think of your answer</p>
+                        <div class="zone-content"></div>
+                    </div>
+                    <div class="sort-zone" id="softeningZone" data-category="softening">
+                        <h4>🎯 Softening & Hedging</h4>
+                        <p class="zone-hint">Making your answers sound balanced and thoughtful</p>
+                        <div class="zone-content"></div>
+                    </div>
+                    <div class="sort-zone" id="structuringZone" data-category="structuring">
+                        <h4>🔗 Structuring & Connecting</h4>
+                        <p class="zone-hint">Organising your ideas and showing cause & effect</p>
+                        <div class="zone-content"></div>
+                    </div>
+                </div>
+            </div>
+            <button class="check-btn" onclick="checkSorting()">Check Answers</button>
+            <button class="reset-btn" onclick="resetSorting()">Reset</button>
+            <div class="feedback" id="sortingFeedback"></div>
+
+            <div class="reveal-box">
+                <div class="reveal-header" onclick="toggleRevealBox(this)">
+                    <h4>📝 More Useful Expressions</h4>
+                    <span class="reveal-hint">Click to reveal →</span>
+                </div>
+                <div class="reveal-content">
+                    <ul>
+                        <li><strong>I played a key role in...</strong> — Describing involvement</li>
+                        <li><strong>What I learned from that experience was...</strong> — Showing reflection</li>
+                        <li><strong>That's something I'm working on improving.</strong> — Addressing weaknesses honestly</li>
+                        <li><strong>In that situation, I decided to...</strong> — Explaining decisions</li>
+                        <li><strong>Looking back, I'm proud that...</strong> — Highlighting achievements</li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <!-- Activity 2: The STAR Method -->
-        <section class="section" id="activity2">
+        <!-- Activity 3: Drop-down Gap-fill -->
+        <section class="section" id="activity3">
             <div class="section-header">
-                <span class="section-number">Activity 2/5</span>
-                <h2>The STAR Method</h2>
+                <span class="section-number">Activity 3/5</span>
+                <h2>Expressions in Context</h2>
             </div>
-            <p class="section-intro">The STAR method helps you structure answers to behavioural questions like "Tell me about a time when..." Click each card to learn the framework.</p>
+            <p class="section-intro">Now practise using these expressions. Choose the best phrase to complete each interview answer.</p>
+
+            <div class="dropdown-activity" id="dropdownActivity1">
+                <div class="dropdown-sentence">
+                    <span class="sentence-number">1</span>
+                    <span class="sentence-context">Question: "Tell me about your current role."</span>
+                    <p>
+                        <select class="gap-dropdown" data-answer="I'm responsible for">
+                            <option value="">Select an expression...</option>
+                            <option value="I'm responsible for">I'm responsible for</option>
+                            <option value="As a result">As a result</option>
+                            <option value="Let me think">Let me think</option>
+                        </select>
+                        managing a team of five people and overseeing all our marketing campaigns in the APAC region.
+                    </p>
+                </div>
+
+                <div class="dropdown-sentence">
+                    <span class="sentence-number">2</span>
+                    <span class="sentence-context">Question: "What's your greatest strength?"</span>
+                    <p>
+                        <select class="gap-dropdown" data-answer="I would say that">
+                            <option value="">Select an expression...</option>
+                            <option value="I would say that">I would say that</option>
+                            <option value="This led to">This led to</option>
+                            <option value="I was responsible for">I was responsible for</option>
+                        </select>
+                        my greatest strength is my ability to stay calm under pressure.
+                        <select class="gap-dropdown" data-answer="To give you an example">
+                            <option value="">Select an expression...</option>
+                            <option value="To give you an example">To give you an example</option>
+                            <option value="I tend to">I tend to</option>
+                            <option value="That's a great question">That's a great question</option>
+                        </select>,
+                        last year we had a major product launch that got moved forward by three weeks, and I coordinated the entire team to deliver on time.
+                    </p>
+                </div>
+
+                <div class="dropdown-sentence">
+                    <span class="sentence-number">3</span>
+                    <span class="sentence-context">Question: "Tell me about a challenge you've faced at work."</span>
+                    <p>
+                        <select class="gap-dropdown" data-answer="One of my key achievements was">
+                            <option value="">Select an expression...</option>
+                            <option value="One of my key achievements was">One of my key achievements was</option>
+                            <option value="Let me think about that">Let me think about that</option>
+                            <option value="I tend to">I tend to</option>
+                        </select>
+                        turning around a struggling project. The team was behind schedule and morale was low. I introduced daily check-ins and broke the work into smaller milestones.
+                        <select class="gap-dropdown" data-answer="As a result">
+                            <option value="">Select an expression...</option>
+                            <option value="As a result">As a result</option>
+                            <option value="I would say that">I would say that</option>
+                            <option value="That's a great question">That's a great question</option>
+                        </select>,
+                        we delivered the project on time and the client extended their contract with us.
+                    </p>
+                </div>
+
+                <div class="dropdown-sentence">
+                    <span class="sentence-number">4</span>
+                    <span class="sentence-context">Question: "What's your management style?"</span>
+                    <p>
+                        <select class="gap-dropdown" data-answer="I tend to">
+                            <option value="">Select an expression...</option>
+                            <option value="I tend to">I tend to</option>
+                            <option value="This led to">This led to</option>
+                            <option value="One of my key achievements was">One of my key achievements was</option>
+                        </select>
+                        be quite collaborative.
+                        <select class="gap-dropdown" data-answer="I believe">
+                            <option value="">Select an expression...</option>
+                            <option value="I believe">I believe</option>
+                            <option value="As a result">As a result</option>
+                            <option value="I was responsible for">I was responsible for</option>
+                        </select>
+                        the best results come from giving people ownership of their work while being available to support them when needed.
+                    </p>
+                </div>
+            </div>
+            <button class="check-btn" onclick="checkDropdownAnswers('dropdownActivity1')">Check Answers</button>
+            <button class="reset-btn" onclick="resetDropdownActivity('dropdownActivity1')">Reset</button>
+            <div class="feedback" id="dropdownActivity1Feedback"></div>
+
+            <div class="reflection-card" style="margin-top: 1.5rem;">
+                <h4>📋 Notes</h4>
+                <p>Space to make any notes you want.</p>
+                <textarea class="notes-input" placeholder="Your notes..."></textarea>
+            </div>
+        </section>
+
+        <!-- Activity 4: The STAR Method (Bonus Tip) -->
+        <section class="section" id="activity4">
+            <div class="section-header">
+                <span class="section-number">Activity 4/5</span>
+                <h2>⭐ Bonus Tip: The STAR Method</h2>
+            </div>
+            <p class="section-intro">The STAR method helps you structure clear, complete answers to behavioural questions like "Tell me about a time when..." Click each card to see useful expressions for each part.</p>
 
             <div class="phrase-cards">
-                <div class="flip-card">
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <span class="phrase-label">S - Situation</span>
                         </div>
                         <div class="flip-card-back">
-                            <p>"In my previous role at [company], we were facing [context/challenge]..."</p>
+                            <p>"In my previous role at [company]..."<br>"We were facing a situation where..."<br>"At the time, the company was..."</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="flip-card">
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <span class="phrase-label">T - Task</span>
                         </div>
                         <div class="flip-card-back">
-                            <p>"My responsibility was to..." / "I was asked to..." / "My role was to..."</p>
+                            <p>"I was responsible for..."<br>"My task was to..."<br>"I needed to..."</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="flip-card">
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <span class="phrase-label">A - Action</span>
                         </div>
                         <div class="flip-card-back">
-                            <p>"So I decided to..." / "The first thing I did was..." / "I took the initiative to..."</p>
+                            <p>"So I decided to..."<br>"The first thing I did was..."<br>"I took the initiative to..."</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="flip-card">
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <span class="phrase-label">R - Result</span>
                         </div>
                         <div class="flip-card-back">
-                            <p>"As a result..." / "This led to..." / "The outcome was..." / "We achieved..."</p>
+                            <p>"As a result..."<br>"This led to..."<br>"The outcome was..."</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Sorting: Good vs Weak STAR responses -->
-            <div class="subsection">
-                <h3>Strong vs Weak Responses</h3>
-                <p class="activity-instruction">Sort these interview response snippets into strong (effective) or weak (needs improvement) categories.</p>
-
-                <div class="sorting-activity">
-                    <div class="phrase-bank" id="phraseBank">
-                        <div class="phrase" data-category="strong" draggable="true">I increased sales by 25% over six months by implementing a new CRM system.</div>
-                        <div class="phrase" data-category="weak" draggable="true">I'm a hard worker and always do my best.</div>
-                        <div class="phrase" data-category="strong" draggable="true">I identified the problem, proposed a solution to my manager, and led a team of three to implement it.</div>
-                        <div class="phrase" data-category="weak" draggable="true">We did a project and it went well.</div>
-                        <div class="phrase" data-category="strong" draggable="true">The client was so pleased that they renewed their contract for another two years.</div>
-                        <div class="phrase" data-category="weak" draggable="true">I think I handled it okay.</div>
-                        <div class="phrase" data-category="strong" draggable="true">I coordinated with three departments to reduce delivery time from 5 days to 2 days.</div>
-                        <div class="phrase" data-category="weak" draggable="true">Everyone said I did a good job.</div>
-                    </div>
-                    
-                    <div class="sorting-zones">
-                        <div class="sort-zone" id="strongZone" data-category="strong">
-                            <h4>💪 Strong Responses</h4>
-                            <p class="zone-hint">Specific, measurable, action-focused</p>
-                            <div class="zone-content"></div>
-                        </div>
-                        <div class="sort-zone" id="weakZone" data-category="weak">
-                            <h4>📝 Needs Improvement</h4>
-                            <p class="zone-hint">Vague, generic, no evidence</p>
-                            <div class="zone-content"></div>
-                        </div>
-                    </div>
-                </div>
-                <button class="check-btn" onclick="checkSorting()">Check Answers</button>
-                <button class="reset-btn" onclick="resetSorting()">Reset</button>
-                <div class="feedback" id="sortingFeedback"></div>
+            <div class="practice-prompt" style="margin-top: 1.5rem;">
+                <h4>💬 Practice Question</h4>
+                <p><strong>"Tell me about a time when you had to learn something new quickly."</strong></p>
+                <p style="margin-top: 0.5rem; font-size: 0.9rem;">Use the STAR method and the expressions from this lesson to answer. Your teacher will give you feedback.</p>
             </div>
 
-            <div class="practice-prompt">
-                <h4>💬 Your Turn</h4>
-                <p>Think of a work achievement you're proud of. Practise describing it using the STAR method with your teacher.</p>
-            </div>
-        </section>
-
-        <!-- Activity 3: Common Interview Questions -->
-        <section class="section" id="activity3">
-            <div class="section-header">
-                <span class="section-number">Activity 3/5</span>
-                <h2>Handling Tricky Questions</h2>
-            </div>
-            <p class="section-intro">Some interview questions are harder than others. Match each tricky question with an effective response strategy.</p>
-
-            <div class="drag-match-activity">
-                <div class="statements-container">
-                    <div class="statement-row" data-match="1">
-                        <div class="statement-text">"What's your greatest weakness?"</div>
-                        <div class="drop-zone" data-match="1">
-                            <span class="drop-placeholder">Drop response here</span>
-                        </div>
-                    </div>
-                    <div class="statement-row" data-match="2">
-                        <div class="statement-text">"Why did you leave your last job?"</div>
-                        <div class="drop-zone" data-match="2">
-                            <span class="drop-placeholder">Drop response here</span>
-                        </div>
-                    </div>
-                    <div class="statement-row" data-match="3">
-                        <div class="statement-text">"Where do you see yourself in five years?"</div>
-                        <div class="drop-zone" data-match="3">
-                            <span class="drop-placeholder">Drop response here</span>
-                        </div>
-                    </div>
-                    <div class="statement-row" data-match="4">
-                        <div class="statement-text">"Why should we hire you?"</div>
-                        <div class="drop-zone" data-match="4">
-                            <span class="drop-placeholder">Drop response here</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="draggable-responses" id="responseBank">
-                    <div class="draggable-response" draggable="true" data-match="3">Show ambition that aligns with the role, but be realistic and flexible.</div>
-                    <div class="draggable-response" draggable="true" data-match="1">Be honest but show self-awareness and what you're doing to improve.</div>
-                    <div class="draggable-response" draggable="true" data-match="4">Summarise your key strengths and how they match what the company needs.</div>
-                    <div class="draggable-response" draggable="true" data-match="2">Stay positive; focus on seeking new challenges or growth opportunities.</div>
-                </div>
-            </div>
-            <button class="check-btn" onclick="checkDragMatching()">Check Matches</button>
-            <button class="reset-btn" onclick="resetDragMatching()">Reset</button>
-            <div class="feedback" id="dragMatchingFeedback"></div>
-
-            <div class="reveal-box">
-                <div class="reveal-header" onclick="toggleRevealBox(this)">
-                    <h4>📝 Example Answers for Tricky Questions</h4>
-                    <span class="reveal-hint">Click to reveal →</span>
-                </div>
-                <div class="reveal-content">
-                    <ul>
-                        <li><strong>Weakness:</strong> "I sometimes take on too much. I've learned to delegate more effectively and use project management tools to stay organised."</li>
-                        <li><strong>Why you left:</strong> "I was ready for a new challenge and wanted to develop my skills in [area]. This role offers exactly that opportunity."</li>
-                        <li><strong>Five years:</strong> "I'd like to have grown into a senior position where I can mentor others and contribute to strategic decisions."</li>
-                        <li><strong>Why hire you:</strong> "My experience in [X] combined with my skills in [Y] means I can add value from day one, particularly in [specific area they mentioned]."</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Activity 4: Questions to Ask -->
-        <section class="section" id="activity4">
-            <div class="section-header">
-                <span class="section-number">Activity 4/5</span>
-                <h2>Questions to Ask the Interviewer</h2>
-            </div>
-            <p class="section-intro">Asking good questions shows you're engaged and have done your research. Click each question to see if it's impressive or should be avoided.</p>
-
-            <div class="topics-grid">
-                <div class="topic-card" onclick="revealTopic(this)" data-safe="true">
-                    <span class="topic-text">"What does success look like in this role?"</span>
-                    <span class="topic-verdict safe">✓ Impressive</span>
-                </div>
-                <div class="topic-card" onclick="revealTopic(this)" data-safe="false">
-                    <span class="topic-text">"How much holiday do I get?"</span>
-                    <span class="topic-verdict avoid">✗ Too soon</span>
-                </div>
-                <div class="topic-card" onclick="revealTopic(this)" data-safe="true">
-                    <span class="topic-text">"What are the biggest challenges facing the team right now?"</span>
-                    <span class="topic-verdict safe">✓ Impressive</span>
-                </div>
-                <div class="topic-card" onclick="revealTopic(this)" data-safe="false">
-                    <span class="topic-text">"What does your company do exactly?"</span>
-                    <span class="topic-verdict avoid">✗ Shows no research</span>
-                </div>
-                <div class="topic-card" onclick="revealTopic(this)" data-safe="true">
-                    <span class="topic-text">"How would you describe the team culture?"</span>
-                    <span class="topic-verdict safe">✓ Impressive</span>
-                </div>
-                <div class="topic-card" onclick="revealTopic(this)" data-safe="false">
-                    <span class="topic-text">"Can I work from home every day?"</span>
-                    <span class="topic-verdict avoid">✗ Too demanding</span>
-                </div>
-                <div class="topic-card" onclick="revealTopic(this)" data-safe="true">
-                    <span class="topic-text">"What opportunities are there for professional development?"</span>
-                    <span class="topic-verdict safe">✓ Impressive</span>
-                </div>
-                <div class="topic-card" onclick="revealTopic(this)" data-safe="true">
-                    <span class="topic-text">"What are the next steps in the interview process?"</span>
-                    <span class="topic-verdict safe">✓ Impressive</span>
-                </div>
-            </div>
-
-            <div class="discussion-note">
-                <h4>🤔 Discussion</h4>
-                <p>What questions would you want to ask about your dream job? Are there questions that are appropriate in your culture but might not be elsewhere?</p>
+            <div class="reflection-card" style="margin-top: 1.5rem;">
+                <h4>📋 Plan Your Answer</h4>
+                <p>Make notes for each part of your STAR answer:</p>
+                <textarea class="notes-input notes-input-tall" placeholder="S - Situation: &#10;&#10;T - Task: &#10;&#10;A - Action: &#10;&#10;R - Result:"></textarea>
             </div>
         </section>
 
@@ -275,46 +326,52 @@
                 <span class="section-number">Activity 5/5</span>
                 <h2>Mock Interview Practice</h2>
             </div>
-            <p class="section-intro">Choose a scenario and practise a short interview with your teacher. Focus on using the STAR method and asking good questions at the end.</p>
+            <p class="section-intro">Now it's time to put everything together! Your teacher will ask you these questions. Use the STAR method and the expressions you've learned.</p>
 
             <div class="scenario-cards">
                 <div class="scenario-card" onclick="selectScenario(this)">
-                    <div class="scenario-icon">💼</div>
-                    <h4>Your Current Field</h4>
-                    <p>Interview for a more senior position in your current industry. The interviewer will ask about your experience and achievements.</p>
+                    <div class="scenario-icon">⚡</div>
+                    <h4>Question 1</h4>
+                    <p>"Tell me about a time when you had to deal with a difficult situation at work."</p>
                     <div class="scenario-goals">
-                        <span>Goals:</span> Use STAR method, quantify achievements, show leadership potential
+                        <span>Focus on:</span> How you handled pressure, what actions you took, and the positive outcome
                     </div>
                 </div>
 
                 <div class="scenario-card" onclick="selectScenario(this)">
-                    <div class="scenario-icon">🔄</div>
-                    <h4>Career Change</h4>
-                    <p>Interview for a role in a new industry. Explain how your transferable skills make you a strong candidate.</p>
+                    <div class="scenario-icon">👥</div>
+                    <h4>Question 2</h4>
+                    <p>"Can you give me an example of when you worked successfully as part of a team?"</p>
                     <div class="scenario-goals">
-                        <span>Goals:</span> Highlight transferable skills, show enthusiasm for the new field, address the change positively
+                        <span>Focus on:</span> Your role in the team, how you collaborated, and what you achieved together
                     </div>
                 </div>
 
                 <div class="scenario-card" onclick="selectScenario(this)">
-                    <div class="scenario-icon">🌍</div>
-                    <h4>International Company</h4>
-                    <p>Interview for a global company where you'd work with international teams and possibly relocate.</p>
+                    <div class="scenario-icon">🏆</div>
+                    <h4>Question 3</h4>
+                    <p>"Describe a project or achievement you're particularly proud of."</p>
                     <div class="scenario-goals">
-                        <span>Goals:</span> Demonstrate cultural awareness, flexibility, language skills
+                        <span>Focus on:</span> Why it was challenging, what you did, and the results you achieved
                     </div>
                 </div>
             </div>
 
             <div class="roleplay-tips">
-                <h4>💡 Interview Tips:</h4>
+                <h4>💡 Remember to:</h4>
                 <ul>
-                    <li>Listen carefully to the full question before answering</li>
-                    <li>Take a moment to think – silence is okay</li>
-                    <li>Keep answers focused (1-2 minutes per question)</li>
-                    <li>Use specific examples, not generalisations</li>
-                    <li>End by asking 2-3 thoughtful questions</li>
+                    <li>Use the STAR structure to organise your answer</li>
+                    <li>Include specific details and numbers where possible</li>
+                    <li>Use expressions for buying time if you need a moment to think</li>
+                    <li>Use softening language to sound balanced and professional</li>
+                    <li>End with a clear result or what you learned</li>
                 </ul>
+            </div>
+
+            <div class="reflection-card" style="margin-top: 1.5rem;">
+                <h4>📋 Notes</h4>
+                <p>Space to make any notes you want.</p>
+                <textarea class="notes-input" placeholder="Your notes..."></textarea>
             </div>
         </section>
 
@@ -327,14 +384,14 @@
             
             <div class="reflection-grid">
                 <div class="reflection-card">
-                    <h4>🌟 Key Phrases to Remember</h4>
-                    <p>Write down 2-3 STAR phrases or question openers you want to practise.</p>
-                    <textarea class="notes-input" placeholder="Write your favourite phrases here..."></textarea>
+                    <h4>🌟 Key Expressions to Remember</h4>
+                    <p>Which 3-4 expressions from today will be most useful for you?</p>
+                    <textarea class="notes-input" placeholder="Write your favourite expressions here..."></textarea>
                 </div>
                 <div class="reflection-card">
                     <h4>📋 Preparation Task</h4>
-                    <p>Think of 2-3 achievements you could describe using the STAR method. Note them here.</p>
-                    <textarea class="notes-input" placeholder="Your achievements for STAR responses..."></textarea>
+                    <p>Think of 2-3 situations from your work experience that you could use for STAR answers. Note the key points here.</p>
+                    <textarea class="notes-input" placeholder="Situation 1: &#10;&#10;Situation 2: &#10;&#10;Situation 3:"></textarea>
                 </div>
             </div>
         </section>
@@ -363,6 +420,8 @@
 
     <!-- Load activities.js as ES module -->
     <script type="module" src="js/activities.js"></script>
+    <!-- Load drop-down.js for gap-fill activity -->
+    <script type="module" src="js/drop-down.js"></script>
     
     <!-- Lesson completion functionality -->
     <script type="module">
