@@ -9,85 +9,312 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== Review 1 Specific Styles ===== */
+        
+        /* Side-by-side grammar boxes */
+        .grammar-boxes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        @media (max-width: 768px) {
+            .grammar-boxes {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Fix rounded borders on all info boxes */
+        .discussion-note,
+        .practice-prompt,
+        .roleplay-tips,
+        .grammar-tip {
+            border-radius: var(--radius-md);
+        }
+        
+        /* Grammar tip box styling */
+        .grammar-tip {
+            background: var(--color-primary-pale);
+            border: 2px solid var(--color-primary);
+            padding: 1rem 1.25rem;
+            margin-top: 1.5rem;
+        }
+        .grammar-tip h4 {
+            font-size: 0.95rem;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+        .grammar-tip p {
+            font-size: 0.9rem;
+            color: var(--color-text);
+            margin: 0;
+            line-height: 1.6;
+        }
+        
+        /* Compact dropdown sentences - inline layout */
+        .dropdown-sentence-compact {
+            background: var(--color-white);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            transition: var(--transition);
+        }
+        .dropdown-sentence-compact:hover {
+            border-color: var(--color-primary-light);
+        }
+        .dropdown-sentence-compact.correct {
+            background: var(--color-success-light);
+            border-color: var(--color-success);
+        }
+        .dropdown-sentence-compact.incorrect {
+            background: var(--color-error-light);
+            border-color: var(--color-error);
+        }
+        .dropdown-sentence-compact .sentence-number {
+            flex-shrink: 0;
+        }
+        .dropdown-sentence-compact p {
+            margin: 0;
+            flex: 1;
+            display: inline;
+            line-height: 1.8;
+        }
+        
+        /* Compact drag-and-drop matching */
+        .compact-match-activity {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+        @media (max-width: 700px) {
+            .compact-match-activity {
+                grid-template-columns: 1fr;
+            }
+        }
+        .match-statements {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .match-statement-row {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .match-statement-text {
+            background: var(--color-white);
+            border: 2px solid var(--color-primary);
+            border-left: 4px solid var(--color-primary);
+            border-radius: var(--radius-sm);
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+        }
+        .match-drop-zone {
+            background: var(--color-bg);
+            border: 2px dashed var(--color-border);
+            border-radius: var(--radius-sm);
+            padding: 0.5rem;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        .match-drop-zone.drag-over {
+            border-color: var(--color-accent);
+            background: var(--color-accent-light);
+            border-style: solid;
+        }
+        .match-drop-zone.correct {
+            border-color: var(--color-success);
+            background: var(--color-success-light);
+            border-style: solid;
+        }
+        .match-drop-zone.incorrect {
+            border-color: var(--color-error);
+            background: var(--color-error-light);
+            border-style: solid;
+        }
+        .match-drop-zone .drop-placeholder {
+            color: var(--color-text-light);
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+        .match-response-bank {
+            background: var(--color-bg);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            position: sticky;
+            top: 1rem;
+        }
+        .match-response-bank h4 {
+            font-size: 0.9rem;
+            color: var(--color-text-light);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .match-response {
+            background: var(--color-accent);
+            color: var(--color-white);
+            padding: 0.6rem 0.75rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            cursor: grab;
+            transition: var(--transition);
+        }
+        .match-response:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+        .match-response.dragging {
+            opacity: 0.5;
+            cursor: grabbing;
+        }
+        .match-response.correct {
+            background: var(--color-success);
+        }
+        .match-response.incorrect {
+            background: var(--color-error);
+        }
+        .match-drop-zone .match-response {
+            width: 100%;
+            margin: 0;
+        }
+        
+        /* Conversation question card */
+        .conversation-prompt {
+            background: linear-gradient(135deg, var(--color-primary-pale) 0%, var(--color-white) 100%);
+            border: 2px solid var(--color-primary);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            margin-top: 1.5rem;
+        }
+        .conversation-prompt h4 {
+            font-size: 0.95rem;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .conversation-prompt p {
+            font-size: 0.95rem;
+            color: var(--color-text);
+            margin: 0;
+            line-height: 1.6;
+        }
+        .conversation-prompt em {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+        }
+        
+        /* Four-zone sorting grid */
+        .sorting-zones.four-zones {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        @media (max-width: 700px) {
+            .sorting-zones.four-zones {
+                grid-template-columns: 1fr;
+            }
+        }
+        .sorting-zones.four-zones .sort-zone {
+            min-height: 100px;
+        }
+    </style>
 </head>
 <body data-lesson="13">
     <header class="header">
         <a href="index.html" class="back-link">← Back to Course</a>
         <div class="header-content">
             <div class="header-badge">Review 1</div>
-            <h1>Consolidation</h1>
-            <p class="header-subtitle">Review key grammar and expressions from Lessons 1-3</p>
+            <h1>Consolidation: Lessons 1-3</h1>
+            <p class="header-subtitle">Review key grammar and expressions with practical activities</p>
         </div>
         <div class="header-decoration"></div>
     </header>
 
     <main class="container">
-        <!-- Activity 1: Grammar Review -->
+        <!-- Activity 1: Grammar Presentation -->
         <section class="section" id="activity1">
             <div class="section-header">
-                <span class="section-number">Activity 1/5</span>
+                <span class="section-number">Activity 1/7</span>
                 <h2>Grammar Review: Verbs + -ing / to</h2>
             </div>
-            <p class="section-intro">Many verbs are followed by another verb. The second verb can be in the <strong>-ing form</strong> or the <strong>to + infinitive form</strong>. Unfortunately, there's no perfect rule — you need to learn which verbs take which form. Here are the most common ones:</p>
+            <p class="section-intro">Many verbs are followed by another verb in either the <strong>-ing form</strong> or the <strong>to + infinitive form</strong>. There's no perfect rule — you need to learn which verbs take which form.</p>
 
-            <div class="language-box">
-                <h4>📘 Verbs followed by -ing</h4>
-                <ul>
-                    <li><strong>enjoy</strong> – I enjoy working with clients.</li>
-                    <li><strong>avoid</strong> – We avoid making promises we can't keep.</li>
-                    <li><strong>finish</strong> – Have you finished writing the report?</li>
-                    <li><strong>consider</strong> – I'm considering changing careers.</li>
-                    <li><strong>suggest</strong> – She suggested having a meeting.</li>
-                    <li><strong>mind</strong> – Would you mind waiting?</li>
-                    <li><strong>keep</strong> – Keep trying!</li>
-                    <li><strong>involve</strong> – My role involves managing a team.</li>
-                </ul>
+            <div class="grammar-boxes">
+                <div class="language-box">
+                    <h4>📘 Verbs followed by -ing</h4>
+                    <ul>
+                        <li><strong>enjoy</strong> – I enjoy working with clients.</li>
+                        <li><strong>avoid</strong> – We avoid making promises we can't keep.</li>
+                        <li><strong>finish</strong> – Have you finished writing the report?</li>
+                        <li><strong>consider</strong> – I'm considering changing careers.</li>
+                        <li><strong>suggest</strong> – She suggested having a meeting.</li>
+                        <li><strong>mind</strong> – Would you mind waiting?</li>
+                        <li><strong>keep</strong> – Keep trying!</li>
+                        <li><strong>involve</strong> – My role involves managing a team.</li>
+                    </ul>
+                </div>
+
+                <div class="language-box">
+                    <h4>📗 Verbs followed by to + infinitive</h4>
+                    <ul>
+                        <li><strong>want</strong> – I want to discuss the budget.</li>
+                        <li><strong>need</strong> – We need to hire more staff.</li>
+                        <li><strong>decide</strong> – She decided to accept the offer.</li>
+                        <li><strong>hope</strong> – I hope to see you there.</li>
+                        <li><strong>plan</strong> – We're planning to expand next year.</li>
+                        <li><strong>agree</strong> – They agreed to work together.</li>
+                        <li><strong>tend</strong> – I tend to be quite organised.</li>
+                        <li><strong>mean</strong> – I meant to ask you about that.</li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="language-box" style="margin-top: 1rem;">
-                <h4>📗 Verbs followed by to + infinitive</h4>
-                <ul>
-                    <li><strong>want</strong> – I want to discuss the budget.</li>
-                    <li><strong>need</strong> – We need to hire more staff.</li>
-                    <li><strong>decide</strong> – She decided to accept the offer.</li>
-                    <li><strong>hope</strong> – I hope to see you there.</li>
-                    <li><strong>plan</strong> – We're planning to expand next year.</li>
-                    <li><strong>agree</strong> – They agreed to work together.</li>
-                    <li><strong>tend</strong> – I tend to be quite organised.</li>
-                    <li><strong>mean</strong> – I meant to ask you about that.</li>
-                </ul>
-            </div>
-
-            <div class="discussion-note" style="margin-top: 1.5rem;">
+            <div class="discussion-note">
                 <h4>⚠️ Special Case: "Stop"</h4>
-                <p><strong>stop + -ing</strong> = quit doing something<br>
-                <em>"I stopped smoking."</em> → I don't smoke anymore.<br><br>
-                <strong>stop + to</strong> = pause in order to do something else<br>
-                <em>"I stopped to smoke."</em> → I was walking, then I paused to have a cigarette.</p>
+                <p><strong>stop + -ing</strong> = quit doing something → <em>"I stopped smoking."</em> (I don't smoke anymore.)<br>
+                <strong>stop + to</strong> = pause in order to do something → <em>"I stopped to smoke."</em> (I paused to have a cigarette.)</p>
             </div>
 
-            <div class="practice-prompt" style="margin-top: 1.5rem;">
+            <div class="grammar-tip">
                 <h4>💡 Tip</h4>
-                <p>Many <strong>-ing verbs</strong> describe your feelings or attitudes towards activities (enjoy, avoid, mind, consider). Many <strong>to verbs</strong> are about intentions, decisions, or things you want to happen (want, plan, decide, hope).</p>
+                <p>Many <strong>-ing verbs</strong> describe feelings or attitudes (enjoy, avoid, mind, consider). Many <strong>to verbs</strong> are about intentions or decisions (want, plan, decide, hope).</p>
             </div>
 
-            <div class="reflection-card" style="margin-top: 1.5rem;">
-                <h4>📋 Notes</h4>
-                <p>Write down any verbs you find difficult to remember:</p>
-                <textarea class="notes-input" placeholder="Your notes..."></textarea>
+            <div class="conversation-prompt">
+                <h4>💬 Quick Discussion</h4>
+                <p>Think of something you <strong>enjoy doing</strong> at work and something you <strong>avoid doing</strong>. Tell your teacher using the correct verb form.</p>
+                <em>Example: "I enjoy collaborating with my team, but I avoid attending unnecessary meetings."</em>
             </div>
         </section>
 
         <!-- Activity 2: Grammar Check -->
         <section class="section" id="activity2">
             <div class="section-header">
-                <span class="section-number">Activity 2/5</span>
+                <span class="section-number">Activity 2/7</span>
                 <h2>Grammar Check</h2>
             </div>
             <p class="section-intro">Choose the correct form to complete each sentence.</p>
 
             <div class="dropdown-activity" id="dropdownActivity1">
-                <div class="dropdown-sentence">
+                <div class="dropdown-sentence-compact">
                     <span class="sentence-number">1</span>
                     <p>My role involves
                         <select class="gap-dropdown" data-answer="managing">
@@ -99,7 +326,7 @@
                     </p>
                 </div>
 
-                <div class="dropdown-sentence">
+                <div class="dropdown-sentence-compact">
                     <span class="sentence-number">2</span>
                     <p>I tend
                         <select class="gap-dropdown" data-answer="to be">
@@ -111,7 +338,7 @@
                     </p>
                 </div>
 
-                <div class="dropdown-sentence">
+                <div class="dropdown-sentence-compact">
                     <span class="sentence-number">3</span>
                     <p>Would you mind
                         <select class="gap-dropdown" data-answer="sending">
@@ -123,7 +350,7 @@
                     </p>
                 </div>
 
-                <div class="dropdown-sentence">
+                <div class="dropdown-sentence-compact">
                     <span class="sentence-number">4</span>
                     <p>That reminds me, I meant
                         <select class="gap-dropdown" data-answer="to ask">
@@ -135,7 +362,7 @@
                     </p>
                 </div>
 
-                <div class="dropdown-sentence">
+                <div class="dropdown-sentence-compact">
                     <span class="sentence-number">5</span>
                     <p>She stopped
                         <select class="gap-dropdown" data-answer="to check">
@@ -143,102 +370,127 @@
                             <option value="checking">checking</option>
                             <option value="to check">to check</option>
                         </select>
-                        her phone during the presentation. <em>(= She paused in order to check it)</em>
+                        her phone during the presentation. <em>(= paused in order to check it)</em>
+                    </p>
+                </div>
+
+                <div class="dropdown-sentence-compact">
+                    <span class="sentence-number">6</span>
+                    <p>We're considering
+                        <select class="gap-dropdown" data-answer="expanding">
+                            <option value="">Select...</option>
+                            <option value="expanding">expanding</option>
+                            <option value="to expand">to expand</option>
+                        </select>
+                        into the Asian market next year.
+                    </p>
+                </div>
+
+                <div class="dropdown-sentence-compact">
+                    <span class="sentence-number">7</span>
+                    <p>They agreed
+                        <select class="gap-dropdown" data-answer="to postpone">
+                            <option value="">Select...</option>
+                            <option value="postponing">postponing</option>
+                            <option value="to postpone">to postpone</option>
+                        </select>
+                        the meeting until next week.
+                    </p>
+                </div>
+
+                <div class="dropdown-sentence-compact">
+                    <span class="sentence-number">8</span>
+                    <p>I really enjoy
+                        <select class="gap-dropdown" data-answer="working">
+                            <option value="">Select...</option>
+                            <option value="working">working</option>
+                            <option value="to work">to work</option>
+                        </select>
+                        with international clients.
                     </p>
                 </div>
             </div>
             <button class="check-btn" onclick="checkDropdownAnswers('dropdownActivity1')">Check Answers</button>
             <button class="reset-btn" onclick="resetDropdownActivity('dropdownActivity1')">Reset</button>
             <div class="feedback" id="dropdownActivity1Feedback"></div>
+
+            <div class="conversation-prompt">
+                <h4>💬 Discussion</h4>
+                <p>Choose one of these questions and answer using the correct verb form:</p>
+                <p>• What do you enjoy doing in your free time?<br>
+                • Is there something you keep meaning to do but haven't done yet?<br>
+                • What do you hope to achieve in the next year?</p>
+            </div>
         </section>
 
-        <!-- Activity 3: Matching Expressions -->
+        <!-- Activity 3: Expression Sorting -->
         <section class="section" id="activity3">
             <div class="section-header">
-                <span class="section-number">Activity 3/5</span>
-                <h2>Expression Review: Match the Meanings</h2>
+                <span class="section-number">Activity 3/7</span>
+                <h2>Expression Sorting: Describe & Connect</h2>
             </div>
-            <p class="section-intro">Match each expression with its meaning or use. Drag the definitions to the correct expression.</p>
-
-            <div class="drag-match-activity">
-                <div class="statements-container">
-                    <div class="statement-row">
-                        <div class="statement-text"><strong>I'm responsible for...</strong></div>
-                        <div class="drop-zone" data-match="responsible">
-                            <span class="drop-placeholder">Drop here</span>
-                        </div>
-                    </div>
-                    <div class="statement-row">
-                        <div class="statement-text"><strong>My role involves...</strong></div>
-                        <div class="drop-zone" data-match="involves">
-                            <span class="drop-placeholder">Drop here</span>
-                        </div>
-                    </div>
-                    <div class="statement-row">
-                        <div class="statement-text"><strong>That reminds me, I meant to ask you...</strong></div>
-                        <div class="drop-zone" data-match="reminds">
-                            <span class="drop-placeholder">Drop here</span>
-                        </div>
-                    </div>
-                    <div class="statement-row">
-                        <div class="statement-text"><strong>I tend to...</strong></div>
-                        <div class="drop-zone" data-match="tend">
-                            <span class="drop-placeholder">Drop here</span>
-                        </div>
-                    </div>
-                    <div class="statement-row">
-                        <div class="statement-text"><strong>This led to...</strong></div>
-                        <div class="drop-zone" data-match="ledto">
-                            <span class="drop-placeholder">Drop here</span>
-                        </div>
-                    </div>
-                    <div class="statement-row">
-                        <div class="statement-text"><strong>I played a key role in...</strong></div>
-                        <div class="drop-zone" data-match="keyrole">
-                            <span class="drop-placeholder">Drop here</span>
-                        </div>
-                    </div>
+            <p class="section-intro">Sort these expressions into the correct category based on their function.</p>
+            
+            <div class="sorting-activity">
+                <div class="phrase-bank" id="phraseBank">
+                    <div class="phrase" data-category="describing" draggable="true">I'm responsible for...</div>
+                    <div class="phrase" data-category="describing" draggable="true">My role involves...</div>
+                    <div class="phrase" data-category="describing" draggable="true">I work closely with...</div>
+                    <div class="phrase" data-category="habits" draggable="true">I tend to...</div>
+                    <div class="phrase" data-category="habits" draggable="true">I usually...</div>
+                    <div class="phrase" data-category="habits" draggable="true">I'm quite good at...</div>
+                    <div class="phrase" data-category="achievements" draggable="true">I played a key role in...</div>
+                    <div class="phrase" data-category="achievements" draggable="true">One of my key achievements was...</div>
+                    <div class="phrase" data-category="achievements" draggable="true">I successfully managed to...</div>
+                    <div class="phrase" data-category="results" draggable="true">This led to...</div>
+                    <div class="phrase" data-category="results" draggable="true">As a result...</div>
+                    <div class="phrase" data-category="results" draggable="true">The outcome was...</div>
                 </div>
-
-                <div class="draggable-responses" id="responseBank">
-                    <div class="draggable-response" data-match="ledto" draggable="true">Showing a result or consequence</div>
-                    <div class="draggable-response" data-match="responsible" draggable="true">Describing your main duties at work</div>
-                    <div class="draggable-response" data-match="tend" draggable="true">Describing a habit or usual behaviour</div>
-                    <div class="draggable-response" data-match="keyrole" draggable="true">Emphasising your important contribution</div>
-                    <div class="draggable-response" data-match="involves" draggable="true">Describing what your job includes</div>
-                    <div class="draggable-response" data-match="reminds" draggable="true">Smoothly changing the topic in conversation</div>
+                
+                <div class="sorting-zones four-zones">
+                    <div class="sort-zone" id="describingZone" data-category="describing">
+                        <h4>💼 Describing Your Role</h4>
+                        <p class="zone-hint">What you do at work</p>
+                        <div class="zone-content"></div>
+                    </div>
+                    <div class="sort-zone" id="habitsZone" data-category="habits">
+                        <h4>🔄 Habits & Tendencies</h4>
+                        <p class="zone-hint">How you usually behave</p>
+                        <div class="zone-content"></div>
+                    </div>
+                    <div class="sort-zone" id="achievementsZone" data-category="achievements">
+                        <h4>🏆 Highlighting Achievements</h4>
+                        <p class="zone-hint">Things you've accomplished</p>
+                        <div class="zone-content"></div>
+                    </div>
+                    <div class="sort-zone" id="resultsZone" data-category="results">
+                        <h4>📈 Showing Results</h4>
+                        <p class="zone-hint">Consequences and outcomes</p>
+                        <div class="zone-content"></div>
+                    </div>
                 </div>
             </div>
-            <button class="check-btn" onclick="checkDragMatching()">Check Answers</button>
-            <button class="reset-btn" onclick="resetDragMatching()">Reset</button>
-            <div class="feedback" id="dragMatchingFeedback"></div>
+            <button class="check-btn" onclick="checkSorting()">Check Answers</button>
+            <button class="reset-btn" onclick="resetSorting()">Reset</button>
+            <div class="feedback" id="sortingFeedback"></div>
 
-            <div class="reveal-box" style="margin-top: 1.5rem;">
-                <div class="reveal-header" onclick="toggleRevealBox(this)">
-                    <h4>📝 More Expressions to Remember</h4>
-                    <span class="reveal-hint">Click to reveal →</span>
-                </div>
-                <div class="reveal-content">
-                    <ul>
-                        <li><strong>Looking back...</strong> — Reflecting on past experiences</li>
-                        <li><strong>I believe...</strong> — Expressing your opinion professionally</li>
-                        <li><strong>One of my key achievements was...</strong> — Highlighting successes</li>
-                        <li><strong>Something I'm working on improving...</strong> — Discussing weaknesses honestly</li>
-                    </ul>
-                </div>
+            <div class="conversation-prompt">
+                <h4>💬 Practice</h4>
+                <p>Use expressions from each category to talk about a hobby or interest you have:</p>
+                <em>Example: "I'm responsible for organising our book club meetings. I tend to choose mystery novels. One of my key achievements was getting 20 people to join. This led to us meeting twice a month instead of once."</em>
             </div>
         </section>
 
-        <!-- Activity 4: Expressions in Practice -->
+        <!-- Activity 4: Flip Cards - Expressions in Context -->
         <section class="section" id="activity4">
             <div class="section-header">
-                <span class="section-number">Activity 4/5</span>
-                <h2>Expressions in Practice</h2>
+                <span class="section-number">Activity 4/7</span>
+                <h2>Expressions in Context</h2>
             </div>
-            <p class="section-intro">Click each card to see an example of the expression in context.</p>
+            <p class="section-intro">Click each card to see an example of the expression used in a real context.</p>
 
             <div class="phrase-cards">
-                <div class="flip-card">
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <span class="phrase-label">I'm responsible for...</span>
@@ -249,7 +501,7 @@
                     </div>
                 </div>
 
-                <div class="flip-card">
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <span class="phrase-label">I tend to...</span>
@@ -260,7 +512,7 @@
                     </div>
                 </div>
 
-                <div class="flip-card">
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <span class="phrase-label">This led to...</span>
@@ -271,7 +523,7 @@
                     </div>
                 </div>
 
-                <div class="flip-card">
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <span class="phrase-label">Looking back...</span>
@@ -282,7 +534,7 @@
                     </div>
                 </div>
 
-                <div class="flip-card">
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <span class="phrase-label">I played a key role in...</span>
@@ -293,7 +545,7 @@
                     </div>
                 </div>
 
-                <div class="flip-card">
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <span class="phrase-label">Something I'm working on...</span>
@@ -305,50 +557,176 @@
                 </div>
             </div>
 
-            <div class="subsection">
-                <h3>💬 Conversation Practice</h3>
-                <p class="activity-instruction">Discuss these questions with your teacher. Try to use the target expressions.</p>
-
-                <div class="conversation-questions">
-                    <div class="question-card">
-                        <div class="question-number">1</div>
-                        <p>Tell me about your current job. What are you responsible for?<br><em>→ Use: I'm responsible for... / My role involves...</em></p>
-                    </div>
-                    <div class="question-card">
-                        <div class="question-number">2</div>
-                        <p>What are your typical work habits? How do you usually approach tasks?<br><em>→ Use: I tend to...</em></p>
-                    </div>
-                    <div class="question-card">
-                        <div class="question-number">3</div>
-                        <p>Tell me about a project or achievement you're proud of. What happened as a result?<br><em>→ Use: I played a key role in... / This led to...</em></p>
-                    </div>
-                    <div class="question-card">
-                        <div class="question-number">4</div>
-                        <p>Is there anything you'd like to improve about yourself professionally?<br><em>→ Use: Something I'm working on improving...</em></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="reflection-card" style="margin-top: 1.5rem;">
-                <h4>📋 Notes</h4>
-                <p>Write down any corrections or new vocabulary from the conversation:</p>
-                <textarea class="notes-input" placeholder="Your notes..."></textarea>
+            <div class="conversation-prompt">
+                <h4>💬 Your Turn</h4>
+                <p>Think of something you've been working on improving recently — at work, a hobby, or a personal skill. Tell your teacher about it using "Something I'm working on..."</p>
             </div>
         </section>
 
-        <!-- Activity 5: Wrap-up Role Play -->
-        <section class="section wrap-up" id="activity5">
+        <!-- Activity 5: Matching Expressions to Meanings -->
+        <section class="section" id="activity5">
             <div class="section-header">
-                <span class="section-number">Activity 5/5</span>
-                <h2>Final Conversation: Role Play</h2>
+                <span class="section-number">Activity 5/7</span>
+                <h2>Match the Meanings</h2>
             </div>
-            <p class="section-intro">Choose one scenario and have a conversation with your teacher. Use as many expressions from today as you can.</p>
+            <p class="section-intro">Match each expression with its meaning or use. Drag the definitions to the correct expression.</p>
+
+            <div class="compact-match-activity">
+                <div class="match-statements">
+                    <div class="match-statement-row">
+                        <div class="match-statement-text"><strong>I'm responsible for...</strong></div>
+                        <div class="match-drop-zone drop-zone" data-match="responsible">
+                            <span class="drop-placeholder">Drop here</span>
+                        </div>
+                    </div>
+                    <div class="match-statement-row">
+                        <div class="match-statement-text"><strong>My role involves...</strong></div>
+                        <div class="match-drop-zone drop-zone" data-match="involves">
+                            <span class="drop-placeholder">Drop here</span>
+                        </div>
+                    </div>
+                    <div class="match-statement-row">
+                        <div class="match-statement-text"><strong>That reminds me...</strong></div>
+                        <div class="match-drop-zone drop-zone" data-match="reminds">
+                            <span class="drop-placeholder">Drop here</span>
+                        </div>
+                    </div>
+                    <div class="match-statement-row">
+                        <div class="match-statement-text"><strong>I tend to...</strong></div>
+                        <div class="match-drop-zone drop-zone" data-match="tend">
+                            <span class="drop-placeholder">Drop here</span>
+                        </div>
+                    </div>
+                    <div class="match-statement-row">
+                        <div class="match-statement-text"><strong>This led to...</strong></div>
+                        <div class="match-drop-zone drop-zone" data-match="ledto">
+                            <span class="drop-placeholder">Drop here</span>
+                        </div>
+                    </div>
+                    <div class="match-statement-row">
+                        <div class="match-statement-text"><strong>I played a key role in...</strong></div>
+                        <div class="match-drop-zone drop-zone" data-match="keyrole">
+                            <span class="drop-placeholder">Drop here</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="match-response-bank" id="responseBank">
+                    <h4>Definitions</h4>
+                    <div class="match-response draggable-response" data-match="ledto" draggable="true">Showing a result or consequence</div>
+                    <div class="match-response draggable-response" data-match="responsible" draggable="true">Describing your main duties</div>
+                    <div class="match-response draggable-response" data-match="tend" draggable="true">Describing usual behaviour</div>
+                    <div class="match-response draggable-response" data-match="keyrole" draggable="true">Emphasising your contribution</div>
+                    <div class="match-response draggable-response" data-match="involves" draggable="true">Describing what your job includes</div>
+                    <div class="match-response draggable-response" data-match="reminds" draggable="true">Changing the topic smoothly</div>
+                </div>
+            </div>
+            <button class="check-btn" onclick="checkDragMatching()">Check Answers</button>
+            <button class="reset-btn" onclick="resetDragMatching()">Reset</button>
+            <div class="feedback" id="dragMatchingFeedback"></div>
+
+            <div class="conversation-prompt">
+                <h4>💬 Discussion</h4>
+                <p>Your teacher will ask you about your job or daily routine. Practice smoothly changing the topic by using "That reminds me..." mid-conversation.</p>
+            </div>
+        </section>
+
+        <!-- Activity 6: Sentence Ordering -->
+        <section class="section" id="activity6">
+            <div class="section-header">
+                <span class="section-number">Activity 6/7</span>
+                <h2>Building Sentences</h2>
+            </div>
+            <p class="section-intro">Put the words in the correct order to make useful professional phrases. Drag the words to rearrange them.</p>
+
+            <div class="sentence-ordering-activity" id="sentenceActivity">
+                <div class="sentence-exercise" data-sentence="1">
+                    <div class="sentence-context">Describing your responsibilities:</div>
+                    <div class="word-bank" data-correct="I'm responsible for managing the budget.">
+                        <div class="draggable-word" draggable="true">budget.</div>
+                        <div class="draggable-word" draggable="true">responsible</div>
+                        <div class="draggable-word" draggable="true">the</div>
+                        <div class="draggable-word" draggable="true">I'm</div>
+                        <div class="draggable-word" draggable="true">managing</div>
+                        <div class="draggable-word" draggable="true">for</div>
+                    </div>
+                </div>
+
+                <div class="sentence-exercise" data-sentence="2">
+                    <div class="sentence-context">Describing your habits:</div>
+                    <div class="word-bank" data-correct="I tend to be quite organised.">
+                        <div class="draggable-word" draggable="true">organised.</div>
+                        <div class="draggable-word" draggable="true">be</div>
+                        <div class="draggable-word" draggable="true">I</div>
+                        <div class="draggable-word" draggable="true">quite</div>
+                        <div class="draggable-word" draggable="true">tend</div>
+                        <div class="draggable-word" draggable="true">to</div>
+                    </div>
+                </div>
+
+                <div class="sentence-exercise" data-sentence="3">
+                    <div class="sentence-context">Showing results:</div>
+                    <div class="word-bank" data-correct="This led to a significant increase in sales.">
+                        <div class="draggable-word" draggable="true">sales.</div>
+                        <div class="draggable-word" draggable="true">in</div>
+                        <div class="draggable-word" draggable="true">This</div>
+                        <div class="draggable-word" draggable="true">increase</div>
+                        <div class="draggable-word" draggable="true">led</div>
+                        <div class="draggable-word" draggable="true">significant</div>
+                        <div class="draggable-word" draggable="true">to</div>
+                        <div class="draggable-word" draggable="true">a</div>
+                    </div>
+                </div>
+
+                <div class="sentence-exercise" data-sentence="4">
+                    <div class="sentence-context">Highlighting an achievement:</div>
+                    <div class="word-bank" data-correct="I played a key role in the project.">
+                        <div class="draggable-word" draggable="true">project.</div>
+                        <div class="draggable-word" draggable="true">key</div>
+                        <div class="draggable-word" draggable="true">I</div>
+                        <div class="draggable-word" draggable="true">the</div>
+                        <div class="draggable-word" draggable="true">played</div>
+                        <div class="draggable-word" draggable="true">in</div>
+                        <div class="draggable-word" draggable="true">a</div>
+                        <div class="draggable-word" draggable="true">role</div>
+                    </div>
+                </div>
+
+                <div class="sentence-exercise" data-sentence="5">
+                    <div class="sentence-context">Reflecting on experience:</div>
+                    <div class="word-bank" data-correct="Looking back, I learned a lot.">
+                        <div class="draggable-word" draggable="true">lot.</div>
+                        <div class="draggable-word" draggable="true">Looking</div>
+                        <div class="draggable-word" draggable="true">I</div>
+                        <div class="draggable-word" draggable="true">a</div>
+                        <div class="draggable-word" draggable="true">back,</div>
+                        <div class="draggable-word" draggable="true">learned</div>
+                    </div>
+                </div>
+            </div>
+            <button class="check-btn" onclick="checkSentenceOrder()">Check Answers</button>
+            <button class="reset-btn" onclick="resetSentenceOrder()">Reset</button>
+            <div class="feedback" id="sentenceFeedback"></div>
+
+            <div class="conversation-prompt">
+                <h4>💬 Speaking Challenge</h4>
+                <p>Use the sentence "Looking back, I learned a lot" as a starting point. Tell your teacher about something you learned from — it could be a trip, a course, a relationship, or a challenge.</p>
+            </div>
+        </section>
+
+        <!-- Activity 7: Final Role Play -->
+        <section class="section wrap-up" id="activity7">
+            <div class="section-header">
+                <span class="section-number">Activity 7/7</span>
+                <h2>Putting It All Together</h2>
+            </div>
+            <p class="section-intro">Choose a scenario and have a conversation with your teacher. Use as many expressions from today as you can.</p>
 
             <div class="scenario-cards">
                 <div class="scenario-card" onclick="selectScenario(this)">
                     <div class="scenario-icon">🤝</div>
                     <h4>Networking Event</h4>
-                    <p>You're at a conference and meet someone in a similar industry. Introduce yourself and discuss your jobs.</p>
+                    <p>You meet someone in a similar industry at a conference. Introduce yourself and discuss your roles.</p>
                     <div class="scenario-goals">
                         <span>Target:</span> I'm responsible for, My role involves, I tend to
                     </div>
@@ -357,16 +735,16 @@
                 <div class="scenario-card" onclick="selectScenario(this)">
                     <div class="scenario-icon">💼</div>
                     <h4>Job Interview</h4>
-                    <p>You're being interviewed. The interviewer asks about your current role and a key achievement.</p>
+                    <p>An interviewer asks about your current role and a key achievement.</p>
                     <div class="scenario-goals">
-                        <span>Target:</span> I played a key role in, This led to, Looking back, I believe
+                        <span>Target:</span> I played a key role in, This led to, Looking back
                     </div>
                 </div>
 
                 <div class="scenario-card" onclick="selectScenario(this)">
                     <div class="scenario-icon">☕</div>
                     <h4>Catching Up</h4>
-                    <p>You haven't seen a colleague for a while. Chat about what you've been working on.</p>
+                    <p>You bump into an old colleague. Chat about what you've both been working on.</p>
                     <div class="scenario-goals">
                         <span>Target:</span> My role involves, That reminds me, Something I'm working on
                     </div>
@@ -421,6 +799,7 @@
 
     <script type="module" src="js/activities.js"></script>
     <script type="module" src="js/drop-down.js"></script>
+    <script type="module" src="js/sentence-ordering.js"></script>
     
     <script type="module">
         import { 
@@ -429,199 +808,6 @@
             markLessonIncomplete,
             getCurrentUser
         } from './js/lesson-utils.js';
-        
-        // Expose functions from activities.js to window for onclick handlers
-        import('./js/activities.js').then(() => {
-            // Functions are already attached to window in activities.js
-        }).catch(() => {
-            // Fallback if module doesn't load
-            console.log('activities.js not loaded, using fallbacks');
-        });
-        
-        // Fallback implementations if modules don't load properly
-        window.checkDragMatching = window.checkDragMatching || function() {
-            const feedback = document.getElementById('dragMatchingFeedback');
-            const dropZones = document.querySelectorAll('.drop-zone');
-            let correct = 0, total = 0, totalZones = dropZones.length;
-            
-            dropZones.forEach(zone => {
-                const response = zone.querySelector('.draggable-response');
-                if (response) {
-                    total++;
-                    zone.classList.remove('correct', 'incorrect');
-                    response.classList.remove('correct', 'incorrect');
-                    if (response.dataset.match === zone.dataset.match) {
-                        zone.classList.add('correct');
-                        response.classList.add('correct');
-                        correct++;
-                    } else {
-                        zone.classList.add('incorrect');
-                        response.classList.add('incorrect');
-                    }
-                }
-            });
-            
-            if (feedback) {
-                feedback.classList.add('show');
-                if (total === 0) {
-                    feedback.textContent = 'Drag responses to the drop zones first.';
-                    feedback.className = 'feedback show error';
-                } else if (correct === totalZones) {
-                    feedback.textContent = 'Perfect! All matched correctly! 🎉';
-                    feedback.className = 'feedback show success';
-                } else {
-                    feedback.textContent = `${correct}/${total} correct. Try again!`;
-                    feedback.className = 'feedback show error';
-                }
-            }
-        };
-        
-        window.resetDragMatching = window.resetDragMatching || function() {
-            const feedback = document.getElementById('dragMatchingFeedback');
-            const responseBank = document.getElementById('responseBank');
-            const dropZones = document.querySelectorAll('.drop-zone');
-            
-            dropZones.forEach(zone => {
-                const response = zone.querySelector('.draggable-response');
-                if (response) {
-                    response.classList.remove('correct', 'incorrect');
-                    responseBank.appendChild(response);
-                }
-                zone.classList.remove('correct', 'incorrect');
-                const placeholder = zone.querySelector('.drop-placeholder');
-                if (placeholder) placeholder.style.display = 'block';
-            });
-            if (feedback) feedback.classList.remove('show');
-        };
-        
-        window.toggleRevealBox = window.toggleRevealBox || function(header) {
-            const box = header.closest('.reveal-box');
-            box.classList.toggle('revealed');
-        };
-        
-        window.selectScenario = window.selectScenario || function(card) {
-            document.querySelectorAll('.scenario-card').forEach(c => c.classList.remove('selected'));
-            card.classList.add('selected');
-        };
-        
-        // Initialize drag and drop if not already done
-        document.addEventListener('DOMContentLoaded', function() {
-            // Flip cards
-            document.querySelectorAll('.flip-card').forEach(card => {
-                card.addEventListener('click', function() {
-                    this.classList.toggle('flipped');
-                });
-            });
-            
-            const responseBank = document.getElementById('responseBank');
-            if (!responseBank) return;
-            
-            let draggedResponse = null;
-            
-            document.querySelectorAll('.draggable-response').forEach(response => {
-                response.addEventListener('dragstart', function(e) {
-                    draggedResponse = this;
-                    this.classList.add('dragging');
-                    e.dataTransfer.effectAllowed = 'move';
-                });
-                response.addEventListener('dragend', function() {
-                    this.classList.remove('dragging');
-                    document.querySelectorAll('.drop-zone').forEach(z => z.classList.remove('drag-over'));
-                });
-            });
-            
-            document.querySelectorAll('.drop-zone').forEach(zone => {
-                zone.addEventListener('dragover', function(e) {
-                    e.preventDefault();
-                    this.classList.add('drag-over');
-                });
-                zone.addEventListener('dragleave', function() {
-                    this.classList.remove('drag-over');
-                });
-                zone.addEventListener('drop', function(e) {
-                    e.preventDefault();
-                    this.classList.remove('drag-over');
-                    if (draggedResponse) {
-                        const existing = this.querySelector('.draggable-response');
-                        if (existing) responseBank.appendChild(existing);
-                        const placeholder = this.querySelector('.drop-placeholder');
-                        if (placeholder) placeholder.style.display = 'none';
-                        this.appendChild(draggedResponse);
-                        draggedResponse.classList.remove('dragging');
-                    }
-                });
-            });
-            
-            responseBank.addEventListener('dragover', function(e) { e.preventDefault(); });
-            responseBank.addEventListener('drop', function(e) {
-                e.preventDefault();
-                if (draggedResponse) {
-                    this.appendChild(draggedResponse);
-                    draggedResponse.classList.remove('dragging');
-                    document.querySelectorAll('.drop-zone').forEach(zone => {
-                        if (!zone.querySelector('.draggable-response')) {
-                            const ph = zone.querySelector('.drop-placeholder');
-                            if (ph) ph.style.display = 'block';
-                        }
-                    });
-                }
-            });
-        });
-        
-        // Expose functions from drop-down.js to window for onclick handlers
-        import('./js/drop-down.js').then(module => {
-            window.checkDropdownAnswers = window.checkDropdownAnswers || function(activityId) {
-                const activity = document.getElementById(activityId);
-                if (!activity) return;
-                const dropdowns = activity.querySelectorAll('.gap-dropdown');
-                const feedback = document.getElementById(activityId + 'Feedback');
-                let correct = 0, total = 0, answered = 0;
-                
-                dropdowns.forEach(dropdown => {
-                    const correctAnswer = dropdown.dataset.answer;
-                    const selectedValue = dropdown.value;
-                    total++;
-                    dropdown.classList.remove('correct', 'incorrect');
-                    if (selectedValue !== '') {
-                        answered++;
-                        if (selectedValue === correctAnswer) {
-                            dropdown.classList.add('correct');
-                            correct++;
-                        } else {
-                            dropdown.classList.add('incorrect');
-                        }
-                    }
-                });
-                
-                if (feedback) {
-                    feedback.classList.add('show');
-                    if (answered === 0) {
-                        feedback.textContent = 'Please select answers first!';
-                        feedback.className = 'feedback show error';
-                    } else if (correct === total) {
-                        feedback.textContent = `Excellent! All ${correct} correct! 🎉`;
-                        feedback.className = 'feedback show success';
-                    } else {
-                        feedback.textContent = `${correct}/${total} correct. Try again!`;
-                        feedback.className = 'feedback show error';
-                    }
-                }
-            };
-            
-            window.resetDropdownActivity = window.resetDropdownActivity || function(activityId) {
-                const activity = document.getElementById(activityId);
-                if (!activity) return;
-                const dropdowns = activity.querySelectorAll('.gap-dropdown');
-                const feedback = document.getElementById(activityId + 'Feedback');
-                dropdowns.forEach(dropdown => {
-                    dropdown.value = '';
-                    dropdown.classList.remove('correct', 'incorrect', 'answered');
-                });
-                if (feedback) {
-                    feedback.classList.remove('show');
-                }
-            };
-        });
         
         const LESSON_NUMBER = 13;
         let isComplete = false;
