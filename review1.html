@@ -430,6 +430,199 @@
             getCurrentUser
         } from './js/lesson-utils.js';
         
+        // Expose functions from activities.js to window for onclick handlers
+        import('./js/activities.js').then(() => {
+            // Functions are already attached to window in activities.js
+        }).catch(() => {
+            // Fallback if module doesn't load
+            console.log('activities.js not loaded, using fallbacks');
+        });
+        
+        // Fallback implementations if modules don't load properly
+        window.checkDragMatching = window.checkDragMatching || function() {
+            const feedback = document.getElementById('dragMatchingFeedback');
+            const dropZones = document.querySelectorAll('.drop-zone');
+            let correct = 0, total = 0, totalZones = dropZones.length;
+            
+            dropZones.forEach(zone => {
+                const response = zone.querySelector('.draggable-response');
+                if (response) {
+                    total++;
+                    zone.classList.remove('correct', 'incorrect');
+                    response.classList.remove('correct', 'incorrect');
+                    if (response.dataset.match === zone.dataset.match) {
+                        zone.classList.add('correct');
+                        response.classList.add('correct');
+                        correct++;
+                    } else {
+                        zone.classList.add('incorrect');
+                        response.classList.add('incorrect');
+                    }
+                }
+            });
+            
+            if (feedback) {
+                feedback.classList.add('show');
+                if (total === 0) {
+                    feedback.textContent = 'Drag responses to the drop zones first.';
+                    feedback.className = 'feedback show error';
+                } else if (correct === totalZones) {
+                    feedback.textContent = 'Perfect! All matched correctly! 🎉';
+                    feedback.className = 'feedback show success';
+                } else {
+                    feedback.textContent = `${correct}/${total} correct. Try again!`;
+                    feedback.className = 'feedback show error';
+                }
+            }
+        };
+        
+        window.resetDragMatching = window.resetDragMatching || function() {
+            const feedback = document.getElementById('dragMatchingFeedback');
+            const responseBank = document.getElementById('responseBank');
+            const dropZones = document.querySelectorAll('.drop-zone');
+            
+            dropZones.forEach(zone => {
+                const response = zone.querySelector('.draggable-response');
+                if (response) {
+                    response.classList.remove('correct', 'incorrect');
+                    responseBank.appendChild(response);
+                }
+                zone.classList.remove('correct', 'incorrect');
+                const placeholder = zone.querySelector('.drop-placeholder');
+                if (placeholder) placeholder.style.display = 'block';
+            });
+            if (feedback) feedback.classList.remove('show');
+        };
+        
+        window.toggleRevealBox = window.toggleRevealBox || function(header) {
+            const box = header.closest('.reveal-box');
+            box.classList.toggle('revealed');
+        };
+        
+        window.selectScenario = window.selectScenario || function(card) {
+            document.querySelectorAll('.scenario-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+        };
+        
+        // Initialize drag and drop if not already done
+        document.addEventListener('DOMContentLoaded', function() {
+            // Flip cards
+            document.querySelectorAll('.flip-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    this.classList.toggle('flipped');
+                });
+            });
+            
+            const responseBank = document.getElementById('responseBank');
+            if (!responseBank) return;
+            
+            let draggedResponse = null;
+            
+            document.querySelectorAll('.draggable-response').forEach(response => {
+                response.addEventListener('dragstart', function(e) {
+                    draggedResponse = this;
+                    this.classList.add('dragging');
+                    e.dataTransfer.effectAllowed = 'move';
+                });
+                response.addEventListener('dragend', function() {
+                    this.classList.remove('dragging');
+                    document.querySelectorAll('.drop-zone').forEach(z => z.classList.remove('drag-over'));
+                });
+            });
+            
+            document.querySelectorAll('.drop-zone').forEach(zone => {
+                zone.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    this.classList.add('drag-over');
+                });
+                zone.addEventListener('dragleave', function() {
+                    this.classList.remove('drag-over');
+                });
+                zone.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    this.classList.remove('drag-over');
+                    if (draggedResponse) {
+                        const existing = this.querySelector('.draggable-response');
+                        if (existing) responseBank.appendChild(existing);
+                        const placeholder = this.querySelector('.drop-placeholder');
+                        if (placeholder) placeholder.style.display = 'none';
+                        this.appendChild(draggedResponse);
+                        draggedResponse.classList.remove('dragging');
+                    }
+                });
+            });
+            
+            responseBank.addEventListener('dragover', function(e) { e.preventDefault(); });
+            responseBank.addEventListener('drop', function(e) {
+                e.preventDefault();
+                if (draggedResponse) {
+                    this.appendChild(draggedResponse);
+                    draggedResponse.classList.remove('dragging');
+                    document.querySelectorAll('.drop-zone').forEach(zone => {
+                        if (!zone.querySelector('.draggable-response')) {
+                            const ph = zone.querySelector('.drop-placeholder');
+                            if (ph) ph.style.display = 'block';
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Expose functions from drop-down.js to window for onclick handlers
+        import('./js/drop-down.js').then(module => {
+            window.checkDropdownAnswers = window.checkDropdownAnswers || function(activityId) {
+                const activity = document.getElementById(activityId);
+                if (!activity) return;
+                const dropdowns = activity.querySelectorAll('.gap-dropdown');
+                const feedback = document.getElementById(activityId + 'Feedback');
+                let correct = 0, total = 0, answered = 0;
+                
+                dropdowns.forEach(dropdown => {
+                    const correctAnswer = dropdown.dataset.answer;
+                    const selectedValue = dropdown.value;
+                    total++;
+                    dropdown.classList.remove('correct', 'incorrect');
+                    if (selectedValue !== '') {
+                        answered++;
+                        if (selectedValue === correctAnswer) {
+                            dropdown.classList.add('correct');
+                            correct++;
+                        } else {
+                            dropdown.classList.add('incorrect');
+                        }
+                    }
+                });
+                
+                if (feedback) {
+                    feedback.classList.add('show');
+                    if (answered === 0) {
+                        feedback.textContent = 'Please select answers first!';
+                        feedback.className = 'feedback show error';
+                    } else if (correct === total) {
+                        feedback.textContent = `Excellent! All ${correct} correct! 🎉`;
+                        feedback.className = 'feedback show success';
+                    } else {
+                        feedback.textContent = `${correct}/${total} correct. Try again!`;
+                        feedback.className = 'feedback show error';
+                    }
+                }
+            };
+            
+            window.resetDropdownActivity = window.resetDropdownActivity || function(activityId) {
+                const activity = document.getElementById(activityId);
+                if (!activity) return;
+                const dropdowns = activity.querySelectorAll('.gap-dropdown');
+                const feedback = document.getElementById(activityId + 'Feedback');
+                dropdowns.forEach(dropdown => {
+                    dropdown.value = '';
+                    dropdown.classList.remove('correct', 'incorrect', 'answered');
+                });
+                if (feedback) {
+                    feedback.classList.remove('show');
+                }
+            };
+        });
+        
         const LESSON_NUMBER = 13;
         let isComplete = false;
         
