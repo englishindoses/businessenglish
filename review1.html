@@ -6,236 +6,10 @@
     <title>Business English | Review 1</title>
     <link rel="stylesheet" href="css/lessons.css">
     <link rel="stylesheet" href="css/drop-down.css">
+    <link rel="stylesheet" href="css/compact-matching.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
-    <style>
-        /* ===== Review 1 Specific Styles ===== */
-        
-        /* Side-by-side grammar boxes */
-        .grammar-boxes {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        @media (max-width: 768px) {
-            .grammar-boxes {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* Fix rounded borders on all info boxes */
-        .discussion-note,
-        .practice-prompt,
-        .roleplay-tips,
-        .grammar-tip {
-            border-radius: var(--radius-md);
-        }
-        
-        /* Grammar tip box styling */
-        .grammar-tip {
-            background: var(--color-primary-pale);
-            border: 2px solid var(--color-primary);
-            padding: 1rem 1.25rem;
-            margin-top: 1.5rem;
-        }
-        .grammar-tip h4 {
-            font-size: 0.95rem;
-            color: var(--color-primary);
-            margin-bottom: 0.5rem;
-        }
-        .grammar-tip p {
-            font-size: 0.9rem;
-            color: var(--color-text);
-            margin: 0;
-            line-height: 1.6;
-        }
-        
-        /* Compact dropdown sentences - inline layout */
-        .dropdown-sentence-compact {
-            background: var(--color-white);
-            border: 2px solid var(--color-border);
-            border-radius: var(--radius-md);
-            padding: 1rem 1.25rem;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-            transition: var(--transition);
-        }
-        .dropdown-sentence-compact:hover {
-            border-color: var(--color-primary-light);
-        }
-        .dropdown-sentence-compact.correct {
-            background: var(--color-success-light);
-            border-color: var(--color-success);
-        }
-        .dropdown-sentence-compact.incorrect {
-            background: var(--color-error-light);
-            border-color: var(--color-error);
-        }
-        .dropdown-sentence-compact .sentence-number {
-            flex-shrink: 0;
-        }
-        .dropdown-sentence-compact p {
-            margin: 0;
-            flex: 1;
-            display: inline;
-            line-height: 1.8;
-        }
-        
-        /* Compact drag-and-drop matching */
-        .compact-match-activity {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            align-items: start;
-        }
-        @media (max-width: 700px) {
-            .compact-match-activity {
-                grid-template-columns: 1fr;
-            }
-        }
-        .match-statements {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-        .match-statement-row {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-        .match-statement-text {
-            background: var(--color-white);
-            border: 2px solid var(--color-primary);
-            border-left: 4px solid var(--color-primary);
-            border-radius: var(--radius-sm);
-            padding: 0.75rem 1rem;
-            font-size: 0.9rem;
-        }
-        .match-drop-zone {
-            background: var(--color-bg);
-            border: 2px dashed var(--color-border);
-            border-radius: var(--radius-sm);
-            padding: 0.5rem;
-            min-height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-        }
-        .match-drop-zone.drag-over {
-            border-color: var(--color-accent);
-            background: var(--color-accent-light);
-            border-style: solid;
-        }
-        .match-drop-zone.correct {
-            border-color: var(--color-success);
-            background: var(--color-success-light);
-            border-style: solid;
-        }
-        .match-drop-zone.incorrect {
-            border-color: var(--color-error);
-            background: var(--color-error-light);
-            border-style: solid;
-        }
-        .match-drop-zone .drop-placeholder {
-            color: var(--color-text-light);
-            font-size: 0.8rem;
-            font-style: italic;
-        }
-        .match-response-bank {
-            background: var(--color-bg);
-            border-radius: var(--radius-md);
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            position: sticky;
-            top: 1rem;
-        }
-        .match-response-bank h4 {
-            font-size: 0.9rem;
-            color: var(--color-text-light);
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .match-response {
-            background: var(--color-accent);
-            color: var(--color-white);
-            padding: 0.6rem 0.75rem;
-            border-radius: var(--radius-sm);
-            font-size: 0.85rem;
-            cursor: grab;
-            transition: var(--transition);
-        }
-        .match-response:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-sm);
-        }
-        .match-response.dragging {
-            opacity: 0.5;
-            cursor: grabbing;
-        }
-        .match-response.correct {
-            background: var(--color-success);
-        }
-        .match-response.incorrect {
-            background: var(--color-error);
-        }
-        .match-drop-zone .match-response {
-            width: 100%;
-            margin: 0;
-        }
-        
-        /* Conversation question card */
-        .conversation-prompt {
-            background: linear-gradient(135deg, var(--color-primary-pale) 0%, var(--color-white) 100%);
-            border: 2px solid var(--color-primary);
-            border-radius: var(--radius-md);
-            padding: 1.25rem;
-            margin-top: 1.5rem;
-        }
-        .conversation-prompt h4 {
-            font-size: 0.95rem;
-            color: var(--color-primary);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .conversation-prompt p {
-            font-size: 0.95rem;
-            color: var(--color-text);
-            margin: 0;
-            line-height: 1.6;
-        }
-        .conversation-prompt em {
-            display: block;
-            margin-top: 0.5rem;
-            font-size: 0.85rem;
-            color: var(--color-text-light);
-        }
-        
-        /* Four-zone sorting grid */
-        .sorting-zones.four-zones {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-        @media (max-width: 700px) {
-            .sorting-zones.four-zones {
-                grid-template-columns: 1fr;
-            }
-        }
-        .sorting-zones.four-zones .sort-zone {
-            min-height: 100px;
-        }
-    </style>
 </head>
 <body data-lesson="13">
     <header class="header">
@@ -257,7 +31,7 @@
             </div>
             <p class="section-intro">Many verbs are followed by another verb in either the <strong>-ing form</strong> or the <strong>to + infinitive form</strong>. There's no perfect rule — you need to learn which verbs take which form.</p>
 
-            <div class="grammar-boxes">
+            <div class="two-column-grid">
                 <div class="language-box">
                     <h4>📘 Verbs followed by -ing</h4>
                     <ul>
@@ -287,18 +61,18 @@
                 </div>
             </div>
 
-            <div class="discussion-note">
+            <div class="special-case">
                 <h4>⚠️ Special Case: "Stop"</h4>
                 <p><strong>stop + -ing</strong> = quit doing something → <em>"I stopped smoking."</em> (I don't smoke anymore.)<br>
                 <strong>stop + to</strong> = pause in order to do something → <em>"I stopped to smoke."</em> (I paused to have a cigarette.)</p>
             </div>
 
-            <div class="grammar-tip">
+            <div class="tip-box">
                 <h4>💡 Tip</h4>
                 <p>Many <strong>-ing verbs</strong> describe feelings or attitudes (enjoy, avoid, mind, consider). Many <strong>to verbs</strong> are about intentions or decisions (want, plan, decide, hope).</p>
             </div>
 
-            <div class="conversation-prompt">
+            <div class="practice-prompt">
                 <h4>💬 Quick Discussion</h4>
                 <p>Think of something you <strong>enjoy doing</strong> at work and something you <strong>avoid doing</strong>. Tell your teacher using the correct verb form.</p>
                 <em>Example: "I enjoy collaborating with my team, but I avoid attending unnecessary meetings."</em>
@@ -414,7 +188,7 @@
             <button class="reset-btn" onclick="resetDropdownActivity('dropdownActivity1')">Reset</button>
             <div class="feedback" id="dropdownActivity1Feedback"></div>
 
-            <div class="conversation-prompt">
+            <div class="practice-prompt">
                 <h4>💬 Discussion</h4>
                 <p>Choose one of these questions and answer using the correct verb form:</p>
                 <p>• What do you enjoy doing in your free time?<br>
@@ -474,7 +248,7 @@
             <button class="reset-btn" onclick="resetSorting()">Reset</button>
             <div class="feedback" id="sortingFeedback"></div>
 
-            <div class="conversation-prompt">
+            <div class="practice-prompt">
                 <h4>💬 Practice</h4>
                 <p>Use expressions from each category to talk about a hobby or interest you have:</p>
                 <em>Example: "I'm responsible for organising our book club meetings. I tend to choose mystery novels. One of my key achievements was getting 20 people to join. This led to us meeting twice a month instead of once."</em>
@@ -557,75 +331,104 @@
                 </div>
             </div>
 
-            <div class="conversation-prompt">
+            <div class="practice-prompt">
                 <h4>💬 Your Turn</h4>
                 <p>Think of something you've been working on improving recently — at work, a hobby, or a personal skill. Tell your teacher about it using "Something I'm working on..."</p>
             </div>
         </section>
 
-        <!-- Activity 5: Matching Expressions to Meanings -->
+        <!-- Activity 5: NEW Compact Matching -->
         <section class="section" id="activity5">
             <div class="section-header">
                 <span class="section-number">Activity 5/7</span>
                 <h2>Match the Meanings</h2>
             </div>
-            <p class="section-intro">Match each expression with its meaning or use. Drag the definitions to the correct expression.</p>
+            <p class="section-intro">Match each expression with its meaning. Drag the numbers to the correct definition, or tap a number then tap where it goes.</p>
 
-            <div class="compact-match-activity">
-                <div class="match-statements">
-                    <div class="match-statement-row">
-                        <div class="match-statement-text"><strong>I'm responsible for...</strong></div>
-                        <div class="match-drop-zone drop-zone" data-match="responsible">
-                            <span class="drop-placeholder">Drop here</span>
-                        </div>
+            <div class="compact-matching" id="compactMatching1">
+                <!-- Column 1: Statements -->
+                <div class="cm-statements">
+                    <div class="cm-statement" data-match="1">
+                        <span class="cm-statement-num">1</span>
+                        <p><strong>I'm responsible for...</strong></p>
                     </div>
-                    <div class="match-statement-row">
-                        <div class="match-statement-text"><strong>My role involves...</strong></div>
-                        <div class="match-drop-zone drop-zone" data-match="involves">
-                            <span class="drop-placeholder">Drop here</span>
-                        </div>
+                    <div class="cm-statement" data-match="2">
+                        <span class="cm-statement-num">2</span>
+                        <p><strong>My role involves...</strong></p>
                     </div>
-                    <div class="match-statement-row">
-                        <div class="match-statement-text"><strong>That reminds me...</strong></div>
-                        <div class="match-drop-zone drop-zone" data-match="reminds">
-                            <span class="drop-placeholder">Drop here</span>
-                        </div>
+                    <div class="cm-statement" data-match="3">
+                        <span class="cm-statement-num">3</span>
+                        <p><strong>That reminds me...</strong></p>
                     </div>
-                    <div class="match-statement-row">
-                        <div class="match-statement-text"><strong>I tend to...</strong></div>
-                        <div class="match-drop-zone drop-zone" data-match="tend">
-                            <span class="drop-placeholder">Drop here</span>
-                        </div>
+                    <div class="cm-statement" data-match="4">
+                        <span class="cm-statement-num">4</span>
+                        <p><strong>I tend to...</strong></p>
                     </div>
-                    <div class="match-statement-row">
-                        <div class="match-statement-text"><strong>This led to...</strong></div>
-                        <div class="match-drop-zone drop-zone" data-match="ledto">
-                            <span class="drop-placeholder">Drop here</span>
-                        </div>
+                    <div class="cm-statement" data-match="5">
+                        <span class="cm-statement-num">5</span>
+                        <p><strong>This led to...</strong></p>
                     </div>
-                    <div class="match-statement-row">
-                        <div class="match-statement-text"><strong>I played a key role in...</strong></div>
-                        <div class="match-drop-zone drop-zone" data-match="keyrole">
-                            <span class="drop-placeholder">Drop here</span>
-                        </div>
+                    <div class="cm-statement" data-match="6">
+                        <span class="cm-statement-num">6</span>
+                        <p><strong>I played a key role in...</strong></p>
                     </div>
                 </div>
 
-                <div class="match-response-bank" id="responseBank">
-                    <h4>Definitions</h4>
-                    <div class="match-response draggable-response" data-match="ledto" draggable="true">Showing a result or consequence</div>
-                    <div class="match-response draggable-response" data-match="responsible" draggable="true">Describing your main duties</div>
-                    <div class="match-response draggable-response" data-match="tend" draggable="true">Describing usual behaviour</div>
-                    <div class="match-response draggable-response" data-match="keyrole" draggable="true">Emphasising your contribution</div>
-                    <div class="match-response draggable-response" data-match="involves" draggable="true">Describing what your job includes</div>
-                    <div class="match-response draggable-response" data-match="reminds" draggable="true">Changing the topic smoothly</div>
+                <!-- Column 2: Markers -->
+                <div class="cm-markers" id="markerBank1">
+                    <div class="cm-marker-slot" data-marker="1">
+                        <div class="cm-marker" data-match="1" draggable="true">1</div>
+                    </div>
+                    <div class="cm-marker-slot" data-marker="2">
+                        <div class="cm-marker" data-match="2" draggable="true">2</div>
+                    </div>
+                    <div class="cm-marker-slot" data-marker="3">
+                        <div class="cm-marker" data-match="3" draggable="true">3</div>
+                    </div>
+                    <div class="cm-marker-slot" data-marker="4">
+                        <div class="cm-marker" data-match="4" draggable="true">4</div>
+                    </div>
+                    <div class="cm-marker-slot" data-marker="5">
+                        <div class="cm-marker" data-match="5" draggable="true">5</div>
+                    </div>
+                    <div class="cm-marker-slot" data-marker="6">
+                        <div class="cm-marker" data-match="6" draggable="true">6</div>
+                    </div>
+                </div>
+
+                <!-- Column 3: Answers (shuffled) -->
+                <div class="cm-answers">
+                    <div class="cm-answer" data-match="5">
+                        <div class="cm-answer-slot"></div>
+                        <p>Showing a result or consequence</p>
+                    </div>
+                    <div class="cm-answer" data-match="1">
+                        <div class="cm-answer-slot"></div>
+                        <p>Describing your main duties</p>
+                    </div>
+                    <div class="cm-answer" data-match="4">
+                        <div class="cm-answer-slot"></div>
+                        <p>Describing usual behaviour</p>
+                    </div>
+                    <div class="cm-answer" data-match="6">
+                        <div class="cm-answer-slot"></div>
+                        <p>Emphasising your contribution</p>
+                    </div>
+                    <div class="cm-answer" data-match="2">
+                        <div class="cm-answer-slot"></div>
+                        <p>Describing what your job includes</p>
+                    </div>
+                    <div class="cm-answer" data-match="3">
+                        <div class="cm-answer-slot"></div>
+                        <p>Changing the topic smoothly</p>
+                    </div>
                 </div>
             </div>
-            <button class="check-btn" onclick="checkDragMatching()">Check Answers</button>
-            <button class="reset-btn" onclick="resetDragMatching()">Reset</button>
-            <div class="feedback" id="dragMatchingFeedback"></div>
+            <button class="check-btn" onclick="checkCompactMatching('compactMatching1')">Check Answers</button>
+            <button class="reset-btn" onclick="resetCompactMatching('compactMatching1')">Reset</button>
+            <div class="feedback" id="compactMatching1Feedback"></div>
 
-            <div class="conversation-prompt">
+            <div class="practice-prompt">
                 <h4>💬 Discussion</h4>
                 <p>Your teacher will ask you about your job or daily routine. Practice smoothly changing the topic by using "That reminds me..." mid-conversation.</p>
             </div>
@@ -708,7 +511,7 @@
             <button class="reset-btn" onclick="resetSentenceOrder()">Reset</button>
             <div class="feedback" id="sentenceFeedback"></div>
 
-            <div class="conversation-prompt">
+            <div class="practice-prompt">
                 <h4>💬 Speaking Challenge</h4>
                 <p>Use the sentence "Looking back, I learned a lot" as a starting point. Tell your teacher about something you learned from — it could be a trip, a course, a relationship, or a challenge.</p>
             </div>
@@ -800,6 +603,7 @@
     <script type="module" src="js/activities.js"></script>
     <script type="module" src="js/drop-down.js"></script>
     <script type="module" src="js/sentence-ordering.js"></script>
+    <script type="module" src="js/compact-matching.js"></script>
     
     <script type="module">
         import { 
