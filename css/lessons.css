@@ -1501,3 +1501,59 @@ h1, h2, h3, h4 {
         font-size: 0.9rem;
     }
 }
+
+/* ===== Grammar Tip Section – Sand / Paper ===== */
+.section.grammar-tip {
+    background: #F6F1E9;          /* paper sand */
+    border: 2px solid #723430;
+    border-left: 5px solid #723430;
+}
+
+.section.grammar-tip .section-number {
+    background: #723430;
+}
+
+.section.grammar-tip h2 {
+    color: #723430;             
+}
+
+.section.grammar-tip .language-box {
+    background: #FFFFFF;
+    border-color: #D6C8B6;
+}
+
+.section.grammar-tip .language-box h4 {
+    color: #351c1a;
+}
+
+.section.grammar-tip .reveal-box {
+    border-color: #D6C8B6;
+}
+.section.grammar-tip .reveal-box :hover {
+    background: #EFE7DC;
+}
+
+
+.section.grammar-tip .reveal-header h4 {
+    color: #351c1a;
+}
+
+.section.grammar-tip .check-btn {
+    background: #D6C8B6;
+    border-color: #D6C8B6;
+    color: #2F2F2F;
+}
+
+.section.grammar-tip .check-btn:hover {
+    background: #C7B8A4;
+    border-color: #C7B8A4;
+}
+
+.section.grammar-tip .reset-btn {
+    border-color: #D6C8B6;
+    color: #351c1a;
+}
+
+.section.grammar-tip .reset-btn:hover {
+    background: #EFE7DC;
+}

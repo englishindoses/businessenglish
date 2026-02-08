@@ -1,0 +1,141 @@
+/* ===== Right/Wrong Activity Styles ===== */
+/* Activity where students identify if sentences are correct or incorrect */
+
+.right-wrong-activity {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.rw-sentence {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--color-white);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    transition: var(--transition);
+}
+
+.rw-sentence:hover {
+    border-color: var(--color-primary-light);
+}
+
+.rw-sentence.correct-answer {
+    background: var(--color-success-light);
+    border-color: var(--color-success);
+}
+
+.rw-sentence.incorrect-answer {
+    background: var(--color-error-light);
+    border-color: var(--color-error);
+}
+
+.rw-text {
+    flex: 1;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.rw-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.rw-btn {
+    width: 44px;
+    height: 44px;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-white);
+    cursor: pointer;
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.rw-btn:hover {
+    transform: scale(1.05);
+}
+
+.rw-btn.tick {
+    color: var(--color-success);
+}
+
+.rw-btn.tick:hover {
+    background: var(--color-success-light);
+    border-color: var(--color-success);
+}
+
+.rw-btn.tick.selected {
+    background: var(--color-success);
+    border-color: var(--color-success);
+    color: var(--color-white);
+}
+
+.rw-btn.cross {
+    color: var(--color-error);
+}
+
+.rw-btn.cross:hover {
+    background: var(--color-error-light);
+    border-color: var(--color-error);
+}
+
+.rw-btn.cross.selected {
+    background: var(--color-error);
+    border-color: var(--color-error);
+    color: var(--color-white);
+}
+
+/* Feedback icons after checking */
+.rw-sentence .rw-result {
+    font-size: 1.25rem;
+    margin-left: 0.5rem;
+    flex-shrink: 0;
+}
+
+.rw-sentence.correct-answer .rw-result::after {
+    content: '✓';
+    color: var(--color-success);
+}
+
+.rw-sentence.incorrect-answer .rw-result::after {
+    content: '✗';
+    color: var(--color-error);
+}
+
+/* Correction text for wrong sentences */
+.rw-correction {
+    display: none;
+    font-size: 0.85rem;
+    color: var(--color-success);
+    margin-top: 0.5rem;
+    padding-left: 0.5rem;
+    border-left: 2px solid var(--color-success);
+}
+
+.rw-sentence.show-correction .rw-correction {
+    display: block;
+}
+
+/* Responsive adjustments */
+@media (max-width: 500px) {
+    .rw-sentence {
+        flex-wrap: wrap;
+    }
+    
+    .rw-text {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .rw-buttons {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
