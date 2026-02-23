@@ -58,7 +58,7 @@
     font-size: 0.95rem;
     color: var(--color-primary);
     cursor: pointer;
-    min-width: 180px;
+    width: 180px;
     transition: var(--transition);
     
     /* Custom dropdown arrow */
