@@ -6,6 +6,7 @@
     <title>Business English | Professional Email Communication</title>
     <link rel="stylesheet" href="css/lessons.css">
     <link rel="stylesheet" href="css/drop-down.css">
+    <link rel="stylesheet" href="css/compact-matching.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
@@ -16,17 +17,17 @@
         <div class="header-content">
             <div class="header-badge">Lesson 4</div>
             <h1>Professional Email Communication</h1>
-            <p class="header-subtitle">Clear, effective email writing & understanding tone</p>
+            <p class="header-subtitle">Essential phrases for clear, professional emails</p>
         </div>
         <div class="header-decoration"></div>
     </header>
 
     <main class="container">
-        <!-- Activity 1: Discussion Warm-up -->
-        <section class="section" id="activity1">
+        <!-- Warm-up -->
+        <section class="section" id="warmup">
             <div class="section-header">
                 <span class="section-number">Warm-up</span>
-                <h2>Your Email Habits</h2>
+                <h2>Email Challenges</h2>
             </div>
             <p class="section-intro">Discuss these questions with your teacher.</p>
 
@@ -35,659 +36,595 @@
                     <div class="card-icon">📧</div>
                     <h3>Discussion Questions</h3>
                     <ul class="discussion-questions">
-                        <li>Roughly how many work emails do you send and receive per day?</li>
-                        <li>What's the most challenging thing about writing emails in English?</li>
-                        <li>Have you ever sent an email you regretted? What happened?</li>
-                        <li>How do you decide when to send an email vs. a chat message?</li>
+                        <li>What's the most difficult thing about writing professional emails in English?</li>
+                        <li>Have you ever worried that an email sounded too direct or too casual? What happened?</li>
+                        <li>What level of formality would you use in these situations?
+                            <ul style="margin-top: 0.5rem; margin-left: 1rem; font-size: 0.9rem;">
+                                <li>A progress report to your boss</li>
+                                <li>Asking a favour from a manager in another department</li>
+                                <li>Complaining to a company's customer service</li>
+                                <li>Confirming dinner plans with a friend</li>
+                                <li>Enquiring about a job at a company you admire</li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
-
-            <div class="tip-box">
-                <h4>💡 Think About It</h4>
-                <p>In your experience, what makes an email feel "too formal" or "too casual"? How do you find the right balance?</p>
-            </div>
         </section>
 
-        <!-- Activity 2: Email vs Chat - Key Differences -->
-        <section class="section" id="activity2">
+        <!-- Activity 1: Grammar Tip - Modal Verbs for Politeness -->
+        <section class="section" id="activity1">
             <div class="section-header">
-                <span class="section-number">Activity 1</span>
-                <h2>Email vs Company Chat: When & How</h2>
+                <span class="section-number">Activity 1/5</span>
+                <h2>Grammar Tip: Modal Verbs for Politeness</h2>
             </div>
-            <p class="section-intro">Emails and instant messages (Slack, Teams, etc.) serve different purposes and use different language. Sort these characteristics into the correct category.</p>
-            
-            <div class="sorting-activity">
-                <div class="phrase-bank" id="phraseBank1">
-                    <div class="phrase" data-category="email" draggable="true">Uses a greeting and sign-off</div>
-                    <div class="phrase" data-category="chat" draggable="true">Often starts without a greeting</div>
-                    <div class="phrase" data-category="email" draggable="true">Complete sentences expected</div>
-                    <div class="phrase" data-category="chat" draggable="true">Fragments and short replies OK</div>
-                    <div class="phrase" data-category="email" draggable="true">Better for detailed explanations</div>
-                    <div class="phrase" data-category="chat" draggable="true">Better for quick questions</div>
-                    <div class="phrase" data-category="email" draggable="true">Creates a formal record</div>
-                    <div class="phrase" data-category="chat" draggable="true">Can use emojis freely 👍</div>
-                    <div class="phrase" data-category="email" draggable="true">Subject line is important</div>
-                    <div class="phrase" data-category="chat" draggable="true">Replies expected quickly</div>
-                </div>
-                
-                <div class="sorting-zones">
-                    <div class="sort-zone" id="emailZone" data-category="email">
-                        <h4>📧 Email</h4>
-                        <p class="zone-hint">More formal, structured communication</p>
-                        <div class="zone-content"></div>
-                    </div>
-                    <div class="sort-zone" id="chatZone" data-category="chat">
-                        <h4>💬 Company Chat</h4>
-                        <p class="zone-hint">Quick, informal exchanges</p>
-                        <div class="zone-content"></div>
-                    </div>
-                </div>
-            </div>
-            <button class="check-btn" onclick="checkSorting('phraseBank1')">Check Answers</button>
-            <button class="reset-btn" onclick="resetSorting('phraseBank1')">Reset</button>
-            <div class="feedback" id="sorting1Feedback"></div>
-
-            <div class="reflection-card" style="margin-top: 1.5rem;">
-                <h4>📋 Notes</h4>
-                <p>Any differences you want to remember?</p>
-                <textarea class="notes-input" placeholder="Your notes..."></textarea>
-            </div>
-        </section>
-
-        <!-- Activity 3: Email Structure Language -->
-        <section class="section" id="activity3">
-            <div class="section-header">
-                <span class="section-number">Activity 2</span>
-                <h2>Starting & Ending Emails</h2>
-            </div>
-            <p class="section-intro">The way you start and end an email sets the tone. Match these openings and closings to the appropriate level of formality.</p>
-
-            <div class="subsection">
-                <h3>Email Openings</h3>
-                <p>Sort these greetings and opening lines from most formal to least formal.</p>
-
-                <div class="sorting-activity">
-                    <div class="phrase-bank" id="phraseBank2">
-                        <div class="phrase" data-category="formal" draggable="true">Dear Mr/Ms [Surname],</div>
-                        <div class="phrase" data-category="formal" draggable="true">I hope this email finds you well.</div>
-                        <div class="phrase" data-category="neutral" draggable="true">Dear [First name],</div>
-                        <div class="phrase" data-category="neutral" draggable="true">I hope you're doing well.</div>
-                        <div class="phrase" data-category="neutral" draggable="true">Thank you for getting back to me.</div>
-                        <div class="phrase" data-category="informal" draggable="true">Hi [Name],</div>
-                        <div class="phrase" data-category="informal" draggable="true">Hope you're well!</div>
-                        <div class="phrase" data-category="informal" draggable="true">Hope you had a good weekend.</div>
-                        <div class="phrase" data-category="informal" draggable="true">Just a quick one...</div>
-                    </div>
-                    
-                    <div class="sorting-zones three-zones">
-                        <div class="sort-zone" id="formalOpenZone" data-category="formal">
-                            <h4>👔 Formal</h4>
-                            <p class="zone-hint">First contact, senior people, clients you don't know well</p>
-                            <div class="zone-content"></div>
-                        </div>
-                        <div class="sort-zone" id="neutralOpenZone" data-category="neutral">
-                            <h4>🤝 Neutral</h4>
-                            <p class="zone-hint">Regular clients, colleagues in other departments</p>
-                            <div class="zone-content"></div>
-                        </div>
-                        <div class="sort-zone" id="informalOpenZone" data-category="informal">
-                            <h4>😊 Informal</h4>
-                            <p class="zone-hint">Close colleagues, people you email often</p>
-                            <div class="zone-content"></div>
-                        </div>
-                    </div>
-                </div>
-                <button class="check-btn" onclick="checkSorting('phraseBank2')">Check Answers</button>
-                <button class="reset-btn" onclick="resetSorting('phraseBank2')">Reset</button>
-                <div class="feedback" id="sorting2Feedback"></div>
-            </div>
-
-            <div class="tip-box">
-                <h4>💡 Tip: Mirror the Other Person</h4>
-                <p>A good rule is to match the formality of the person you're replying to. If they use "Hi" and your first name, you can do the same. If they use "Dear Mr...", stay formal until they become more casual.</p>
-            </div>
-
-            <div class="subsection">
-                <h3>Email Closings</h3>
-                <p>Now sort these sign-offs and closing lines.</p>
-
-                <div class="sorting-activity">
-                    <div class="phrase-bank" id="phraseBank3">
-                        <div class="phrase" data-category="formal" draggable="true">Yours sincerely,</div>
-                        <div class="phrase" data-category="formal" draggable="true">Kind regards,</div>
-                        <div class="phrase" data-category="formal" draggable="true">I look forward to hearing from you.</div>
-                        <div class="phrase" data-category="neutral" draggable="true">Best regards,</div>
-                        <div class="phrase" data-category="neutral" draggable="true">Many thanks,</div>
-                        <div class="phrase" data-category="neutral" draggable="true">Please let me know if you have any questions.</div>
-                        <div class="phrase" data-category="informal" draggable="true">Thanks!</div>
-                        <div class="phrase" data-category="informal" draggable="true">Cheers,</div>
-                        <div class="phrase" data-category="informal" draggable="true">Best,</div>
-                        <div class="phrase" data-category="informal" draggable="true">Let me know if you need anything else.</div>
-                    </div>
-                    
-                    <div class="sorting-zones three-zones">
-                        <div class="sort-zone" id="formalCloseZone" data-category="formal">
-                            <h4>👔 Formal</h4>
-                            <p class="zone-hint">First contact, senior people, external clients</p>
-                            <div class="zone-content"></div>
-                        </div>
-                        <div class="sort-zone" id="neutralCloseZone" data-category="neutral">
-                            <h4>🤝 Neutral</h4>
-                            <p class="zone-hint">Most professional emails</p>
-                            <div class="zone-content"></div>
-                        </div>
-                        <div class="sort-zone" id="informalCloseZone" data-category="informal">
-                            <h4>😊 Informal</h4>
-                            <p class="zone-hint">Close colleagues, casual internal emails</p>
-                            <div class="zone-content"></div>
-                        </div>
-                    </div>
-                </div>
-                <button class="check-btn" onclick="checkSorting('phraseBank3')">Check Answers</button>
-                <button class="reset-btn" onclick="resetSorting('phraseBank3')">Reset</button>
-                <div class="feedback" id="sorting3Feedback"></div>
-            </div>
-
-            <div class="discussion-note">
-                <h4>🗣️ Discussion</h4>
-                <p>In your company/industry, what's the typical level of formality in emails? Has it changed over time?</p>
-            </div>
-
-            <div class="reflection-card" style="margin-top: 1.5rem;">
-                <h4>📋 Notes</h4>
-                <p>Which openings and closings do you think you'll use most often?</p>
-                <textarea class="notes-input" placeholder="Your notes..."></textarea>
-            </div>
-        </section>
-
-        <!-- Activity 4: Connectors and Structure Words -->
-        <section class="section" id="activity4">
-            <div class="section-header">
-                <span class="section-number">Activity 3</span>
-                <h2>Structuring Your Email: Connectors</h2>
-            </div>
-            <p class="section-intro">Good emails are easy to follow. Connectors (linking words) help your reader understand how your ideas connect. Click each card to see examples.</p>
-
-            <div class="phrase-cards">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <span class="phrase-label">Stating Purpose</span>
-                        </div>
-                        <div class="flip-card-back">
-                            <p><strong>I'm writing to...</strong> inquire about / follow up on / confirm<br><strong>I wanted to...</strong> let you know / check in about / ask</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <span class="phrase-label">Adding Information</span>
-                        </div>
-                        <div class="flip-card-back">
-                            <p><strong>In addition,</strong> ... <br><strong>Furthermore,</strong> ...<br><strong>I should also mention that...</strong><br><strong>On top of that,</strong> ...</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <span class="phrase-label">Contrasting / However</span>
-                        </div>
-                        <div class="flip-card-back">
-                            <p><strong>However,</strong> ...<br><strong>On the other hand,</strong> ...<br><strong>That said,</strong> ...<br><strong>Although</strong> X, Y...</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <span class="phrase-label">Giving Reasons</span>
-                        </div>
-                        <div class="flip-card-back">
-                            <p><strong>This is because...</strong><br><strong>The reason for this is...</strong><br><strong>Due to</strong> [noun],<br><strong>Since</strong> / <strong>As</strong> [clause],</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <span class="phrase-label">Results / Consequences</span>
-                        </div>
-                        <div class="flip-card-back">
-                            <p><strong>As a result,</strong> ...<br><strong>Therefore,</strong> ...<br><strong>This means that...</strong><br><strong>Consequently,</strong> ...</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <span class="phrase-label">Referring to Attachments</span>
-                        </div>
-                        <div class="flip-card-back">
-                            <p><strong>Please find attached...</strong><br><strong>I've attached...</strong><br><strong>As you can see in the attached...</strong><br><strong>The attached document shows...</strong></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tip-box">
-                <h4>💡 Connector Position</h4>
-                <p>Most connectors work at the start of a sentence followed by a comma: "However, we need to reconsider." Some also work mid-sentence: "We need, however, to reconsider." The mid-sentence position sounds more formal.</p>
-            </div>
-
-            <div class="subsection">
-                <h3>Practice: Fill in the Connectors</h3>
-                <p>Complete these email extracts with appropriate connectors.</p>
-
-                <div class="dropdown-activity" id="dropdownActivity1">
-                    <div class="dropdown-sentence">
-                        <p>
-                            <select class="gap-dropdown" data-answer="I'm writing to">
-                                <option value="">Select...</option>
-                                <option value="I'm writing to">I'm writing to</option>
-                                <option value="However">However</option>
-                                <option value="As a result">As a result</option>
-                            </select>
-                            follow up on our meeting last week about the Q3 budget.
-                        </p>
-                    </div>
-
-                    <div class="dropdown-sentence">
-                        <p>
-                            The project is going well.
-                            <select class="gap-dropdown" data-answer="However">
-                                <option value="">Select...</option>
-                                <option value="Furthermore">Furthermore</option>
-                                <option value="However">However</option>
-                                <option value="As a result">As a result</option>
-                            </select>
-                            we've encountered a small delay with the supplier.
-                        </p>
-                    </div>
-
-                    <div class="dropdown-sentence">
-                        <p>
-                            The venue was unavailable.
-                            <select class="gap-dropdown" data-answer="Therefore">
-                                <option value="">Select...</option>
-                                <option value="In addition">In addition</option>
-                                <option value="Although">Although</option>
-                                <option value="Therefore">Therefore</option>
-                            </select>
-                            we've moved the event to the 15th.
-                        </p>
-                    </div>
-
-                    <div class="dropdown-sentence">
-                        <p>
-                            <select class="gap-dropdown" data-answer="Please find attached">
-                                <option value="">Select...</option>
-                                <option value="I'm writing to">I'm writing to</option>
-                                <option value="Please find attached">Please find attached</option>
-                                <option value="On the other hand">On the other hand</option>
-                            </select>
-                            the revised proposal for your review.
-                        </p>
-                    </div>
-
-                    <div class="dropdown-sentence">
-                        <p>
-                            We need to finalize the contract this week.
-                            <select class="gap-dropdown" data-answer="In addition">
-                                <option value="">Select...</option>
-                                <option value="However">However</option>
-                                <option value="In addition">In addition</option>
-                                <option value="Therefore">Therefore</option>
-                            </select>
-                            we should schedule a call to discuss the payment terms.
-                        </p>
-                    </div>
-                </div>
-                <button class="check-btn" onclick="checkDropdownAnswers('dropdownActivity1')">Check Answers</button>
-                <button class="reset-btn" onclick="resetDropdownActivity('dropdownActivity1')">Reset</button>
-                <div class="feedback" id="dropdownActivity1Feedback"></div>
-            </div>
-
-            <div class="reflection-card" style="margin-top: 1.5rem;">
-                <h4>📋 Notes</h4>
-                <p>Which connectors are new to you? Which do you want to practice using?</p>
-                <textarea class="notes-input" placeholder="Your notes..."></textarea>
-            </div>
-        </section>
-
-        <!-- Activity 5: Modal Verbs for Politeness -->
-        <section class="section" id="activity5">
-            <div class="section-header">
-                <span class="section-number">Activity 4</span>
-                <h2>Making Polite Requests</h2>
-            </div>
-            <p class="section-intro">In professional emails, how you ask for something matters as much as what you ask for. Modal verbs (can, could, would, might) help soften requests and sound more professional.</p>
+            <p class="section-intro">Modal verbs like <strong>could</strong>, <strong>would</strong>, and <strong>might</strong> soften requests and make them sound more professional. Compare these examples:</p>
 
             <div class="language-box">
-                <h4>The Politeness Scale</h4>
-                <p>The more words you add, the more polite (and indirect) your request sounds:</p>
-                <table class="grammar-table">
-                    <thead>
-                        <tr>
-                            <th>Directness</th>
-                            <th>Example</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Direct</strong> (can sound rude)</td>
-                            <td>Send me the report.</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Neutral</strong></td>
-                            <td>Can you send me the report?</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Polite</strong></td>
-                            <td>Could you send me the report?</td>
-                        </tr>
-                        <tr>
-                            <td><strong>More polite</strong></td>
-                            <td>Could you possibly send me the report?</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Very polite</strong></td>
-                            <td>I was wondering if you could send me the report?</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Most polite</strong></td>
-                            <td>I was wondering if you might be able to send me the report?</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h4>Polite ✓ vs Informal/Direct ✗</h4>
+                <ul>
+                    <li>✗ <em>Send me the report.</em> → ✓ <strong>Could you send me the report?</strong></li>
+                    <li>✗ <em>I want a meeting tomorrow.</em> → ✓ <strong>Would it be possible to meet tomorrow?</strong></li>
+                    <li>✗ <em>Tell me your decision.</em> → ✓ <strong>I was wondering if you could let me know your decision.</strong></li>
+                    <li>✗ <em>Reply by Friday.</em> → ✓ <strong>I would appreciate it if you could reply by Friday.</strong></li>
+                    <li>✗ <em>Change the deadline.</em> → ✓ <strong>Would you mind changing the deadline?</strong></li>
+                </ul>
             </div>
 
             <div class="tip-box">
                 <h4>💡 Key Patterns</h4>
-                <p><strong>Would/Could + base verb:</strong> "Would you check..." / "Could you confirm..."<br>
-                <strong>Would you mind + -ing:</strong> "Would you mind sending..." (NOT: Would you mind to send)<br>
-                <strong>I would appreciate it if you could:</strong> "I would appreciate it if you could let me know..."</p>
-            </div>
-
-            <div class="special-case">
-                <h4>🇧🇷 Brazilian Learner Note: Structure after 'would like'</h4>
-                <p>✗ <em><s>I would like that you send me the report.</s></em></p>
-                <p>✓ <strong>I would like you to send me the report.</strong></p>
-                <p>In Portuguese, 'gostaria que você enviasse' uses 'que' (that). In English, 'would like' is followed directly by object + infinitive: 'would like [someone] to [do something]'.</p>
-            </div>
-
-            <div class="subsection">
-                <h3>Practice: Make it More Polite</h3>
-                <p>Transform these direct requests into more professional versions using the patterns above.</p>
-
-                <div class="planning-grid">
-                    <div class="planning-card">
-                        <h4>1. "Send me the files by Friday."</h4>
-                        <p>Make this polite for a client:</p>
-                        <textarea class="notes-input" placeholder="Could you possibly..."></textarea>
-                    </div>
-                    <div class="planning-card">
-                        <h4>2. "Reply to this email today."</h4>
-                        <p>Make this polite for a busy colleague:</p>
-                        <textarea class="notes-input" placeholder="I was wondering if..."></textarea>
-                    </div>
-                    <div class="planning-card">
-                        <h4>3. "Give me more details."</h4>
-                        <p>Make this polite for a new contact:</p>
-                        <textarea class="notes-input" placeholder="Would you mind..."></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <div class="practice-prompt">
-                <h4>💬 Compare</h4>
-                <p>Share your answers with your teacher. Are some versions more appropriate than others for the situation?</p>
-            </div>
-        </section>
-
-        <!-- Activity 6: Email Phrasal Verbs -->
-        <section class="section" id="activity6">
-            <div class="section-header">
-                <span class="section-number">Activity 5</span>
-                <h2>Email Phrasal Verbs</h2>
-            </div>
-            <p class="section-intro">These phrasal verbs appear frequently in professional emails. Match each phrasal verb to its meaning.</p>
-
-            <div class="drag-match-activity">
-                <div class="statements-container">
-                    <div class="statement-row" data-pair="1">
-                        <div class="statement-text">
-                            <strong>follow up (on)</strong><br>
-                            "I'm just following up on my previous email."
-                        </div>
-                        <div class="drop-zone" data-correct="A">
-                            <span class="placeholder-text">Drag meaning here</span>
-                        </div>
-                    </div>
-                    <div class="statement-row" data-pair="2">
-                        <div class="statement-text">
-                            <strong>get back to</strong><br>
-                            "I'll get back to you by Friday."
-                        </div>
-                        <div class="drop-zone" data-correct="B">
-                            <span class="placeholder-text">Drag meaning here</span>
-                        </div>
-                    </div>
-                    <div class="statement-row" data-pair="3">
-                        <div class="statement-text">
-                            <strong>look into</strong><br>
-                            "I'll look into this issue and let you know."
-                        </div>
-                        <div class="drop-zone" data-correct="C">
-                            <span class="placeholder-text">Drag meaning here</span>
-                        </div>
-                    </div>
-                    <div class="statement-row" data-pair="4">
-                        <div class="statement-text">
-                            <strong>set up</strong><br>
-                            "Could we set up a meeting for next week?"
-                        </div>
-                        <div class="drop-zone" data-correct="D">
-                            <span class="placeholder-text">Drag meaning here</span>
-                        </div>
-                    </div>
-                    <div class="statement-row" data-pair="5">
-                        <div class="statement-text">
-                            <strong>put together</strong><br>
-                            "I've put together a summary of the key points."
-                        </div>
-                        <div class="drop-zone" data-correct="E">
-                            <span class="placeholder-text">Drag meaning here</span>
-                        </div>
-                    </div>
-                    <div class="statement-row" data-pair="6">
-                        <div class="statement-text">
-                            <strong>fill (someone) in</strong><br>
-                            "Can you fill me in on what I missed?"
-                        </div>
-                        <div class="drop-zone" data-correct="F">
-                            <span class="placeholder-text">Drag meaning here</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="draggables-bank" id="meaningsBank">
-                    <div class="draggable-response" draggable="true" data-answer="A">Contact again about something discussed before</div>
-                    <div class="draggable-response" draggable="true" data-answer="B">Reply or respond to someone</div>
-                    <div class="draggable-response" draggable="true" data-answer="C">Investigate or research something</div>
-                    <div class="draggable-response" draggable="true" data-answer="D">Arrange or organise (a meeting, call, etc.)</div>
-                    <div class="draggable-response" draggable="true" data-answer="E">Create or compile (a document, report, etc.)</div>
-                    <div class="draggable-response" draggable="true" data-answer="F">Give someone information they don't have</div>
-                </div>
-            </div>
-            <button class="check-btn" onclick="checkDragMatch()">Check Answers</button>
-            <button class="reset-btn" onclick="resetDragMatch()">Reset</button>
-            <div class="feedback" id="dragMatchFeedback"></div>
-
-            <div class="tip-box">
-                <h4>💡 More Useful Email Phrases</h4>
-                <p><strong>keep (someone) posted</strong> – "I'll keep you posted on any updates."<br>
-                <strong>run (something) by (someone)</strong> – "I wanted to run this idea by you."<br>
-                <strong>hold off on</strong> – "Let's hold off on sending the proposal until Friday."</p>
-            </div>
-
-            <div class="reflection-card" style="margin-top: 1.5rem;">
-                <h4>📋 Notes</h4>
-                <p>Which phrasal verbs do you already use? Which ones are new?</p>
-                <textarea class="notes-input" placeholder="Your notes..."></textarea>
-            </div>
-        </section>
-
-        <!-- Activity 7: Model Email Analysis -->
-        <section class="section" id="activity7">
-            <div class="section-header">
-                <span class="section-number">Activity 6</span>
-                <h2>Analysing a Model Email</h2>
-            </div>
-            <p class="section-intro">Read this follow-up email and identify the language features we've studied. Discuss with your teacher.</p>
-
-            <div class="scenario-box">
-                <div class="scenario-icon-large">📧</div>
-                <h3>Model Email: Following up on a proposal</h3>
-                <div class="email-model">
-                    <p><strong>Subject:</strong> Following up on our proposal</p>
-                    <p><strong>Dear Ms Carvalho,</strong></p>
-                    <p>I hope you're doing well.</p>
-                    <p><strong>I'm just following up</strong> on the proposal I sent over last week regarding the marketing campaign. <strong>I was wondering if</strong> you've had a chance to look it over?</p>
-                    <p>If you have any questions or <strong>would like</strong> me to clarify anything, I'd be happy to <strong>set up</strong> a call at your convenience. <strong>Could you possibly</strong> let me know your thoughts by the end of the week?</p>
-                    <p>We're keen to move forward and <strong>would appreciate</strong> your feedback.</p>
-                    <p><strong>Many thanks,</strong><br>Sarah</p>
-                </div>
-            </div>
-
-            <div class="language-box">
-                <h4>Discussion Questions</h4>
-                <ul>
-                    <li>What level of formality is this email? What tells you this?</li>
-                    <li>Find examples of: polite requests, phrasal verbs, connectors.</li>
-                    <li>Is the email clear about what action the writer wants? How?</li>
-                    <li>How would you make this email more formal? More informal?</li>
-                </ul>
-            </div>
-
-            <div class="reflection-card" style="margin-top: 1.5rem;">
-                <h4>📋 Notes</h4>
-                <p>What language features from this email do you want to use in your own writing?</p>
-                <textarea class="notes-input" placeholder="Your notes..."></textarea>
-            </div>
-        </section>
-
-        <!-- Activity 8: Chat Message Comparison -->
-        <section class="section" id="activity8">
-            <div class="section-header">
-                <span class="section-number">Activity 7</span>
-                <h2>Email vs Chat: Side by Side</h2>
-            </div>
-            <p class="section-intro">Compare how the same information might be communicated in an email vs. a company chat message.</p>
-
-            <div class="two-column-grid">
-                <div class="language-box">
-                    <h4>📧 Email Version</h4>
-                    <p><em>Hi Tom,</em></p>
-                    <p><em>I hope you're well. I'm writing to let you know that the client meeting has been moved to 3pm tomorrow. Please let me know if that works for you.</em></p>
-                    <p><em>Thanks,<br>Ana</em></p>
-                </div>
-                <div class="language-box">
-                    <h4>💬 Chat Version</h4>
-                    <p><em>Hey! Quick heads up - client meeting moved to 3pm tomorrow. You ok with that?</em></p>
-                </div>
-            </div>
-
-            <div class="discussion-note">
-                <h4>🗣️ Key Differences</h4>
-                <p><strong>Email:</strong> Greeting + sign-off, complete sentences, "I'm writing to", polite "please"<br>
-                <strong>Chat:</strong> No greeting/sign-off needed, fragments OK, casual phrases ("heads up"), direct questions</p>
-            </div>
-
-            <div class="tip-box">
-                <h4>💡 Useful Chat Phrases</h4>
                 <p>
-                    <strong>Quick question –</strong> (before asking something)<br>
-                    <strong>Heads up:</strong> (to give a quick update or warning)<br>
-                    <strong>FYI</strong> (for your information – just so you know)<br>
-                    <strong>Let me know!</strong> (asking for a response)<br>
-                    <strong>Thanks!</strong> or <strong>👍</strong> (acknowledging something)
+                    <strong>Could you...?</strong> – Simple polite request<br>
+                    <strong>Would it be possible to...?</strong> – More formal<br>
+                    <strong>I was wondering if you could...</strong> – Very polite, good for sensitive requests<br>
+                    <strong>I would appreciate it if you could...</strong> – Polite with a deadline<br>
+                    <strong>Would you mind + -ing?</strong> – Polite for small favours (NOT: Would you mind to...)
                 </p>
             </div>
 
             <div class="reflection-card" style="margin-top: 1.5rem;">
                 <h4>📋 Notes</h4>
-                <p>What chat phrases do you use at work? Are there any you'd like to start using?</p>
+                <p>Which patterns are new to you? Which do you want to start using?</p>
+                <textarea class="notes-input" placeholder="Your notes..."></textarea>
+            </div>
+
+            <div class="subsection">
+                <h3>Practice: Build Polite Requests</h3>
+                <p>Put the words in the correct order to make polite requests.</p>
+
+                <div class="sentence-order-activity" id="sentenceOrder1">
+                    <div class="sentence-exercise" data-answer="Could you send me the updated figures?">
+                        <p class="sentence-prompt">1. (asking a colleague for data)</p>
+                        <div class="sentence-workspace"></div>
+                        <div class="word-bank">
+                            <div class="draggable-word" draggable="true">send</div>
+                            <div class="draggable-word" draggable="true">Could</div>
+                            <div class="draggable-word" draggable="true">figures?</div>
+                            <div class="draggable-word" draggable="true">me</div>
+                            <div class="draggable-word" draggable="true">the</div>
+                            <div class="draggable-word" draggable="true">updated</div>
+                            <div class="draggable-word" draggable="true">you</div>
+                        </div>
+                    </div>
+
+                    <div class="sentence-exercise" data-answer="I was wondering if you could confirm the delivery date.">
+                        <p class="sentence-prompt">2. (asking a supplier to confirm something)</p>
+                        <div class="sentence-workspace"></div>
+                        <div class="word-bank">
+                            <div class="draggable-word" draggable="true">if</div>
+                            <div class="draggable-word" draggable="true">wondering</div>
+                            <div class="draggable-word" draggable="true">the</div>
+                            <div class="draggable-word" draggable="true">I</div>
+                            <div class="draggable-word" draggable="true">date.</div>
+                            <div class="draggable-word" draggable="true">could</div>
+                            <div class="draggable-word" draggable="true">was</div>
+                            <div class="draggable-word" draggable="true">confirm</div>
+                            <div class="draggable-word" draggable="true">you</div>
+                            <div class="draggable-word" draggable="true">delivery</div>
+                        </div>
+                    </div>
+
+                    <div class="sentence-exercise" data-answer="Would it be possible to arrange a call this week?">
+                        <p class="sentence-prompt">3. (suggesting a meeting with a client)</p>
+                        <div class="sentence-workspace"></div>
+                        <div class="word-bank">
+                            <div class="draggable-word" draggable="true">a</div>
+                            <div class="draggable-word" draggable="true">Would</div>
+                            <div class="draggable-word" draggable="true">this</div>
+                            <div class="draggable-word" draggable="true">call</div>
+                            <div class="draggable-word" draggable="true">be</div>
+                            <div class="draggable-word" draggable="true">arrange</div>
+                            <div class="draggable-word" draggable="true">it</div>
+                            <div class="draggable-word" draggable="true">to</div>
+                            <div class="draggable-word" draggable="true">possible</div>
+                            <div class="draggable-word" draggable="true">week?</div>
+                        </div>
+                    </div>
+
+                    <div class="sentence-exercise" data-answer="I would appreciate it if you could reply by Friday.">
+                        <p class="sentence-prompt">4. (asking for a response with a deadline)</p>
+                        <div class="sentence-workspace"></div>
+                        <div class="word-bank">
+                            <div class="draggable-word" draggable="true">it</div>
+                            <div class="draggable-word" draggable="true">appreciate</div>
+                            <div class="draggable-word" draggable="true">could</div>
+                            <div class="draggable-word" draggable="true">by</div>
+                            <div class="draggable-word" draggable="true">if</div>
+                            <div class="draggable-word" draggable="true">I</div>
+                            <div class="draggable-word" draggable="true">Friday.</div>
+                            <div class="draggable-word" draggable="true">would</div>
+                            <div class="draggable-word" draggable="true">reply</div>
+                            <div class="draggable-word" draggable="true">you</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkSentenceOrder()">Check Answers</button>
+                <button class="reset-btn" onclick="resetSentenceOrder()">Reset</button>
+                <div class="feedback" id="sentenceFeedback"></div>
+            </div>
+        </section>
+
+        <!-- Activity 2: Openings & Closings - Compact Matching -->
+        <section class="section" id="activity2">
+            <div class="section-header">
+                <span class="section-number">Activity 2/5</span>
+                <h2>Openings & Closings by Formality</h2>
+            </div>
+            <p class="section-intro">Match each phrase to its level of formality. Drag the numbers to the correct category, or tap a number then tap where it goes.</p>
+
+            <div class="compact-matching" id="compactMatching1">
+                <!-- Column 1: Statements (Phrases) -->
+                <div class="cm-statements">
+                    <div class="cm-statement" data-match="1">
+                        <span class="cm-statement-num">1</span>
+                        <p>Dear Mr/Ms [Surname],</p>
+                    </div>
+                    <div class="cm-statement" data-match="2">
+                        <span class="cm-statement-num">2</span>
+                        <p>Hi [Name],</p>
+                    </div>
+                    <div class="cm-statement" data-match="3">
+                        <span class="cm-statement-num">3</span>
+                        <p>I hope this email finds you well.</p>
+                    </div>
+                    <div class="cm-statement" data-match="4">
+                        <span class="cm-statement-num">4</span>
+                        <p>Hope you had a good weekend!</p>
+                    </div>
+                    <div class="cm-statement" data-match="5">
+                        <span class="cm-statement-num">5</span>
+                        <p>Kind regards,</p>
+                    </div>
+                    <div class="cm-statement" data-match="6">
+                        <span class="cm-statement-num">6</span>
+                        <p>Thanks!</p>
+                    </div>
+                    <div class="cm-statement" data-match="7">
+                        <span class="cm-statement-num">7</span>
+                        <p>Best regards,</p>
+                    </div>
+                    <div class="cm-statement" data-match="8">
+                        <span class="cm-statement-num">8</span>
+                        <p>I hope you're doing well.</p>
+                    </div>
+                </div>
+
+                <!-- Column 2: Markers -->
+                <div class="cm-markers" id="markerBank1">
+                    <div class="cm-marker-slot" data-marker="1">
+                        <div class="cm-marker" data-match="1" draggable="true">1</div>
+                    </div>
+                    <div class="cm-marker-slot" data-marker="2">
+                        <div class="cm-marker" data-match="2" draggable="true">2</div>
+                    </div>
+                    <div class="cm-marker-slot" data-marker="3">
+                        <div class="cm-marker" data-match="3" draggable="true">3</div>
+                    </div>
+                    <div class="cm-marker-slot" data-marker="4">
+                        <div class="cm-marker" data-match="4" draggable="true">4</div>
+                    </div>
+                    <div class="cm-marker-slot" data-marker="5">
+                        <div class="cm-marker" data-match="5" draggable="true">5</div>
+                    </div>
+                    <div class="cm-marker-slot" data-marker="6">
+                        <div class="cm-marker" data-match="6" draggable="true">6</div>
+                    </div>
+                    <div class="cm-marker-slot" data-marker="7">
+                        <div class="cm-marker" data-match="7" draggable="true">7</div>
+                    </div>
+                    <div class="cm-marker-slot" data-marker="8">
+                        <div class="cm-marker" data-match="8" draggable="true">8</div>
+                    </div>
+                </div>
+
+                <!-- Column 3: Answers (Categories) -->
+                <div class="cm-answers">
+                    <div class="cm-answer" data-match="1">
+                        <div class="cm-answer-slot"></div>
+                        <p>👔 <strong>Formal</strong> – opening</p>
+                    </div>
+                    <div class="cm-answer" data-match="3">
+                        <div class="cm-answer-slot"></div>
+                        <p>👔 <strong>Formal</strong> – first line</p>
+                    </div>
+                    <div class="cm-answer" data-match="5">
+                        <div class="cm-answer-slot"></div>
+                        <p>👔 <strong>Formal</strong> – closing</p>
+                    </div>
+                    <div class="cm-answer" data-match="8">
+                        <div class="cm-answer-slot"></div>
+                        <p>🤝 <strong>Neutral</strong> – first line</p>
+                    </div>
+                    <div class="cm-answer" data-match="7">
+                        <div class="cm-answer-slot"></div>
+                        <p>🤝 <strong>Neutral</strong> – closing</p>
+                    </div>
+                    <div class="cm-answer" data-match="2">
+                        <div class="cm-answer-slot"></div>
+                        <p>😊 <strong>Informal</strong> – opening</p>
+                    </div>
+                    <div class="cm-answer" data-match="4">
+                        <div class="cm-answer-slot"></div>
+                        <p>😊 <strong>Informal</strong> – first line</p>
+                    </div>
+                    <div class="cm-answer" data-match="6">
+                        <div class="cm-answer-slot"></div>
+                        <p>😊 <strong>Informal</strong> – closing</p>
+                    </div>
+                </div>
+            </div>
+            <button class="check-btn" onclick="checkCompactMatching('compactMatching1')">Check Answers</button>
+            <button class="reset-btn" onclick="resetCompactMatching('compactMatching1')">Reset</button>
+            <div class="feedback" id="compactMatching1Feedback"></div>
+
+            <div class="tip-box">
+                <h4>💡 Tip: Mirror the Other Person</h4>
+                <p>A good rule is to match the formality of the person you're replying to. If they use "Hi" and your first name, you can do the same. If they start with "Dear Mr...", stay formal until they become more casual.</p>
+            </div>
+
+            <div class="reflection-card" style="margin-top: 1.5rem;">
+                <h4>📋 Notes</h4>
+                <p>What level of formality is most common in your workplace?</p>
                 <textarea class="notes-input" placeholder="Your notes..."></textarea>
             </div>
         </section>
 
-        <!-- Activity 9: Writing Practice -->
-        <section class="section" id="activity9">
+        <!-- Activity 3: Transition Phrases - Compact Matching -->
+        <section class="section" id="activity3">
             <div class="section-header">
-                <span class="section-number">Activity 8</span>
-                <h2>Writing Practice</h2>
+                <span class="section-number">Activity 3/5</span>
+                <h2>Transition Phrases for Email Structure</h2>
             </div>
-            <p class="section-intro">Choose one of these scenarios and write an appropriate email. Use the language we've studied today.</p>
+            <p class="section-intro">Transition phrases help guide your reader through your email. Match each phrase to its function.</p>
 
-            <div class="scenario-cards">
-                <div class="scenario-card" onclick="selectScenario(this)">
-                    <div class="scenario-icon">🔄</div>
-                    <h4>Scenario 1: Following Up</h4>
-                    <p>You sent a project update to a client 5 days ago but haven't heard back. Write a polite follow-up.</p>
-                    <div class="scenario-goals">
-                        <span>Include:</span> Greeting, reason for writing, polite request, closing
+            <div class="compact-matching" id="compactMatching2">
+                <!-- Column 1: Statements (Phrases) -->
+                <div class="cm-statements">
+                    <div class="cm-statement" data-match="1">
+                        <span class="cm-statement-num">1</span>
+                        <p>I'm writing to...</p>
+                    </div>
+                    <div class="cm-statement" data-match="2">
+                        <span class="cm-statement-num">2</span>
+                        <p>Following our conversation,...</p>
+                    </div>
+                    <div class="cm-statement" data-match="3">
+                        <span class="cm-statement-num">3</span>
+                        <p>In addition,...</p>
+                    </div>
+                    <div class="cm-statement" data-match="4">
+                        <span class="cm-statement-num">4</span>
+                        <p>However,...</p>
+                    </div>
+                    <div class="cm-statement" data-match="5">
+                        <span class="cm-statement-num">5</span>
+                        <p>Therefore,...</p>
+                    </div>
+                    <div class="cm-statement" data-match="6">
+                        <span class="cm-statement-num">6</span>
+                        <p>Please find attached...</p>
                     </div>
                 </div>
 
-                <div class="scenario-card" onclick="selectScenario(this)">
-                    <div class="scenario-icon">📅</div>
-                    <h4>Scenario 2: Rescheduling</h4>
-                    <p>You need to reschedule a meeting with your manager. Explain why and suggest new times.</p>
-                    <div class="scenario-goals">
-                        <span>Include:</span> Reason (connector), apology, alternatives, polite closing
+                <!-- Column 2: Markers -->
+                <div class="cm-markers" id="markerBank2">
+                    <div class="cm-marker-slot" data-marker="1">
+                        <div class="cm-marker" data-match="1" draggable="true">1</div>
+                    </div>
+                    <div class="cm-marker-slot" data-marker="2">
+                        <div class="cm-marker" data-match="2" draggable="true">2</div>
+                    </div>
+                    <div class="cm-marker-slot" data-marker="3">
+                        <div class="cm-marker" data-match="3" draggable="true">3</div>
+                    </div>
+                    <div class="cm-marker-slot" data-marker="4">
+                        <div class="cm-marker" data-match="4" draggable="true">4</div>
+                    </div>
+                    <div class="cm-marker-slot" data-marker="5">
+                        <div class="cm-marker" data-match="5" draggable="true">5</div>
+                    </div>
+                    <div class="cm-marker-slot" data-marker="6">
+                        <div class="cm-marker" data-match="6" draggable="true">6</div>
                     </div>
                 </div>
 
-                <div class="scenario-card" onclick="selectScenario(this)">
-                    <div class="scenario-icon">❓</div>
-                    <h4>Scenario 3: Requesting Information</h4>
-                    <p>You need details about a new project from a colleague in another department.</p>
-                    <div class="scenario-goals">
-                        <span>Include:</span> Purpose, specific questions, deadline, offer to help
+                <!-- Column 3: Answers (Functions - shuffled) -->
+                <div class="cm-answers">
+                    <div class="cm-answer" data-match="4">
+                        <div class="cm-answer-slot"></div>
+                        <p>Contrasting or introducing a different point</p>
+                    </div>
+                    <div class="cm-answer" data-match="1">
+                        <div class="cm-answer-slot"></div>
+                        <p>Stating your purpose</p>
+                    </div>
+                    <div class="cm-answer" data-match="6">
+                        <div class="cm-answer-slot"></div>
+                        <p>Mentioning attachments</p>
+                    </div>
+                    <div class="cm-answer" data-match="3">
+                        <div class="cm-answer-slot"></div>
+                        <p>Adding more information</p>
+                    </div>
+                    <div class="cm-answer" data-match="2">
+                        <div class="cm-answer-slot"></div>
+                        <p>Referring to a previous discussion</p>
+                    </div>
+                    <div class="cm-answer" data-match="5">
+                        <div class="cm-answer-slot"></div>
+                        <p>Showing a result or consequence</p>
+                    </div>
+                </div>
+            </div>
+            <button class="check-btn" onclick="checkCompactMatching('compactMatching2')">Check Answers</button>
+            <button class="reset-btn" onclick="resetCompactMatching('compactMatching2')">Reset</button>
+            <div class="feedback" id="compactMatching2Feedback"></div>
+
+            <div class="tip-box">
+                <h4>💡 More Useful Transition Phrases</h4>
+                <p>
+                    <strong>Stating purpose:</strong> I wanted to... / I'm getting in touch about...<br>
+                    <strong>Adding info:</strong> Furthermore,... / I should also mention that...<br>
+                    <strong>Contrasting:</strong> That said,... / On the other hand,...<br>
+                    <strong>Results:</strong> As a result,... / This means that...
+                </p>
+            </div>
+
+            <div class="reflection-card" style="margin-top: 1.5rem;">
+                <h4>📋 Notes</h4>
+                <p>Which transition phrases do you already use? Which new ones would be useful?</p>
+                <textarea class="notes-input" placeholder="Your notes..."></textarea>
+            </div>
+        </section>
+
+        <!-- Activity 4: Email Phrasal Verbs - Flip Cards -->
+        <section class="section" id="activity4">
+            <div class="section-header">
+                <span class="section-number">Activity 4/5</span>
+                <h2>Common Email Phrasal Verbs</h2>
+            </div>
+            <p class="section-intro">These phrasal verbs appear frequently in professional emails. Click each card to see the meaning and an example.</p>
+
+            <div class="phrase-cards">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="phrase-label">follow up (on)</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <p><strong>= contact again about something</strong><br><em>"I'm just following up on my previous email."</em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="phrase-label">get back to</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <p><strong>= reply to someone later</strong><br><em>"I'll get back to you by Friday."</em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="phrase-label">look into</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <p><strong>= investigate or examine</strong><br><em>"I'll look into this and let you know."</em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="phrase-label">set up</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <p><strong>= arrange or organise</strong><br><em>"Could we set up a call for next week?"</em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="phrase-label">put together</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <p><strong>= create or compile</strong><br><em>"I've put together a summary for you."</em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="phrase-label">fill (someone) in</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <p><strong>= give someone information they missed</strong><br><em>"Can you fill me in on what was decided?"</em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="phrase-label">keep (someone) posted</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <p><strong>= continue to give updates</strong><br><em>"I'll keep you posted on any changes."</em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="phrase-label">run (something) by</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <p><strong>= check with someone before deciding</strong><br><em>"I wanted to run this idea by you first."</em></p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="planning-grid">
-                <div class="planning-card" style="grid-column: 1 / -1;">
-                    <h4>✍️ Your Email</h4>
-                    <p>Write your email here. Remember to include an appropriate opening, clear structure, and professional closing.</p>
-                    <textarea class="notes-input" style="min-height: 200px;" placeholder="Subject: &#10;&#10;Dear / Hi [Name],&#10;&#10;[Your message]&#10;&#10;[Sign off],&#10;[Your name]"></textarea>
+            <div class="reflection-card" style="margin-top: 1.5rem;">
+                <h4>📋 Notes</h4>
+                <p>Which phrasal verbs do you already use? Which ones are new to you?</p>
+                <textarea class="notes-input" placeholder="Your notes..."></textarea>
+            </div>
+        </section>
+
+        <!-- Activity 5: Email vs Chat Phrases - Dropdown -->
+        <section class="section" id="activity5">
+            <div class="section-header">
+                <span class="section-number">Activity 5/5</span>
+                <h2>Email vs Chat: Different Phrases</h2>
+            </div>
+            <p class="section-intro">The same message often needs different language depending on whether you're writing an email or a chat message. Complete each pair with the correct phrase.</p>
+
+            <div class="dropdown-activity" id="dropdownActivity1">
+                <div class="dropdown-sentence">
+                    <p><strong>Giving a quick update:</strong></p>
+                    <p>
+                        📧 Email: "
+                        <select class="gap-dropdown" data-answer="I wanted to let you know that">
+                            <option value="">Select...</option>
+                            <option value="Heads up">Heads up</option>
+                            <option value="I wanted to let you know that">I wanted to let you know that</option>
+                            <option value="FYI">FYI</option>
+                        </select>
+                        the meeting has been moved to 3pm."
+                    </p>
+                    <p>
+                        💬 Chat: "
+                        <select class="gap-dropdown" data-answer="Heads up">
+                            <option value="">Select...</option>
+                            <option value="Heads up">Heads up</option>
+                            <option value="I wanted to let you know that">I wanted to let you know that</option>
+                            <option value="I am writing to inform you that">I am writing to inform you that</option>
+                        </select>
+                        – meeting moved to 3pm"
+                    </p>
+                </div>
+
+                <div class="dropdown-sentence">
+                    <p><strong>Asking for information:</strong></p>
+                    <p>
+                        📧 Email: "
+                        <select class="gap-dropdown" data-answer="I was wondering if you could">
+                            <option value="">Select...</option>
+                            <option value="Can you">Can you</option>
+                            <option value="I was wondering if you could">I was wondering if you could</option>
+                            <option value="Quick question">Quick question</option>
+                        </select>
+                        send me the latest sales figures."
+                    </p>
+                    <p>
+                        💬 Chat: "
+                        <select class="gap-dropdown" data-answer="Quick question">
+                            <option value="">Select...</option>
+                            <option value="Quick question">Quick question</option>
+                            <option value="I would appreciate it if you could">I would appreciate it if you could</option>
+                            <option value="I was wondering if you could">I was wondering if you could</option>
+                        </select>
+                        – do you have the latest sales figures?"
+                    </p>
+                </div>
+
+                <div class="dropdown-sentence">
+                    <p><strong>Saying you'll reply later:</strong></p>
+                    <p>
+                        📧 Email: "
+                        <select class="gap-dropdown" data-answer="I'll get back to you">
+                            <option value="">Select...</option>
+                            <option value="Will check and let you know">Will check and let you know</option>
+                            <option value="I'll get back to you">I'll get back to you</option>
+                            <option value="Gimme a sec">Gimme a sec</option>
+                        </select>
+                        with more details by end of day."
+                    </p>
+                    <p>
+                        💬 Chat: "
+                        <select class="gap-dropdown" data-answer="Will check and let you know">
+                            <option value="">Select...</option>
+                            <option value="Will check and let you know">Will check and let you know</option>
+                            <option value="I will respond to you at my earliest convenience">I will respond to you at my earliest convenience</option>
+                            <option value="I'll get back to you with more details">I'll get back to you with more details</option>
+                        </select>
+                        👍"
+                    </p>
+                </div>
+
+                <div class="dropdown-sentence">
+                    <p><strong>Thanking someone:</strong></p>
+                    <p>
+                        📧 Email: "
+                        <select class="gap-dropdown" data-answer="Thank you for your help with this">
+                            <option value="">Select...</option>
+                            <option value="Thanks!">Thanks!</option>
+                            <option value="Thank you for your help with this">Thank you for your help with this</option>
+                            <option value="Cheers">Cheers</option>
+                        </select>
+                        – I really appreciate it."
+                    </p>
+                    <p>
+                        💬 Chat: "
+                        <select class="gap-dropdown" data-answer="Thanks!">
+                            <option value="">Select...</option>
+                            <option value="Thanks!">Thanks!</option>
+                            <option value="I would like to express my gratitude">I would like to express my gratitude</option>
+                            <option value="Thank you for your assistance">Thank you for your assistance</option>
+                        </select>
+                        🙏"
+                    </p>
                 </div>
             </div>
+            <button class="check-btn" onclick="checkDropdownAnswers('dropdownActivity1')">Check Answers</button>
+            <button class="reset-btn" onclick="resetDropdownActivity('dropdownActivity1')">Reset</button>
+            <div class="feedback" id="dropdownActivity1Feedback"></div>
 
-            <div class="roleplay-tips">
-                <h4>✅ Checklist for Your Email</h4>
-                <ul>
-                    <li>Does the greeting match the situation and relationship?</li>
-                    <li>Is the purpose clear from the beginning?</li>
-                    <li>Did you use connectors to structure your ideas?</li>
-                    <li>Are your requests polite (using modals)?</li>
-                    <li>Is the closing appropriate for the formality level?</li>
-                </ul>
+            <div class="tip-box">
+                <h4>💡 More Useful Chat Phrases</h4>
+                <p>
+                    <strong>FYI</strong> – for your information (just so you know)<br>
+                    <strong>Let me know!</strong> – asking for a response<br>
+                    <strong>On it!</strong> – I'm working on this now<br>
+                    <strong>Makes sense</strong> – I understand / I agree
+                </p>
             </div>
 
-            <div class="practice-prompt">
-                <h4>💬 Review</h4>
-                <p>Share your email with your teacher for feedback. Would you change anything after discussing it?</p>
+            <div class="reflection-card" style="margin-top: 1.5rem;">
+                <h4>📋 Notes</h4>
+                <p>Which chat phrases do you use at work? Are there any you'd like to start using?</p>
+                <textarea class="notes-input" placeholder="Your notes..."></textarea>
             </div>
         </section>
 
@@ -701,19 +638,19 @@
             <div class="reflection-grid">
                 <div class="reflection-card">
                     <h4>🌟 Key Phrases to Remember</h4>
-                    <p>Which 3-4 phrases or structures from today will be most useful for you?</p>
-                    <textarea class="notes-input" placeholder="Write your favourite phrases here..."></textarea>
+                    <p>Which 3-4 phrases from today will be most useful for your emails?</p>
+                    <textarea class="notes-input" placeholder="Write your key phrases here..."></textarea>
                 </div>
                 <div class="reflection-card">
-                    <h4>📋 Real-World Practice</h4>
-                    <p>Think of an email you need to write this week. What language from today's lesson could you use?</p>
+                    <h4>📋 This Week's Practice</h4>
+                    <p>Think of an email you need to write soon. Which phrases from today could you use in it?</p>
                     <textarea class="notes-input" placeholder="Your notes..."></textarea>
                 </div>
             </div>
 
-            <div class="tip-box" style="margin-top: 1.5rem;">
+            <div class="discussion-note" style="margin-top: 1.5rem;">
                 <h4>📚 Between Lessons</h4>
-                <p>Before your next lesson, try to write one email using at least 3 new phrases from today. Notice how your colleagues write their emails too – what phrases do they use?</p>
+                <p>Before your next lesson, try to use at least 3 new phrases from today in your real emails. Notice how your colleagues write too – what phrases do they use?</p>
             </div>
         </section>
 
@@ -722,9 +659,9 @@
             <div class="completion-content">
                 <div class="completion-icon" id="completionIcon">📚</div>
                 <h3 id="completionTitle">You've reached the end of Lesson 4!</h3>
-                <p id="completionText">Well done on completing the activities. Your email writing skills are developing nicely!</p>
+                <p id="completionText">Well done on completing the activities. Your professional email vocabulary is growing!</p>
                 <div class="completion-buttons">
-                    <a href="lesson3.html" class="nav-btn">← Previous Lesson</a>
+                    <a href="review1.html" class="nav-btn">← Previous: Review 1</a>
                     <button class="complete-lesson-btn" id="completeBtn" onclick="toggleLessonComplete()">
                         <span class="btn-icon">✓</span>
                         <span class="btn-text">Mark Complete</span>
@@ -741,5 +678,6 @@
 
     <script src="js/activities.js"></script>
     <script src="js/drop-down.js"></script>
+    <script type="module" src="js/compact-matching.js"></script>
 </body>
 </html>
