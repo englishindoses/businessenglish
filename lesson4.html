@@ -10,6 +10,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Remove arrows from nested formality situations list */
+        .formality-situations {
+            margin-top: 0.5rem;
+            margin-left: 1rem;
+            font-size: 0.9rem;
+            list-style-type: disc;
+        }
+        .formality-situations li {
+            padding-left: 0;
+        }
+        .formality-situations li::before {
+            content: none;
+        }
+    </style>
 </head>
 <body data-lesson="4">
     <header class="header">
@@ -39,12 +54,12 @@
                         <li>What's the most difficult thing about writing professional emails in English?</li>
                         <li>Have you ever worried that an email sounded too direct or too casual? What happened?</li>
                         <li>What level of formality would you use in these situations?
-                            <ul style="margin-top: 0.5rem; margin-left: 1rem; font-size: 0.9rem;">
-                                <li>A progress report to your boss</li>
-                                <li>Asking a favour from a manager in another department</li>
-                                <li>Complaining to a company's customer service</li>
-                                <li>Confirming dinner plans with a friend</li>
-                                <li>Enquiring about a job at a company you admire</li>
+                            <ul class="formality-situations">
+                                <li>A progress report to your boss.</li>
+                                <li>Asking a favour from a manager in another department.</li>
+                                <li>Complaining to a company's customer service.</li>
+                                <li>Confirming dinner plans with a friend.</li>
+                                <li>Enquiring about a job at a company you admire.</li>
                             </ul>
                         </li>
                     </ul>
@@ -58,17 +73,30 @@
                 <span class="section-number">Activity 1/5</span>
                 <h2>Grammar Tip: Modal Verbs for Politeness</h2>
             </div>
-            <p class="section-intro">Modal verbs like <strong>could</strong>, <strong>would</strong>, and <strong>might</strong> soften requests and make them sound more professional. Compare these examples:</p>
+            <p class="section-intro">Modal verbs like <strong>could</strong>, <strong>would</strong>, and <strong>might</strong> soften requests and make them sound more professional.</p>
 
-            <div class="language-box">
-                <h4>Polite ✓ vs Informal/Direct ✗</h4>
-                <ul>
-                    <li>✗ <em>Send me the report.</em> → ✓ <strong>Could you send me the report?</strong></li>
-                    <li>✗ <em>I want a meeting tomorrow.</em> → ✓ <strong>Would it be possible to meet tomorrow?</strong></li>
-                    <li>✗ <em>Tell me your decision.</em> → ✓ <strong>I was wondering if you could let me know your decision.</strong></li>
-                    <li>✗ <em>Reply by Friday.</em> → ✓ <strong>I would appreciate it if you could reply by Friday.</strong></li>
-                    <li>✗ <em>Change the deadline.</em> → ✓ <strong>Would you mind changing the deadline?</strong></li>
-                </ul>
+            <div class="two-column-grid">
+                <div class="language-box">
+                    <h4>✗ Informal / Too Direct</h4>
+                    <ul>
+                        <li>Send me the report.</li>
+                        <li>I want a meeting tomorrow.</li>
+                        <li>Tell me your decision.</li>
+                        <li>Reply by Friday.</li>
+                        <li>Change the deadline.</li>
+                    </ul>
+                </div>
+
+                <div class="language-box">
+                    <h4>✓ Polite</h4>
+                    <ul>
+                        <li><strong>Could you</strong> send me the report?</li>
+                        <li><strong>Would it be possible to</strong> meet tomorrow?</li>
+                        <li><strong>I was wondering if you could</strong> let me know your decision.</li>
+                        <li><strong>I would appreciate it if you could</strong> reply by Friday.</li>
+                        <li><strong>Would you mind</strong> changing the deadline?</li>
+                    </ul>
+                </div>
             </div>
 
             <div class="tip-box">
@@ -164,118 +192,54 @@
             </div>
         </section>
 
-        <!-- Activity 2: Openings & Closings - Compact Matching -->
+        <!-- Activity 2: Openings & Closings - Sorting -->
         <section class="section" id="activity2">
             <div class="section-header">
                 <span class="section-number">Activity 2/5</span>
                 <h2>Openings & Closings by Formality</h2>
             </div>
-            <p class="section-intro">Match each phrase to its level of formality. Drag the numbers to the correct category, or tap a number then tap where it goes.</p>
+            <p class="section-intro">The phrases you use to start and end an email set the tone. Sort these expressions by their level of formality.</p>
 
-            <div class="compact-matching" id="compactMatching1">
-                <!-- Column 1: Statements (Phrases) -->
-                <div class="cm-statements">
-                    <div class="cm-statement" data-match="1">
-                        <span class="cm-statement-num">1</span>
-                        <p>Dear Mr/Ms [Surname],</p>
-                    </div>
-                    <div class="cm-statement" data-match="2">
-                        <span class="cm-statement-num">2</span>
-                        <p>Hi [Name],</p>
-                    </div>
-                    <div class="cm-statement" data-match="3">
-                        <span class="cm-statement-num">3</span>
-                        <p>I hope this email finds you well.</p>
-                    </div>
-                    <div class="cm-statement" data-match="4">
-                        <span class="cm-statement-num">4</span>
-                        <p>Hope you had a good weekend!</p>
-                    </div>
-                    <div class="cm-statement" data-match="5">
-                        <span class="cm-statement-num">5</span>
-                        <p>Kind regards,</p>
-                    </div>
-                    <div class="cm-statement" data-match="6">
-                        <span class="cm-statement-num">6</span>
-                        <p>Thanks!</p>
-                    </div>
-                    <div class="cm-statement" data-match="7">
-                        <span class="cm-statement-num">7</span>
-                        <p>Best regards,</p>
-                    </div>
-                    <div class="cm-statement" data-match="8">
-                        <span class="cm-statement-num">8</span>
-                        <p>I hope you're doing well.</p>
-                    </div>
+            <div class="sorting-activity">
+                <div class="phrase-bank" id="phraseBank1">
+                    <!-- Formal -->
+                    <div class="phrase" data-category="formal" draggable="true">Dear Mr/Ms [Surname],</div>
+                    <div class="phrase" data-category="formal" draggable="true">I hope this email finds you well.</div>
+                    <div class="phrase" data-category="formal" draggable="true">Kind regards,</div>
+                    <div class="phrase" data-category="formal" draggable="true">Yours sincerely,</div>
+                    <!-- Neutral -->
+                    <div class="phrase" data-category="neutral" draggable="true">Dear [First name],</div>
+                    <div class="phrase" data-category="neutral" draggable="true">I hope you're doing well.</div>
+                    <div class="phrase" data-category="neutral" draggable="true">Best regards,</div>
+                    <div class="phrase" data-category="neutral" draggable="true">Many thanks,</div>
+                    <!-- Informal -->
+                    <div class="phrase" data-category="informal" draggable="true">Hi [Name],</div>
+                    <div class="phrase" data-category="informal" draggable="true">Hope you had a good weekend!</div>
+                    <div class="phrase" data-category="informal" draggable="true">Thanks!</div>
+                    <div class="phrase" data-category="informal" draggable="true">Cheers,</div>
                 </div>
-
-                <!-- Column 2: Markers -->
-                <div class="cm-markers" id="markerBank1">
-                    <div class="cm-marker-slot" data-marker="1">
-                        <div class="cm-marker" data-match="1" draggable="true">1</div>
+                
+                <div class="sorting-zones" style="grid-template-columns: 1fr 1fr 1fr;">
+                    <div class="sort-zone" id="formalZone" data-category="formal">
+                        <h4>👔 Formal</h4>
+                        <p class="zone-hint">First contact, senior people, external clients</p>
+                        <div class="zone-content"></div>
                     </div>
-                    <div class="cm-marker-slot" data-marker="2">
-                        <div class="cm-marker" data-match="2" draggable="true">2</div>
+                    <div class="sort-zone" id="neutralZone" data-category="neutral">
+                        <h4>🤝 Neutral</h4>
+                        <p class="zone-hint">Regular contacts, colleagues in other teams</p>
+                        <div class="zone-content"></div>
                     </div>
-                    <div class="cm-marker-slot" data-marker="3">
-                        <div class="cm-marker" data-match="3" draggable="true">3</div>
-                    </div>
-                    <div class="cm-marker-slot" data-marker="4">
-                        <div class="cm-marker" data-match="4" draggable="true">4</div>
-                    </div>
-                    <div class="cm-marker-slot" data-marker="5">
-                        <div class="cm-marker" data-match="5" draggable="true">5</div>
-                    </div>
-                    <div class="cm-marker-slot" data-marker="6">
-                        <div class="cm-marker" data-match="6" draggable="true">6</div>
-                    </div>
-                    <div class="cm-marker-slot" data-marker="7">
-                        <div class="cm-marker" data-match="7" draggable="true">7</div>
-                    </div>
-                    <div class="cm-marker-slot" data-marker="8">
-                        <div class="cm-marker" data-match="8" draggable="true">8</div>
-                    </div>
-                </div>
-
-                <!-- Column 3: Answers (Categories) -->
-                <div class="cm-answers">
-                    <div class="cm-answer" data-match="1">
-                        <div class="cm-answer-slot"></div>
-                        <p>👔 <strong>Formal</strong> – opening</p>
-                    </div>
-                    <div class="cm-answer" data-match="3">
-                        <div class="cm-answer-slot"></div>
-                        <p>👔 <strong>Formal</strong> – first line</p>
-                    </div>
-                    <div class="cm-answer" data-match="5">
-                        <div class="cm-answer-slot"></div>
-                        <p>👔 <strong>Formal</strong> – closing</p>
-                    </div>
-                    <div class="cm-answer" data-match="8">
-                        <div class="cm-answer-slot"></div>
-                        <p>🤝 <strong>Neutral</strong> – first line</p>
-                    </div>
-                    <div class="cm-answer" data-match="7">
-                        <div class="cm-answer-slot"></div>
-                        <p>🤝 <strong>Neutral</strong> – closing</p>
-                    </div>
-                    <div class="cm-answer" data-match="2">
-                        <div class="cm-answer-slot"></div>
-                        <p>😊 <strong>Informal</strong> – opening</p>
-                    </div>
-                    <div class="cm-answer" data-match="4">
-                        <div class="cm-answer-slot"></div>
-                        <p>😊 <strong>Informal</strong> – first line</p>
-                    </div>
-                    <div class="cm-answer" data-match="6">
-                        <div class="cm-answer-slot"></div>
-                        <p>😊 <strong>Informal</strong> – closing</p>
+                    <div class="sort-zone" id="informalZone" data-category="informal">
+                        <h4>😊 Informal</h4>
+                        <p class="zone-hint">Close colleagues, people you email often</p>
+                        <div class="zone-content"></div>
                     </div>
                 </div>
             </div>
-            <button class="check-btn" onclick="checkCompactMatching('compactMatching1')">Check Answers</button>
-            <button class="reset-btn" onclick="resetCompactMatching('compactMatching1')">Reset</button>
-            <div class="feedback" id="compactMatching1Feedback"></div>
+            <button class="check-btn" onclick="checkSorting('phraseBank1')">Check Answers</button>
+            <button class="reset-btn" onclick="resetSorting('phraseBank1')">Reset</button>
+            <div class="feedback" id="sorting1Feedback"></div>
 
             <div class="tip-box">
                 <h4>💡 Tip: Mirror the Other Person</h4>
@@ -576,7 +540,7 @@
                         <select class="gap-dropdown" data-answer="Will check and let you know">
                             <option value="">Select...</option>
                             <option value="Will check and let you know">Will check and let you know</option>
-                            <option value="I will respond to you at my earliest convenience">I will respond to you at my earliest convenience</option>
+                            <option value="Let me check and get back to you">Let me check and get back to you</option>
                             <option value="I'll get back to you with more details">I'll get back to you with more details</option>
                         </select>
                         👍"
