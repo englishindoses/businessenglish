@@ -11,15 +11,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
     <style>
-        /* Remove arrows from nested formality situations list */
+        /* Formality situations list - no arrows, just bullets */
         .formality-situations {
+            list-style: disc;
             margin-top: 0.5rem;
-            margin-left: 1rem;
-            font-size: 0.9rem;
-            list-style-type: disc;
+            margin-left: 1.5rem;
+            padding-left: 0;
         }
         .formality-situations li {
-            padding-left: 0;
+            padding-left: 0.25rem;
+            font-size: 0.95rem;
         }
         .formality-situations li::before {
             content: none;
@@ -68,46 +69,33 @@
         </section>
 
         <!-- Activity 1: Grammar Tip - Modal Verbs for Politeness -->
-        <section class="section" id="activity1">
+        <section class="section grammar-tip" id="activity1">
             <div class="section-header">
-                <span class="section-number">Activity 1/5</span>
-                <h2>Grammar Tip: Modal Verbs for Politeness</h2>
+                <span class="section-number">💡 Grammar Tip</span>
+                <h2>Modal Verbs for Politeness</h2>
             </div>
             <p class="section-intro">Modal verbs like <strong>could</strong>, <strong>would</strong>, and <strong>might</strong> soften requests and make them sound more professional.</p>
 
-            <div class="two-column-grid">
-                <div class="language-box">
-                    <h4>✗ Informal / Too Direct</h4>
-                    <ul>
-                        <li>Send me the report.</li>
-                        <li>I want a meeting tomorrow.</li>
-                        <li>Tell me your decision.</li>
-                        <li>Reply by Friday.</li>
-                        <li>Change the deadline.</li>
-                    </ul>
-                </div>
-
-                <div class="language-box">
-                    <h4>✓ Polite</h4>
-                    <ul>
-                        <li><strong>Could you</strong> send me the report?</li>
-                        <li><strong>Would it be possible to</strong> meet tomorrow?</li>
-                        <li><strong>I was wondering if you could</strong> let me know your decision.</li>
-                        <li><strong>I would appreciate it if you could</strong> reply by Friday.</li>
-                        <li><strong>Would you mind</strong> changing the deadline?</li>
-                    </ul>
-                </div>
+            <div class="language-box">
+                <h4>✗ Informal / Too Direct → ✓ Polite</h4>
+                <ul>
+                    <li>✗ <em>Send me the report.</em> → ✓ <strong>Could you send me the report?</strong></li>
+                    <li>✗ <em>I want a meeting tomorrow.</em> → ✓ <strong>Would it be possible to meet tomorrow?</strong></li>
+                    <li>✗ <em>Tell me your decision.</em> → ✓ <strong>I was wondering if you could let me know your decision.</strong></li>
+                    <li>✗ <em>Reply by Friday.</em> → ✓ <strong>I would appreciate it if you could reply by Friday.</strong></li>
+                    <li>✗ <em>Change the deadline.</em> → ✓ <strong>Would you mind changing the deadline?</strong></li>
+                </ul>
             </div>
 
-            <div class="tip-box">
-                <h4>💡 Key Patterns</h4>
-                <p>
-                    <strong>Could you...?</strong> – Simple polite request<br>
-                    <strong>Would it be possible to...?</strong> – More formal<br>
-                    <strong>I was wondering if you could...</strong> – Very polite, good for sensitive requests<br>
-                    <strong>I would appreciate it if you could...</strong> – Polite with a deadline<br>
-                    <strong>Would you mind + -ing?</strong> – Polite for small favours (NOT: Would you mind to...)
-                </p>
+            <div class="language-box" style="margin-top: 1rem;">
+                <h4>Key Patterns</h4>
+                <ul>
+                    <li><strong>Could you...?</strong> – Simple polite request</li>
+                    <li><strong>Would it be possible to...?</strong> – More formal</li>
+                    <li><strong>I was wondering if you could...</strong> – Very polite, good for sensitive requests</li>
+                    <li><strong>I would appreciate it if you could...</strong> – Polite with a deadline</li>
+                    <li><strong>Would you mind + -ing?</strong> – Polite for small favours (NOT: Would you mind to...)</li>
+                </ul>
             </div>
 
             <div class="reflection-card" style="margin-top: 1.5rem;">
@@ -192,10 +180,10 @@
             </div>
         </section>
 
-        <!-- Activity 2: Openings & Closings - Sorting -->
+        <!-- Activity 2: Openings & Closings - Sorting Activity -->
         <section class="section" id="activity2">
             <div class="section-header">
-                <span class="section-number">Activity 2/5</span>
+                <span class="section-number">Activity 1/4</span>
                 <h2>Openings & Closings by Formality</h2>
             </div>
             <p class="section-intro">The phrases you use to start and end an email set the tone. Sort these expressions by their level of formality.</p>
@@ -219,7 +207,7 @@
                     <div class="phrase" data-category="informal" draggable="true">Cheers,</div>
                 </div>
                 
-                <div class="sorting-zones" style="grid-template-columns: 1fr 1fr 1fr;">
+                <div class="sorting-zones three-zones">
                     <div class="sort-zone" id="formalZone" data-category="formal">
                         <h4>👔 Formal</h4>
                         <p class="zone-hint">First contact, senior people, external clients</p>
@@ -256,12 +244,12 @@
         <!-- Activity 3: Transition Phrases - Compact Matching -->
         <section class="section" id="activity3">
             <div class="section-header">
-                <span class="section-number">Activity 3/5</span>
+                <span class="section-number">Activity 2/4</span>
                 <h2>Transition Phrases for Email Structure</h2>
             </div>
             <p class="section-intro">Transition phrases help guide your reader through your email. Match each phrase to its function.</p>
 
-            <div class="compact-matching" id="compactMatching2">
+            <div class="compact-matching" id="compactMatching1">
                 <!-- Column 1: Statements (Phrases) -->
                 <div class="cm-statements">
                     <div class="cm-statement" data-match="1">
@@ -291,7 +279,7 @@
                 </div>
 
                 <!-- Column 2: Markers -->
-                <div class="cm-markers" id="markerBank2">
+                <div class="cm-markers" id="markerBank1">
                     <div class="cm-marker-slot" data-marker="1">
                         <div class="cm-marker" data-match="1" draggable="true">1</div>
                     </div>
@@ -340,9 +328,9 @@
                     </div>
                 </div>
             </div>
-            <button class="check-btn" onclick="checkCompactMatching('compactMatching2')">Check Answers</button>
-            <button class="reset-btn" onclick="resetCompactMatching('compactMatching2')">Reset</button>
-            <div class="feedback" id="compactMatching2Feedback"></div>
+            <button class="check-btn" onclick="checkCompactMatching('compactMatching1')">Check Answers</button>
+            <button class="reset-btn" onclick="resetCompactMatching('compactMatching1')">Reset</button>
+            <div class="feedback" id="compactMatching1Feedback"></div>
 
             <div class="tip-box">
                 <h4>💡 More Useful Transition Phrases</h4>
@@ -364,7 +352,7 @@
         <!-- Activity 4: Email Phrasal Verbs - Flip Cards -->
         <section class="section" id="activity4">
             <div class="section-header">
-                <span class="section-number">Activity 4/5</span>
+                <span class="section-number">Activity 3/4</span>
                 <h2>Common Email Phrasal Verbs</h2>
             </div>
             <p class="section-intro">These phrasal verbs appear frequently in professional emails. Click each card to see the meaning and an example.</p>
@@ -469,7 +457,7 @@
         <!-- Activity 5: Email vs Chat Phrases - Dropdown -->
         <section class="section" id="activity5">
             <div class="section-header">
-                <span class="section-number">Activity 5/5</span>
+                <span class="section-number">Activity 4/4</span>
                 <h2>Email vs Chat: Different Phrases</h2>
             </div>
             <p class="section-intro">The same message often needs different language depending on whether you're writing an email or a chat message. Complete each pair with the correct phrase.</p>
@@ -540,8 +528,8 @@
                         <select class="gap-dropdown" data-answer="Will check and let you know">
                             <option value="">Select...</option>
                             <option value="Will check and let you know">Will check and let you know</option>
-                            <option value="Let me check and get back to you">Let me check and get back to you</option>
-                            <option value="I'll get back to you with more details">I'll get back to you with more details</option>
+                            <option value="I'll look into this and provide you with the information">I'll look into this and provide you with the information</option>
+                            <option value="I'll get back to you with more details by end of day">I'll get back to you with more details by end of day</option>
                         </select>
                         👍"
                     </p>
