@@ -108,11 +108,10 @@
                 <h3>Practice: Build Polite Requests</h3>
                 <p>Put the words in the correct order to make polite requests.</p>
 
-                <div class="sentence-order-activity" id="sentenceOrder1">
-                    <div class="sentence-exercise" data-answer="Could you send me the updated figures?">
-                        <p class="sentence-prompt">1. (asking a colleague for data)</p>
-                        <div class="sentence-workspace"></div>
-                        <div class="word-bank">
+                <div class="sentence-ordering-activity" id="sentenceActivity">
+                    <div class="sentence-exercise" data-sentence="1">
+                        <div class="sentence-context">Asking a colleague for data:</div>
+                        <div class="word-bank" data-correct="Could you send me the updated figures?">
                             <div class="draggable-word" draggable="true">send</div>
                             <div class="draggable-word" draggable="true">Could</div>
                             <div class="draggable-word" draggable="true">figures?</div>
@@ -123,10 +122,9 @@
                         </div>
                     </div>
 
-                    <div class="sentence-exercise" data-answer="I was wondering if you could confirm the delivery date.">
-                        <p class="sentence-prompt">2. (asking a supplier to confirm something)</p>
-                        <div class="sentence-workspace"></div>
-                        <div class="word-bank">
+                    <div class="sentence-exercise" data-sentence="2">
+                        <div class="sentence-context">Asking a supplier to confirm something:</div>
+                        <div class="word-bank" data-correct="I was wondering if you could confirm the delivery date.">
                             <div class="draggable-word" draggable="true">if</div>
                             <div class="draggable-word" draggable="true">wondering</div>
                             <div class="draggable-word" draggable="true">the</div>
@@ -140,10 +138,9 @@
                         </div>
                     </div>
 
-                    <div class="sentence-exercise" data-answer="Would it be possible to arrange a call this week?">
-                        <p class="sentence-prompt">3. (suggesting a meeting with a client)</p>
-                        <div class="sentence-workspace"></div>
-                        <div class="word-bank">
+                    <div class="sentence-exercise" data-sentence="3">
+                        <div class="sentence-context">Suggesting a meeting with a client:</div>
+                        <div class="word-bank" data-correct="Would it be possible to arrange a call this week?">
                             <div class="draggable-word" draggable="true">a</div>
                             <div class="draggable-word" draggable="true">Would</div>
                             <div class="draggable-word" draggable="true">this</div>
@@ -157,10 +154,9 @@
                         </div>
                     </div>
 
-                    <div class="sentence-exercise" data-answer="I would appreciate it if you could reply by Friday.">
-                        <p class="sentence-prompt">4. (asking for a response with a deadline)</p>
-                        <div class="sentence-workspace"></div>
-                        <div class="word-bank">
+                    <div class="sentence-exercise" data-sentence="4">
+                        <div class="sentence-context">Asking for a response with a deadline:</div>
+                        <div class="word-bank" data-correct="I would appreciate it if you could reply by Friday.">
                             <div class="draggable-word" draggable="true">it</div>
                             <div class="draggable-word" draggable="true">appreciate</div>
                             <div class="draggable-word" draggable="true">could</div>
@@ -189,7 +185,7 @@
             <p class="section-intro">The phrases you use to start and end an email set the tone. Sort these expressions by their level of formality.</p>
 
             <div class="sorting-activity">
-                <div class="phrase-bank" id="phraseBank1">
+                <div class="phrase-bank" id="phraseBank">
                     <!-- Formal -->
                     <div class="phrase" data-category="formal" draggable="true">Dear Mr/Ms [Surname],</div>
                     <div class="phrase" data-category="formal" draggable="true">I hope this email finds you well.</div>
@@ -225,9 +221,9 @@
                     </div>
                 </div>
             </div>
-            <button class="check-btn" onclick="checkSorting('phraseBank1')">Check Answers</button>
-            <button class="reset-btn" onclick="resetSorting('phraseBank1')">Reset</button>
-            <div class="feedback" id="sorting1Feedback"></div>
+            <button class="check-btn" onclick="checkSorting()">Check Answers</button>
+            <button class="reset-btn" onclick="resetSorting()">Reset</button>
+            <div class="feedback" id="sortingFeedback"></div>
 
             <div class="tip-box">
                 <h4>💡 Tip: Mirror the Other Person</h4>
@@ -365,39 +361,6 @@
                         </div>
                         <div class="flip-card-back">
                             <p><strong>= contact again about something</strong><br><em>"I'm just following up on my previous email."</em></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <span class="phrase-label">get back to</span>
-                        </div>
-                        <div class="flip-card-back">
-                            <p><strong>= reply to someone later</strong><br><em>"I'll get back to you by Friday."</em></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <span class="phrase-label">look into</span>
-                        </div>
-                        <div class="flip-card-back">
-                            <p><strong>= investigate or examine</strong><br><em>"I'll look into this and let you know."</em></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <span class="phrase-label">set up</span>
-                        </div>
-                        <div class="flip-card-back">
-                            <p><strong>= arrange or organise</strong><br><em>"Could we set up a call for next week?"</em></p>
                         </div>
                     </div>
                 </div>
@@ -623,17 +586,19 @@
             </div>
         </section>
     </main>
- 
+
     <footer class="footer">
         <p>Business English Course © 2024</p>
     </footer>
- 
+
     <!-- Load activities.js as ES module -->
     <script type="module" src="js/activities.js"></script>
     <!-- Load drop-down.js for gap-fill activity -->
     <script type="module" src="js/drop-down.js"></script>
     <!-- Load compact-matching.js for matching activity -->
     <script type="module" src="js/compact-matching.js"></script>
+    <!-- Load sentence-ordering.js for word ordering activity -->
+    <script type="module" src="js/sentence-ordering.js"></script>
     
     <!-- Lesson completion functionality -->
     <script type="module">
