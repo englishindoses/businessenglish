@@ -1,0 +1,102 @@
+/* ===== Confidence Check Inline Selector ===== */
+
+.confidence-activity {
+    margin-bottom: 1.5rem;
+}
+
+.confidence-item {
+    background: var(--color-white);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 0.75rem;
+    transition: var(--transition);
+}
+
+.confidence-item:hover {
+    border-color: var(--color-primary-light);
+}
+
+.confidence-item .item-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.confidence-item .item-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary);
+    color: var(--color-white);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.confidence-item .item-text {
+    margin: 0;
+    flex: 1;
+    line-height: 1.6;
+}
+
+.confidence-options {
+    display: flex;
+    gap: 0.5rem;
+    padding-left: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.confidence-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.9rem;
+    border: 2px solid var(--color-border);
+    border-radius: 999px;
+    background: var(--color-white);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    transition: var(--transition);
+    user-select: none;
+}
+
+.confidence-option:hover {
+    border-color: var(--color-primary-light);
+    background: var(--color-primary-pale);
+}
+
+.confidence-option.selected {
+    border-color: var(--color-primary);
+    background: var(--color-primary-pale);
+    color: var(--color-primary);
+    font-weight: 500;
+}
+
+.confidence-option .option-emoji {
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .confidence-options {
+        padding-left: 0;
+    }
+
+    .confidence-item {
+        padding: 1rem;
+    }
+
+    .confidence-option {
+        padding: 0.4rem 0.7rem;
+        font-size: 0.85rem;
+    }
+}
