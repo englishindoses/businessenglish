@@ -47,7 +47,7 @@ export default {
     function refresh() {
       for (const { slot } of rows) {
         slot.classList.toggle('is-empty', !slot.querySelector('.mt-chip'));
-        slot.classList.remove('is-right', 'is-wrong');
+        slot.classList.remove('is-right', 'is-wrong', 'needs-answer');
       }
       if (onEditHandler) onEditHandler();
     }
@@ -131,6 +131,16 @@ export default {
       node,
       feedbackNodes,
       isAnswered: () => rows.every(({ slot }) => slot.querySelector('.mt-chip')),
+      blankCount: () => rows.filter(({ slot }) => !slot.querySelector('.mt-chip')).length,
+      highlightBlanks() {
+        let first = null;
+        for (const { slot } of rows) {
+          const empty = !slot.querySelector('.mt-chip');
+          slot.classList.toggle('needs-answer', empty);
+          if (empty && !first) first = slot;
+        }
+        first?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      },
       check() {
         return rows.map(({ item, slot }) => {
           const chip = slot.querySelector('.mt-chip');

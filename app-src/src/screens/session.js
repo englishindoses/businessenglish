@@ -8,6 +8,7 @@
 import { el, markup, announce } from '../lib/dom.js';
 import { navigate } from '../lib/router.js';
 import { renderScreen } from '../ui/shell.js';
+import { confirmDialog } from '../ui/dialog.js';
 import { getEngine } from '../engines/index.js';
 import {
   getTopic,
@@ -200,15 +201,48 @@ function renderRound() {
     q.feedback.replaceChildren(...parts);
   }
 
-  function check() {
-    if (!allAnswered()) {
-      announce('Answer every question in this round first.');
-      for (const q of questions) {
-        const answered =
-          engine.mode === 'per-round' ? true : q.question.isAnswered();
-        q.card.classList.toggle('needs-answer', !answered);
-      }
+  /** How many questions in this round are still blank. */
+  function blankCount() {
+    if (engine.mode === 'per-round') {
+      return questions.roundWidget.blankCount
+        ? questions.roundWidget.blankCount()
+        : Number(!questions.roundWidget.isAnswered());
+    }
+    return questions.filter((q) => !q.question.isAnswered()).length;
+  }
+
+  function highlightBlanks() {
+    if (engine.mode === 'per-round') {
+      questions.roundWidget.highlightBlanks?.();
       return;
+    }
+    let first = null;
+    for (const q of questions) {
+      const answered = engine.mode === 'per-round' ? true : q.question.isAnswered();
+      q.card.classList.toggle('needs-answer', !answered);
+      if (!answered && !first) first = q.card;
+    }
+    (first || questions[0]?.card)?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  }
+
+  async function check() {
+    const blanks = blankCount();
+
+    if (blanks > 0) {
+      const plural = blanks === 1 ? 'question is' : 'questions are';
+      const goAhead = await confirmDialog({
+        title: `${blanks} ${plural} still blank`,
+        message:
+          'You can go back and finish them, or check what you have — blank answers will be marked wrong.',
+        cancelLabel: 'Finish them',
+        confirmLabel: 'Check anyway',
+      });
+
+      if (!goAhead) {
+        highlightBlanks();
+        announce(`${blanks} ${plural} still blank.`);
+        return;
+      }
     }
     for (const q of questions) q.card.classList.remove('needs-answer');
 
