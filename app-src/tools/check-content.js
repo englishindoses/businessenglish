@@ -71,6 +71,53 @@ for (const item of wordorder) {
   if (!item.clue) flag(item.id, 'no clue');
 }
 
+// ---- clues must hint, not answer ----
+// A clue is shown only when the student got it wrong and is about to try again,
+// so it must point at where to look without containing the answer itself.
+const MAX_CLUE = 70;
+// Word-level comparison rather than a regex, so punctuation in a phrase
+// ("must be", "to introduce") needs no escaping.
+const wordsOf = (text) => (text.toLowerCase().match(/[a-z']+/g) || []);
+const hasWord = (text, phrase) => {
+  const hay = wordsOf(text);
+  const needle = wordsOf(phrase);
+  if (!needle.length) return false;
+  return hay.some((_, i) => needle.every((w, j) => hay[i + j] === w));
+};
+
+for (const [type, list] of Object.entries(topic.items)) {
+  for (const item of list) {
+    const clue = item.clue || '';
+    if (clue.length > MAX_CLUE) flag(item.id, `clue is ${clue.length} chars, aim for ${MAX_CLUE}`);
+
+    if (type === 'gapfill') {
+      for (const gap of Object.values(item.gaps))
+        if (hasWord(clue, gap.answer)) flag(item.id, `clue contains the answer "${gap.answer}"`);
+    }
+
+    if (type === 'rightwrong' && item.fix) {
+      // the words the correction emphasises are the giveaway
+      for (const [, corrected] of item.fix.matchAll(/\*\*(.+?)\*\*/g))
+        if (hasWord(clue, corrected)) flag(item.id, `clue contains the correction "${corrected}"`);
+    }
+
+    if (type === 'matching') {
+      const meaning = item.right.toLowerCase().match(/[a-z]{4,}/g) || [];
+      const leaked = meaning.filter((w) => hasWord(clue, w));
+      if (leaked.length >= 2) flag(item.id, `clue echoes the meaning (${leaked.join(', ')})`);
+    }
+
+    if (type === 'wordorder') {
+      const words = item.answer.replace(/[.?!,]/g, '').split(' ');
+      for (let i = 0; i + 2 < words.length; i++) {
+        const run = words.slice(i, i + 3).join(' ');
+        if (clue.toLowerCase().includes(run.toLowerCase()))
+          flag(item.id, `clue gives away part of the answer ("${run}")`);
+      }
+    }
+  }
+}
+
 console.log(`checked ${allIds.length} items across ${Object.keys(topic.items).length} activity types`);
 console.log(`right/wrong balance: ${ok} correct, ${rightwrong.length - ok} incorrect`);
 console.log(problems.length ? `\n${problems.length} problem(s):\n- ` + problems.join('\n- ') : '\nno problems found');
