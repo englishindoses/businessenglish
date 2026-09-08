@@ -49,8 +49,8 @@ const gapfill = [
     id: 'l1-gf-06',
     context: 'Explaining who your manager is',
     sentence: 'I {1} to the Head of Operations, but I work with the CEO on special projects.',
-    gaps: { 1: { options: ['report', 'refer', 'respond'], answer: 'report' } },
-    clue: "'To report to someone' means they are your manager.",
+    gaps: { 1: { options: ['report', 'manage', 'supervise'], answer: 'report' } },
+    clue: "You report to the person above you. You manage or supervise the people below you — and neither of those takes 'to'.",
   },
   {
     id: 'l1-gf-07',
@@ -69,9 +69,9 @@ const gapfill = [
   {
     id: 'l1-gf-09',
     context: 'Showing interest in a colleague’s news',
-    sentence: 'That {1} be exciting — launching in four countries at the same time.',
-    gaps: { 1: { options: ['must', 'should', 'can'], answer: 'must' } },
-    clue: "'That must be' shows you are drawing a confident conclusion about how someone feels.",
+    sentence: 'Launching in four countries at the same time? That {1} exciting!',
+    gaps: { 1: { options: ['must be', 'must to be', 'must being'], answer: 'must be' } },
+    clue: "'Must be' + adjective draws a confident conclusion about how someone feels. 'Must' is never followed by 'to'.",
   },
   {
     id: 'l1-gf-10',
@@ -90,7 +90,7 @@ const gapfill = [
   {
     id: 'l1-gf-12',
     context: 'Asking about something that has finished',
-    sentence: 'How {1} the client presentation go in the end?',
+    sentence: 'How {1} the client presentation go yesterday?',
     gaps: { 1: { options: ['did', 'was', 'does'], answer: 'did' } },
     clue: "Past simple question: did + subject + base verb. The verb 'go' stays in its base form.",
   },
@@ -112,7 +112,7 @@ const gapfill = [
     id: 'l1-gf-15',
     context: 'Saying when you joined',
     sentence: "I've worked here {1} 2019, so I've seen the company double in size.",
-    gaps: { 1: { options: ['since', 'for', 'from'], answer: 'since' } },
+    gaps: { 1: { options: ['since', 'for', 'by'], answer: 'since' } },
     clue: "'Since' + a point in time (2019, March, I graduated). 'For' + a length of time.",
   },
   {
@@ -164,8 +164,8 @@ const gapfill = [
     id: 'l1-gf-22',
     context: 'Introducing two people to each other',
     sentence: 'Could I {1} you to my colleague Marta? She handles our Spanish accounts.',
-    gaps: { 1: { options: ['introduce', 'present', 'meet'], answer: 'introduce' } },
-    clue: "You introduce one person to another. 'Meet' would need a different structure: 'Have you met Marta?'",
+    gaps: { 1: { options: ['introduce', 'know', 'meet'], answer: 'introduce' } },
+    clue: "You introduce one person to another. 'Meet' and 'know' need a different structure: 'Have you met Marta?'",
   },
   {
     id: 'l1-gf-23',
@@ -277,10 +277,10 @@ const rightwrong = [
   },
   {
     id: 'l1-rw-15',
-    sentence: 'Great to finally put a name to the face — we have emailed for two years!',
+    sentence: "I'm looking forward to meet you at the conference next week.",
     correct: false,
-    fix: 'Great to finally put a **face to the name** — we **have been emailing** for two years!',
-    clue: "The fixed expression runs 'face to the name'. And an action continuing over time needs the present perfect continuous.",
+    fix: "I'm looking forward to **meeting** you at the conference next week.",
+    clue: "'Look forward to' is followed by the -ing form. The 'to' here is a preposition, not part of an infinitive.",
   },
   {
     id: 'l1-rw-16',
@@ -376,8 +376,8 @@ const matching = [
   {
     id: 'l1-mt-06',
     left: 'Allow me to introduce myself.',
-    right: 'a formal opening when nobody has introduced you',
-    clue: 'Formal, and used at the very start of a conversation.',
+    right: 'the most formal way to give your own name',
+    clue: 'You are about to say your own name and role, unprompted.',
   },
   {
     id: 'l1-mt-07',
@@ -394,8 +394,8 @@ const matching = [
   {
     id: 'l1-mt-09',
     left: 'That must have been challenging.',
-    right: 'showing you understand something was difficult',
-    clue: 'This one shows empathy rather than asking for information.',
+    right: 'showing sympathy about something that is already over',
+    clue: 'Past tense, and it offers sympathy rather than asking for information.',
   },
   {
     id: 'l1-mt-10',
@@ -418,14 +418,14 @@ const matching = [
   {
     id: 'l1-mt-13',
     left: "I'm in charge of...",
-    right: 'says what you have authority over',
-    clue: 'Stronger than describing duties — this is about being the decision maker.',
+    right: 'says what you have the final say over',
+    clue: 'Stronger than describing duties — this one is about who decides.',
   },
   {
     id: 'l1-mt-14',
     left: "I don't believe we've been introduced.",
-    right: 'a polite way to start talking to a stranger',
-    clue: 'Used when you have not met before and want to break the ice politely.',
+    right: 'a polite hint that you would like to be introduced',
+    clue: 'You are inviting the other person to introduce themselves, rather than naming yourself first.',
   },
   {
     id: 'l1-mt-15',
@@ -442,8 +442,8 @@ const matching = [
   {
     id: 'l1-mt-17',
     left: 'Are you enjoying the event so far?',
-    right: 'safe small talk with someone at a conference',
-    clue: 'It asks about the shared situation you are both in.',
+    right: 'small talk about an event you are both attending',
+    clue: 'It asks about the situation the two of you are sharing right now.',
   },
   {
     id: 'l1-mt-18',
@@ -454,14 +454,14 @@ const matching = [
   {
     id: 'l1-mt-19',
     left: 'I look after...',
-    right: 'a slightly informal way to describe what you manage',
-    clue: 'Same idea as being responsible for something, but more relaxed.',
+    right: "an informal alternative to 'I am responsible for'",
+    clue: 'Same meaning as being responsible for something, but more relaxed in register.',
   },
   {
     id: 'l1-mt-20',
     left: 'How are you finding it so far?',
-    right: 'asking someone’s impression of something new to them',
-    clue: 'Used with people who have recently started something.',
+    right: 'asking how someone is settling into something new',
+    clue: 'Used with someone who has recently started a job, a team or a role.',
   },
   {
     id: 'l1-mt-21',
@@ -484,8 +484,8 @@ const matching = [
   {
     id: 'l1-mt-24',
     left: 'Have we met before, or am I thinking of someone else?',
-    right: 'checking politely whether you already know someone',
-    clue: 'It leaves room for you to be wrong, which keeps it polite.',
+    right: 'asking whether you have met before, allowing that you may be wrong',
+    clue: 'The second half admits you might be mistaken, which is what keeps it polite.',
   },
 ];
 
@@ -560,6 +560,7 @@ const wordorder = [
     id: 'l1-wo-12',
     context: 'Showing empathy',
     answer: 'That must have been really challenging.',
+    alternatives: ['That must really have been challenging.'],
     clue: "'Must have been' draws a conclusion about the past.",
   },
   {
@@ -626,6 +627,7 @@ const wordorder = [
     id: 'l1-wo-23',
     context: 'Suggesting future contact',
     answer: 'We should definitely stay in touch.',
+    alternatives: ['We definitely should stay in touch.'],
     clue: "The adverb sits between 'should' and the verb.",
   },
   {
