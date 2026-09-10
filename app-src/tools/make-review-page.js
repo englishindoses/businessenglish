@@ -4,9 +4,15 @@
  * Reads the real data file, so the page can never drift from what the app
  * actually asks students.
  *
- *   node tools/make-review-page.js > ../review-lesson1.html
+ *   node tools/make-review-page.js lesson2 > ../review-lesson2.html
  */
-import topic from '../src/data/lesson1.js';
+import { getTopic } from '../src/data/topics.js';
+
+const topic = getTopic(process.argv[2] || 'lesson1');
+if (!topic?.items) {
+  console.error(`No written topic called "${process.argv[2]}"`);
+  process.exit(1);
+}
 
 const esc = (s) =>
   String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -18,7 +24,7 @@ const clue = (item) =>
 
 const eyebrow = (item) => (item.context ? `<p class="context">${esc(item.context)}</p>` : '');
 
-const idTag = (item) => `<span class="id">${esc(item.id.replace('l1-', ''))}</span>`;
+const idTag = (item) => `<span class="id">${esc(item.id.replace(/^[^-]+-/, ''))}</span>`;
 
 /* ---------- one renderer per question type ---------- */
 
@@ -123,7 +129,7 @@ const sections = SECTIONS.map(
   </section>`
 ).join('');
 
-process.stdout.write(`<title>First Impressions Question Bank</title>
+process.stdout.write(`<title>${esc(topic.title)} Question Bank</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
@@ -346,7 +352,7 @@ process.stdout.write(`<title>First Impressions Question Bank</title>
 
 <div class="wrap">
   <header class="masthead">
-    <p class="kicker">Lesson ${topic.order} &middot; for proofreading</p>
+    <p class="kicker">${esc(topic.lessons[0].label)} &middot; for proofreading</p>
     <h1>${esc(topic.title)}</h1>
     <p class="standfirst">${esc(topic.subtitle)}. Every question written for the practice app, with the answer marked and the clue the student sees when they get it wrong.</p>
     <p class="tally">
