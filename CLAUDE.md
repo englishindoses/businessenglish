@@ -95,9 +95,8 @@ owner to read on a phone.
   distractors, with short clues, and the blank-answer dialog.
 - **Next:** Lesson 2 content (Building Professional Relationships), then 3, 4, 5, 6, 6b,
   7, 8 in order.
-- **Uncommitted, waiting for the owner's go-ahead:**
-  - `review2.html` — its Lesson 5 grammar card said "future forms"; it now matches what
-    Lesson 5 actually teaches (don't / doesn't + base verb).
-  - `course-language-summary.md`
+- **Also live:** Review 2's Lesson 5 grammar card now matches what Lesson 5 actually
+  teaches (don't / doesn't + base verb) — it used to say "future forms". And
+  `course-language-summary.md` is published.
 - **Waiting on the owner:** the logo for the app icon.
 - **Later:** student logins; a link to the app from the course homepage.
