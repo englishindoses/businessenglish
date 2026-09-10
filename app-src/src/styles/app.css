@@ -827,6 +827,65 @@ a {
   margin-top: 0.5rem;
 }
 
+/* ===== Dragging ========================================================== */
+
+.wo-word,
+.mt-chip {
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* The chip left behind while its copy follows the finger. */
+.is-drag-source {
+  opacity: 0.3;
+}
+
+.drag-ghost {
+  position: fixed;
+  z-index: 100;
+  margin: 0;
+  pointer-events: none;
+  transition: none;
+  box-shadow: var(--shadow-lg);
+  transform: scale(1.06);
+  background: var(--color-white);
+  border: 2px solid var(--color-accent);
+  color: var(--color-primary);
+}
+
+/* Shows the gap a word will drop into. */
+.drag-caret {
+  position: fixed;
+  z-index: 99;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--color-accent);
+  pointer-events: none;
+}
+
+html.is-dragging,
+html.is-dragging * {
+  cursor: grabbing !important;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.wo-line.is-drop-target,
+.mt-slot.is-drop-target {
+  border-color: var(--color-accent);
+  background: var(--color-accent-light);
+}
+
+.wo-bank.is-drop-target,
+.mt-bank.is-drop-target {
+  border-radius: var(--radius-sm);
+  outline: 2px dashed var(--color-accent);
+  outline-offset: 4px;
+  background: var(--color-accent-light);
+}
+
 /* ===== Feedback ========================================================== */
 
 .qfeedback {

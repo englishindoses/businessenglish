@@ -4,11 +4,15 @@
  * All four pairs of a round share one set of meanings, so this engine builds the
  * whole round at once rather than one card per question.
  *
- * Interaction is tap-to-place, and it works in either order: tap a meaning then
- * a slot, or tap a slot then a meaning. Tapping a filled slot sends it back.
+ * Two ways to place a meaning:
+ * - Hold it and drag it onto a phrase. Dropping onto a filled phrase swaps the
+ *   two; dropping back on the list of meanings takes it out again.
+ * - Tap, in either order: tap a meaning then a phrase, or a phrase then a
+ *   meaning. Tapping a placed meaning sends it back.
  */
 import { el } from '../lib/dom.js';
 import { shuffle } from '../lib/pool.js';
+import { makeDraggable, isOver } from '../lib/drag.js';
 
 export default {
   id: 'matching',
@@ -35,11 +39,15 @@ export default {
     }
 
     function place(chip, slot) {
-      // If the slot already holds something, send it back to the bank.
       const existing = slot.querySelector('.mt-chip');
-      if (existing) bank.append(existing);
+      if (existing === chip) return;
+      if (existing) {
+        // Came from another phrase? Swap them. Otherwise send the old one back.
+        const from = chip.parentElement;
+        if (from.classList.contains('mt-slot')) from.append(existing);
+        else bank.append(existing);
+      }
       slot.append(chip);
-      slot.classList.remove('is-empty');
       clearSelection();
       refresh();
     }
@@ -52,8 +60,49 @@ export default {
       if (onEditHandler) onEditHandler();
     }
 
+    // --- dragging ------------------------------------------------------------
+
+    let dropTarget = null;
+
+    function targetAt(x, y) {
+      // The whole row counts, not just the dashed box, so a thumb needn't be exact.
+      const row = rows.find((r) => isOver(r.row, x, y));
+      if (row) return row.slot;
+      if (isOver(bank, x, y, 12)) return bank;
+      return null;
+    }
+
+    function showTarget(target) {
+      if (target === dropTarget) return;
+      dropTarget?.classList.remove('is-drop-target');
+      dropTarget = target;
+      dropTarget?.classList.add('is-drop-target');
+    }
+
+    function dragHandlers(chip) {
+      return {
+        start: clearSelection,
+        over: (x, y) => showTarget(targetAt(x, y)),
+        drop(x, y) {
+          const target = targetAt(x, y);
+          if (!target) return;
+          if (target === bank) {
+            if (chip.parentElement !== bank) {
+              bank.append(chip);
+              refresh();
+            }
+          } else {
+            place(chip, target);
+          }
+        },
+        end: () => showTarget(null),
+      };
+    }
+
+    // --- building ------------------------------------------------------------
+
     function makeChip(item) {
-      return el('button', {
+      const chip = el('button', {
         type: 'button',
         class: 'mt-chip',
         text: item.right,
@@ -78,6 +127,8 @@ export default {
           }
         },
       });
+      makeDraggable(chip, dragHandlers(chip));
+      return chip;
     }
 
     for (const item of items) {
@@ -104,7 +155,7 @@ export default {
             this.click();
           }
         },
-      }, [el('span', { class: 'mt-slot-hint', text: 'tap a meaning' })]);
+      }, [el('span', { class: 'mt-slot-hint', text: 'Drop a meaning here' })]);
 
       const feedback = el('div', { class: 'mt-feedback' });
       feedbackNodes.push(feedback);
@@ -121,7 +172,10 @@ export default {
     for (const chip of shuffle(items.map(makeChip))) bank.append(chip);
 
     const node = el('div', { class: 'mt-widget' }, [
-      el('p', { class: 'mt-instruction', text: 'Tap a meaning, then tap the phrase it belongs to.' }),
+      el('p', {
+        class: 'mt-instruction',
+        text: 'Hold a meaning and drag it to the phrase it belongs to. You can also tap a meaning, then tap the phrase.',
+      }),
       el('div', { class: 'mt-rows' }, rows.map((r) => r.row)),
       el('p', { class: 'mt-bank-label', text: 'Meanings' }),
       bank,
