@@ -5,21 +5,20 @@
  * see what's coming, and are filled in one at a time.
  */
 import lesson1 from './lesson1.js';
+import lesson2 from './lesson2.js';
+import lesson3 from './lesson3.js';
+import lesson4 from './lesson4.js';
+import lesson5 from './lesson5.js';
+import lesson6 from './lesson6.js';
+import lesson6b from './lesson6b.js';
+import lesson7 from './lesson7.js';
+import lesson8 from './lesson8.js';
 
 /** Topics that are written and playable. */
-const ready = [lesson1];
+const ready = [lesson1, lesson2, lesson3, lesson4, lesson5, lesson6, lesson6b, lesson7, lesson8];
 
-/** Placeholders — same order as the course. */
-const upcoming = [
-  { id: 'lesson2', order: 2, title: 'Building Professional Relationships', subtitle: 'Starting, sustaining and ending conversations', icon: '☕' },
-  { id: 'lesson3', order: 3, title: 'Interview Skills', subtitle: 'STAR answers, buying time, describing achievements', icon: '💼' },
-  { id: 'lesson4', order: 4, title: 'Professional Email Communication', subtitle: 'Polite requests, formality, transitions', icon: '✉️' },
-  { id: 'lesson5', order: 5, title: 'Phone and Video Calls', subtitle: 'Opening, clarifying, technical problems, closing', icon: '📞' },
-  { id: 'lesson6', order: 6, title: 'Speaking Up in Meetings', subtitle: 'Opinions, diplomatic disagreement, hedging', icon: '🗣️' },
-  { id: 'lesson6b', order: 7, title: 'Hedging and Politeness', subtitle: 'Second conditional and softening techniques', icon: '🎭' },
-  { id: 'lesson7', order: 8, title: 'Meetings: Clarifying and Summarising', subtitle: 'Interrupting, clarifying, reported speech', icon: '👥' },
-  { id: 'lesson8', order: 9, title: 'Presenting Ideas with Clarity', subtitle: 'Signposting, emphasis, the passive voice', icon: '📊' },
-];
+/** Placeholders — same order as the course. Empty until the next lessons are written. */
+const upcoming = [];
 
 export const ACTIVITY_TYPES = [
   {
