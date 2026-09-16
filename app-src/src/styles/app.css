@@ -916,13 +916,6 @@ html.is-dragging * {
   font-size: 1rem;
 }
 
-.qfeedback-clue {
-  margin-top: 0.35rem;
-  color: var(--color-text);
-  font-weight: 400;
-  line-height: 1.5;
-}
-
 /* ===== Actions =========================================================== */
 
 .actions {
@@ -1081,12 +1074,6 @@ html.is-dragging * {
 .review-text {
   font-size: 0.92rem;
   line-height: 1.5;
-}
-
-.review-clue {
-  margin-top: 0.3rem;
-  font-size: 0.82rem;
-  color: var(--color-text-light);
 }
 
 /* ===== My questions ====================================================== */

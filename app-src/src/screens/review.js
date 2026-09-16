@@ -40,7 +40,6 @@ export default function reviewScreen() {
       ]),
       el('div', { class: 'review-body' }, [
         el('p', { class: 'review-text', html: markup(engine.label(item)) }),
-        !right && item.clue ? el('p', { class: 'review-clue', html: markup(item.clue) }) : null,
       ]),
       reviewFlag(item, topic.id, type, engine),
     ]);

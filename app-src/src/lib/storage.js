@@ -16,7 +16,6 @@ const KEYS = {
 
 const DEFAULT_SETTINGS = {
   textSize: 'normal', // 'normal' | 'large'
-  showClues: true,
   reduceMotion: false,
 };
 

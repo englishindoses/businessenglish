@@ -5,7 +5,7 @@
  * moves on. A question counts as right once it checks green — this is practice,
  * not a test, so getting there after a correction still counts.
  */
-import { el, markup, announce } from '../lib/dom.js';
+import { el, announce } from '../lib/dom.js';
 import { navigate } from '../lib/router.js';
 import { renderScreen } from '../ui/shell.js';
 import { confirmDialog } from '../ui/dialog.js';
@@ -26,7 +26,6 @@ import {
   saveBankProgress,
   toggleQuestion,
   isFlagged,
-  getSettings,
 } from '../lib/storage.js';
 
 /** The session in play. Held in memory; a summary is mirrored to storage. */
@@ -190,12 +189,13 @@ function renderRound() {
     const parts = [
       el('p', { class: 'qfeedback-line' }, [
         el('span', { class: 'qfeedback-mark', 'aria-hidden': 'true', text: right ? '✓' : '✗' }),
-        el('span', { text: right ? 'That’s right.' : 'Not quite — have another go.' }),
+        el('span', {
+          text: right
+            ? 'That’s right.'
+            : 'Try again or save the question to ask your teacher.',
+        }),
       ]),
     ];
-    if (!right && q.item.clue && getSettings().showClues) {
-      parts.push(el('p', { class: 'qfeedback-clue', html: markup(q.item.clue) }));
-    }
     if (engine.mode === 'per-round') parts.push(flagButton(q.item, true));
 
     q.feedback.replaceChildren(...parts);

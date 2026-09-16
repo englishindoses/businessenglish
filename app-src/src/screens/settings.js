@@ -32,14 +32,6 @@ export default function settingsScreen() {
         },
       }),
       toggleRow({
-        label: 'Show clues',
-        description: 'Explain what went wrong when an answer is incorrect.',
-        value: settings.showClues,
-        onChange(value) {
-          saveSettings({ showClues: value });
-        },
-      }),
-      toggleRow({
         label: 'Reduce motion',
         description: 'Turn off the small animations.',
         value: settings.reduceMotion,
