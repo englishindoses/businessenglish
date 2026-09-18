@@ -51,7 +51,7 @@ const SECTIONS = [
     icon: '📈',
     title: 'Your progress',
     text: [
-      'Your dashboard shows how many questions you’ve answered, how many were right first time, and how many days you practised this week.',
+      'Your dashboard shows how many questions you’ve answered and how many days you practised this week.',
       'Tap See all for every topic.',
     ],
   },

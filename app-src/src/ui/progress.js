@@ -27,14 +27,12 @@ export function stat(value, label) {
   ]);
 }
 
-/** The three headline numbers. */
+/** The headline numbers. */
 export function statRow(progress, days) {
   const s = summarise(progress);
-  const firstTry = s.answered ? Math.round((s.firstTry / s.answered) * 100) : 0;
   const week = daysThisWeek(days);
-  return el('div', { class: 'stat-row' }, [
+  return el('div', { class: 'stat-row stat-row-2' }, [
     stat(s.answered, 'questions answered'),
-    stat(`${firstTry}%`, 'right first time'),
     stat(`${week}/7`, 'days practised this week'),
   ]);
 }
