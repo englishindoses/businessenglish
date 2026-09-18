@@ -1361,6 +1361,354 @@ html.is-dragging * {
   }
 }
 
+/* ===== People: avatars and the profile menu ============================ */
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--color-accent);
+  color: var(--color-white);
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.avatar-guest {
+  background: var(--color-primary-pale);
+  color: var(--color-primary);
+}
+
+.avatar-sm { width: 2rem; height: 2rem; font-size: 0.95rem; }
+.avatar-md { width: 2.75rem; height: 2.75rem; font-size: 1.2rem; }
+.avatar-lg { width: 3.5rem; height: 3.5rem; font-size: 1.5rem; }
+
+.topbar-profile .avatar {
+  border: 2px solid rgba(255, 255, 255, 0.85);
+}
+
+.topbar-profile .avatar-guest {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.profile-menu {
+  position: absolute;
+  top: calc(100% - 0.35rem);
+  right: max(0.75rem, calc((100vw - var(--page-max)) / 2 + 0.75rem));
+  z-index: 30;
+  width: min(17rem, calc(100vw - 1.5rem));
+  padding: 0.4rem;
+  background: var(--color-white);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+}
+
+.profile-head {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem 0.6rem 0.75rem;
+  margin-bottom: 0.3rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.profile-who {
+  min-width: 0;
+}
+
+.profile-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.profile-email {
+  font-size: 0.78rem;
+  color: var(--color-text-light);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile-item {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  width: 100%;
+  min-height: var(--tap);
+  padding: 0.5rem 0.6rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.94rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.profile-item:hover,
+.profile-item:focus-visible {
+  background: var(--color-primary-pale);
+}
+
+.profile-item-glyph {
+  width: 1.4rem;
+  text-align: center;
+}
+
+/* ===== Sign-in page ===================================================== */
+
+.signin {
+  max-width: 24rem;
+  margin: 0 auto;
+  padding-top: calc(1.5rem + env(safe-area-inset-top));
+}
+
+.signin-brand {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.signin-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  font-size: 2.2rem;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 0.9rem;
+}
+
+.signin-title {
+  font-size: 1.55rem;
+  color: var(--color-primary);
+}
+
+.signin-sub {
+  color: var(--color-text-light);
+  font-size: 0.95rem;
+}
+
+.signin-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.25rem;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  border-color: var(--color-border);
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.btn-google-mark {
+  display: inline-flex;
+}
+
+.signin-note {
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+  text-align: center;
+  line-height: 1.45;
+}
+
+.signin-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-text-light);
+  font-size: 0.8rem;
+  margin: 0.3rem 0;
+}
+
+.signin-divider::before,
+.signin-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.signin-error:empty {
+  display: none;
+}
+
+.signin-error {
+  font-size: 0.85rem;
+  color: var(--color-error);
+  background: var(--color-error-light);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.75rem;
+}
+
+.signin-stay {
+  margin-top: 1rem;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+/* ===== Dashboard ======================================================== */
+
+.greeting {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 1.1rem;
+}
+
+.greeting-hello {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.greeting-line {
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+}
+
+.dash-section {
+  margin-top: 1.5rem;
+}
+
+.dash-section .stat-row {
+  margin-top: 0.6rem;
+}
+
+.dash-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.dash-heading h2 {
+  font-size: 1.05rem;
+}
+
+.dash-heading a {
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.note-action {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.screen > .card-install {
+  margin-top: 1.25rem;
+}
+
+.bar {
+  display: block;
+  height: 0.4rem;
+  margin: 0.4rem 0 0.25rem;
+  border-radius: 999px;
+  background: var(--color-border);
+  overflow: hidden;
+}
+
+.bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--color-success);
+}
+
+/* ===== Progress and the teacher's pages ================================= */
+
+.progress-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1rem;
+}
+
+.progress-row + .progress-row {
+  border-top: 1px solid var(--color-border);
+}
+
+.progress-title {
+  font-weight: 600;
+  font-size: 0.94rem;
+}
+
+.progress-lesson {
+  color: var(--color-accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.stat-row + .settings-section {
+  margin-top: 1.5rem;
+}
+
+.student-card .pill {
+  flex-shrink: 0;
+}
+
+.loading {
+  text-align: center;
+  color: var(--color-text-light);
+  padding: 2.5rem 0;
+}
+
+/* Help box for installing the app. Buttons stack so long labels fit. */
+.dialog-actions-stacked {
+  flex-direction: column;
+}
+
+@media (min-width: 26rem) {
+  .dialog-actions-stacked {
+    flex-direction: column;
+  }
+}
+
+.dialog-actions a.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.install-steps {
+  margin: 0.8rem 0 0.4rem;
+  padding-left: 1.3rem;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.install-steps li + li {
+  margin-top: 0.35rem;
+}
+
+.card-install {
+  border-style: dashed;
+  border-color: var(--color-primary-light);
+}
+
 /* Empty matching slots, flagged after the student chose to go back. */
 .mt-slot.needs-answer {
   border-color: var(--color-warning);

@@ -3,6 +3,7 @@ import './styles/app.css';
 import { route, fallback, start, navigate } from './lib/router.js';
 import { mountShell, focusScreen } from './ui/shell.js';
 import { el } from './lib/dom.js';
+import { initInstall } from './lib/install.js';
 
 import homeScreen from './screens/home.js';
 import topicsScreen from './screens/topics.js';
@@ -11,12 +12,26 @@ import sessionScreen from './screens/session.js';
 import reviewScreen from './screens/review.js';
 import questionsScreen from './screens/questions.js';
 import settingsScreen from './screens/settings.js';
+import signinScreen from './screens/signin.js';
+import progressScreen from './screens/progress.js';
+import { studentsScreen, studentScreen } from './screens/students.js';
+import { restore, needsSignIn } from './lib/account.js';
+
+// Listen straight away: the browser may offer installing before any screen draws.
+initInstall();
 
 mountShell(document.getElementById('app'));
 
-/** Wrap a screen so focus lands sensibly after every navigation. */
+/**
+ * Wrap a screen so focus lands sensibly after every navigation, and so nobody
+ * gets past the sign-in page without choosing Google or guest.
+ */
 const screen = (render) => (params) => {
-  render(params);
+  if (needsSignIn()) {
+    signinScreen();
+  } else {
+    render(params);
+  }
   focusScreen();
 };
 
@@ -28,9 +43,19 @@ route('/practice/:id/:type/replay', screen((p) => sessionScreen({ ...p, mode: 'r
 route('/review', screen(reviewScreen));
 route('/questions', screen(questionsScreen));
 route('/settings', screen(settingsScreen));
+route('/progress', screen(progressScreen));
+route('/students', screen(studentsScreen));
+route('/student/:uid', screen(studentScreen));
 fallback(() => navigate('/', { replace: true }));
 
-start();
+showSplash();
+restore().finally(start);
+
+function showSplash() {
+  document.getElementById('screen').append(
+    el('p', { class: 'loading', role: 'status', text: 'Loading…' })
+  );
+}
 
 // ---------------------------------------------------------------------------
 // Offline support. A new version never reloads the page underneath a student

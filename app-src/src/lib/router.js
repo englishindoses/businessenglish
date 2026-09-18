@@ -38,6 +38,11 @@ export function back(fallbackPath = '/') {
   else navigate(fallbackPath, { replace: true });
 }
 
+/** Draw the current screen again, e.g. once someone has signed in. */
+export function refresh() {
+  resolve();
+}
+
 export function currentPath() {
   return current;
 }

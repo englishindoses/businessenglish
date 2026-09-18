@@ -5,6 +5,8 @@
 import { el, clear } from '../lib/dom.js';
 import { navigate, back } from '../lib/router.js';
 import { getQuestions, getSettings } from '../lib/storage.js';
+import { getAccount, logOut } from '../lib/account.js';
+import { avatar } from './avatar.js';
 
 let root = null;
 let bodyNode = null;
@@ -65,6 +67,7 @@ export function renderScreen({ title, subtitle, backTo = null, body, progress = 
 
   const bar = document.getElementById('topbar');
   clear(bar);
+  bar.hidden = false;
   bar.append(
     el('div', { class: 'topbar-row' }, [
       el('div', { class: 'topbar-left' }, [
@@ -88,11 +91,7 @@ export function renderScreen({ title, subtitle, backTo = null, body, progress = 
           badge: questionCount || null,
           onClick: () => navigate('/questions'),
         }),
-        iconButton({
-          label: 'Settings',
-          glyph: '⚙',
-          onClick: () => navigate('/settings'),
-        }),
+        profileButton(),
       ]),
     ])
   );
@@ -102,6 +101,116 @@ export function renderScreen({ title, subtitle, backTo = null, body, progress = 
   bodyNode.append(...[].concat(body).filter(Boolean));
   bodyNode.scrollTop = 0;
   window.scrollTo(0, 0);
+}
+
+/** A screen with no top bar, for signing in. */
+export function renderBare(body) {
+  const bar = document.getElementById('topbar');
+  clear(bar);
+  bar.hidden = true;
+  clear(bodyNode);
+  bodyNode.append(...[].concat(body).filter(Boolean));
+  window.scrollTo(0, 0);
+}
+
+// ---------- the profile menu ----------
+
+function profileButton() {
+  const { student } = getAccount();
+  const button = el('button', {
+    type: 'button',
+    class: 'topbar-btn topbar-profile',
+    'aria-label': 'Profile',
+    title: 'Profile',
+    'aria-haspopup': 'menu',
+    'aria-expanded': 'false',
+    onClick: (event) => {
+      event.stopPropagation();
+      toggleMenu(button);
+    },
+  }, [avatar(student || {}, 'sm')]);
+  return button;
+}
+
+function toggleMenu(button) {
+  const open = document.querySelector('.profile-menu');
+  if (open) {
+    open.closeMenu();
+    return;
+  }
+
+  const account = getAccount();
+  const { student } = account;
+
+  const item = (label, glyph, onClick) =>
+    el('button', { type: 'button', class: 'profile-item', role: 'menuitem', onClick: () => {
+      closeMenu();
+      onClick();
+    } }, [
+      el('span', { class: 'profile-item-glyph', 'aria-hidden': 'true', text: glyph }),
+      el('span', { text: label }),
+    ]);
+
+  const items = [
+    item('Your progress', '📈', () => navigate('/progress')),
+    item('Settings', '⚙', () => navigate('/settings')),
+  ];
+  if (account.isTeacher) items.unshift(item('Your students', '👥', () => navigate('/students')));
+  items.push(
+    student
+      ? item('Log out', '↩', async () => {
+          await logOut();
+          window.location.replace(window.location.pathname);
+        })
+      : item('Sign in with Google', '🔑', async () => {
+          await logOut(); // leaves guest mode; their practice stays on the device
+          window.location.replace(window.location.pathname);
+        })
+  );
+
+  const menu = el('div', { class: 'profile-menu', role: 'menu', 'aria-label': 'Profile' }, [
+    el('div', { class: 'profile-head' }, [
+      avatar(student || {}, 'md'),
+      el('div', { class: 'profile-who' }, [
+        el('p', { class: 'profile-name', text: student ? student.name || 'Signed in' : 'Guest' }),
+        el('p', {
+          class: 'profile-email',
+          text: student ? student.email : 'Practice saved on this device only',
+        }),
+      ]),
+    ]),
+    ...items,
+  ]);
+
+  button.setAttribute('aria-expanded', 'true');
+  document.getElementById('topbar').append(menu);
+  menu.querySelector('.profile-item').focus();
+
+  setTimeout(() => {
+    document.addEventListener('click', onOutside);
+    document.addEventListener('keydown', onKey);
+  });
+
+  function onOutside(event) {
+    if (!menu.contains(event.target)) closeMenu();
+  }
+  function onKey(event) {
+    if (event.key === 'Escape') {
+      closeMenu();
+      button.focus();
+    }
+  }
+  function closeMenu() {
+    menu.remove();
+    button.setAttribute('aria-expanded', 'false');
+    document.removeEventListener('click', onOutside);
+    document.removeEventListener('keydown', onKey);
+  }
+  menu.closeMenu = closeMenu;
+}
+
+function closeMenu() {
+  document.querySelector('.profile-menu')?.closeMenu();
 }
 
 /** Focus the screen body — used after a route change so keyboard users land here. */

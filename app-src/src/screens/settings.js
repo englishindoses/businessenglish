@@ -8,12 +8,15 @@ import {
   resetEverything,
   getSummary,
 } from '../lib/storage.js';
+import { getAccount } from '../lib/account.js';
 
 const APP_VERSION = __APP_VERSION__;
 
 export default function settingsScreen() {
   const settings = getSettings();
   const summary = getSummary();
+  const signedIn = getAccount().kind === 'student';
+  const where = signedIn ? 'your account' : 'this device';
 
   const body = [
     section('Reading', [
@@ -79,7 +82,7 @@ export default function settingsScreen() {
           el('p', { class: 'setting-label', text: 'Clear everything' }),
           el('p', {
             class: 'setting-desc',
-            text: 'Removes your progress, your questions list and these settings from this device.',
+            text: `Removes your progress, your questions list and these settings from ${where}.`,
           }),
         ]),
         el('button', {
@@ -87,7 +90,7 @@ export default function settingsScreen() {
           class: 'btn btn-quiet btn-danger',
           text: 'Clear all',
           onClick() {
-            if (!confirm('Remove everything this app has saved on this device?')) return;
+            if (!confirm(`Remove everything this app has saved on ${where}?`)) return;
             resetEverything();
             applySettings();
             announce('Everything cleared.');
@@ -113,7 +116,9 @@ export default function settingsScreen() {
       ]),
       el('div', { class: 'note' }, [
         el('p', {
-          text: 'Your practice is saved on this device only. Signing in — so it follows you between phone and laptop — is coming later.',
+          text: signedIn
+            ? 'Your practice is saved to your Google account, so it follows you to any phone or computer where you sign in.'
+            : 'You’re using BizEng as a guest, so your practice is saved on this device only.',
         }),
       ]),
     ]),

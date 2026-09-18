@@ -15,6 +15,8 @@ export default defineConfig({
     // Built files go into ../app so GitHub Pages serves them from the main branch.
     outDir: '../app',
     emptyOutDir: true,
+    // Firebase comes as one large piece. It only loads for signed-in students.
+    chunkSizeWarningLimit: 600,
   },
   plugins: [
     VitePWA({
