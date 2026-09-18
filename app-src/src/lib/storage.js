@@ -15,7 +15,7 @@ const PREFIX = 'bizeng.';
 const SETTINGS_KEY = PREFIX + 'settings';
 
 /** The parts of a student's practice that follow them between devices. */
-export const SYNCED = ['progress', 'questions', 'session'];
+export const SYNCED = ['progress', 'questions', 'session', 'days'];
 
 let namespace = PREFIX; // guest until told otherwise
 let syncListener = null;
@@ -147,6 +147,9 @@ export function mergeGuestIntoAccount() {
   questions.sort((a, b) => (b.addedAt || 0) - (a.addedAt || 0));
   writeSynced('questions', questions);
 
+  const days = union(getPracticeDays(), read(key('days', PREFIX), [])).sort();
+  writeSynced('days', days.slice(-DAYS_KEPT));
+
   for (const name of SYNCED) remove(key(name, PREFIX));
 }
 
@@ -191,7 +194,41 @@ export function saveBankProgress(topicId, type, patch) {
   if (patch.used) next.seen = union(current.seen, patch.used);
   all[topicId][type] = next;
   writeSynced('progress', all);
+  if (patch.answered !== undefined) notePracticeDay();
   return next;
+}
+
+// ---------- days practised ----------
+// The dates (on the student's own calendar) they checked at least one round.
+
+const DAYS_KEPT = 60;
+
+export function getPracticeDays() {
+  return read(key('days'), []);
+}
+
+function notePracticeDay() {
+  const today = dayString(new Date());
+  const days = getPracticeDays();
+  if (days.includes(today)) return;
+  writeSynced('days', [...days, today].slice(-DAYS_KEPT));
+}
+
+/** How many different days they practised in the last 7, today included. */
+export function daysThisWeek(days = getPracticeDays()) {
+  const recent = new Set();
+  for (let i = 0; i < 7; i++) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    recent.add(dayString(d));
+  }
+  return days.filter((d) => recent.has(d)).length;
+}
+
+function dayString(date) {
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${date.getFullYear()}-${m}-${d}`;
 }
 
 /** Totals for the dashboard and the progress screen. */

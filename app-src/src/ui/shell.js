@@ -152,10 +152,11 @@ function toggleMenu(button) {
     ]);
 
   const items = [
+    item('Profile', '👤', () => navigate('/profile')),
     item('Your progress', '📈', () => navigate('/progress')),
     item('Settings', '⚙', () => navigate('/settings')),
   ];
-  if (account.isTeacher) items.unshift(item('Your students', '👥', () => navigate('/students')));
+  if (account.isTeacher) items.splice(1, 0, item('Your students', '👥', () => navigate('/students')));
   items.push(
     student
       ? item('Log out', '↩', async () => {

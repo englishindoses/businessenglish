@@ -3,8 +3,8 @@
  */
 import { el } from '../lib/dom.js';
 import { renderScreen } from '../ui/shell.js';
-import { getProgress } from '../lib/storage.js';
-import { statRow, topicProgressList } from '../ui/progress.js';
+import { getProgress, getPracticeDays } from '../lib/storage.js';
+import { statRow, courseBar, topicProgressList } from '../ui/progress.js';
 
 export default function progressScreen() {
   const progress = getProgress();
@@ -13,7 +13,8 @@ export default function progressScreen() {
     title: 'Your progress',
     backTo: 'auto',
     body: [
-      statRow(progress),
+      statRow(progress, getPracticeDays()),
+      courseBar(progress),
       el('section', { class: 'settings-section' }, [
         el('h2', { class: 'settings-heading', text: 'Topics' }),
         topicProgressList(progress),

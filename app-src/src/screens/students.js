@@ -121,7 +121,7 @@ export async function studentScreen({ uid }) {
           el('p', { class: 'greeting-line', text: `Last active ${when(s.lastActive)}` }),
         ]),
       ]),
-      statRow(s.progress),
+      statRow(s.progress, s.days),
       el('section', { class: 'settings-section' }, [
         el('h2', {
           class: 'settings-heading',

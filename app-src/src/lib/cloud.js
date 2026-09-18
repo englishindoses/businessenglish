@@ -11,7 +11,7 @@
  *   answered, sessions,
  *   questionCount, lastActive  small totals, so the teacher's list loads quickly
  *   progress, questions,
- *   session                  the full practice, as JSON text
+ *   session, days            the full practice, as JSON text
  *   updatedAt                when the practice last changed (device clock)
  */
 import { initializeApp } from 'firebase/app';
@@ -128,6 +128,7 @@ export async function loadPractice(uid) {
     progress: parse(data.progress),
     questions: parse(data.questions),
     session: parse(data.session),
+    days: parse(data.days),
   };
 }
 
@@ -147,6 +148,7 @@ export async function savePractice(student, practice) {
       progress: JSON.stringify(practice.progress || {}),
       questions: JSON.stringify(practice.questions || []),
       session: JSON.stringify(practice.session ?? null),
+      days: JSON.stringify(practice.days || []),
     },
     { merge: true }
   );
@@ -183,6 +185,7 @@ export async function getStudent(uid) {
     lastActive: data.lastActive?.toDate?.() || null,
     progress: parse(data.progress) || {},
     questions: parse(data.questions) || [],
+    days: parse(data.days) || [],
   };
 }
 

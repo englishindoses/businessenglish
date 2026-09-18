@@ -14,6 +14,8 @@ import questionsScreen from './screens/questions.js';
 import settingsScreen from './screens/settings.js';
 import signinScreen from './screens/signin.js';
 import progressScreen from './screens/progress.js';
+import helpScreen from './screens/help.js';
+import profileScreen from './screens/profile.js';
 import { studentsScreen, studentScreen } from './screens/students.js';
 import { restore, needsSignIn } from './lib/account.js';
 
@@ -44,6 +46,8 @@ route('/review', screen(reviewScreen));
 route('/questions', screen(questionsScreen));
 route('/settings', screen(settingsScreen));
 route('/progress', screen(progressScreen));
+route('/help', screen(helpScreen));
+route('/profile', screen(profileScreen));
 route('/students', screen(studentsScreen));
 route('/student/:uid', screen(studentScreen));
 fallback(() => navigate('/', { replace: true }));

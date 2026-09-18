@@ -1,18 +1,21 @@
 /**
- * The dashboard: who's here, what to do next, and how it's going.
+ * The dashboard: a welcome, one big way into practice, clear progress, and
+ * quick links to everything else.
  */
 import { el } from '../lib/dom.js';
 import { navigate } from '../lib/router.js';
 import { renderScreen } from '../ui/shell.js';
 import { installCard } from '../ui/install.js';
 import { avatar, firstName } from '../ui/avatar.js';
-import { totalIn, progressBar, statRow } from '../ui/progress.js';
+import { welcome } from '../ui/greetings.js';
+import { totalIn, progressBar, statRow, courseBar } from '../ui/progress.js';
 import { getAccount, logOut } from '../lib/account.js';
 import {
   getSummary,
   getSavedSession,
   getQuestions,
   getProgress,
+  getPracticeDays,
   seenInTopic,
 } from '../lib/storage.js';
 import {
@@ -31,80 +34,53 @@ export default function homeScreen() {
   const questions = getQuestions();
   const progress = getProgress();
 
-  const body = [greeting(account, summary)];
-  const cards = [];
+  const body = [greeting(account)];
 
-  // Pick up where you left off.
-  if (saved) {
-    const topic = getTopic(saved.topicId);
-    const activity = ACTIVITY_TYPES.find((a) => a.id === saved.type);
-    if (topic && activity) {
-      cards.push(
-        el('button', {
-          type: 'button',
-          class: 'card card-resume',
-          onClick: () => navigate(`/practice/${saved.topicId}/${saved.type}`),
-        }, [
-          el('span', { class: 'card-eyebrow', text: 'Pick up where you left off' }),
-          el('span', { class: 'card-title', text: `${topic.title} — ${activity.name}` }),
-          el('span', {
-            class: 'card-meta',
-            text: `Round ${Math.min(saved.roundIndex + 1, ROUNDS_PER_SESSION)} of ${ROUNDS_PER_SESSION}`,
-          }),
-        ])
-      );
-    }
-  }
+  // ---- practice ----
+  const practice = [];
+  const resume = resumeCard(saved);
+  if (resume) practice.push(resume);
+  practice.push(startButton(Boolean(resume)));
+  body.push(el('div', { class: 'stack' }, practice));
 
-  cards.push(
-    el('button', {
-      type: 'button',
-      class: 'card card-primary',
-      onClick: () => navigate('/topics'),
-    }, [
-      el('span', { class: 'card-icon', 'aria-hidden': 'true', text: '🎯' }),
-      el('span', { class: 'topic-text' }, [
-        el('span', {
-          class: 'card-title',
-          text: saved ? 'Start something new' : 'Start practising',
-        }),
-        el('span', { class: 'card-meta', text: 'Choose a topic, then an activity' }),
+  // ---- progress ----
+  body.push(
+    el('section', { class: 'dash-section' }, [
+      el('div', { class: 'dash-heading' }, [
+        el('h2', { text: 'Your progress' }),
+        summary.answered > 0 ? el('a', { href: '#/progress', text: 'See all' }) : null,
       ]),
-      el('span', { class: 'topic-go', 'aria-hidden': 'true', text: '›' }),
+      summary.answered > 0
+        ? el('div', { class: 'stack' }, [
+            statRow(progress, getPracticeDays()),
+            courseBar(progress),
+            upNext(progress),
+          ])
+        : el('div', { class: 'note' }, [
+            el('p', {
+              text: 'Your progress will show here after your first round. Each session is 12 questions in three short rounds, and nothing is timed.',
+            }),
+          ]),
     ])
   );
 
-  const next = upNext(progress);
-  if (next && summary.answered > 0) cards.push(next);
-
-  if (questions.length) {
-    cards.push(
-      el('button', {
-        type: 'button',
-        class: 'card',
-        onClick: () => navigate('/questions'),
-      }, [
-        el('span', { class: 'card-icon', 'aria-hidden': 'true', text: '🔖' }),
-        el('span', { class: 'topic-text' }, [
-          el('span', {
-            class: 'card-title',
-            text: `${questions.length} ${questions.length === 1 ? 'question' : 'questions'} for your teacher`,
-          }),
-          el('span', {
-            class: 'card-meta',
-            text: 'Open this in your lesson to remember what to ask',
-          }),
-        ]),
-        el('span', { class: 'topic-go', 'aria-hidden': 'true', text: '›' }),
-      ])
-    );
-  }
+  // ---- quick links ----
+  body.push(
+    el('section', { class: 'dash-section' }, [
+      el('div', { class: 'tile-grid' }, [
+        tile('📖', 'How to use BizEng', () => navigate('/help')),
+        tile('🔖', 'Saved questions', () => navigate('/questions'), questions.length || null),
+        tile('👤', 'Profile', () => navigate('/profile')),
+        tile('⚙', 'Settings', () => navigate('/settings')),
+      ]),
+    ])
+  );
 
   if (account.isTeacher) {
-    cards.push(
+    body.push(
       el('button', {
         type: 'button',
-        class: 'card',
+        class: 'card dash-card',
         onClick: () => navigate('/students'),
       }, [
         el('span', { class: 'card-icon', 'aria-hidden': 'true', text: '👥' }),
@@ -115,22 +91,6 @@ export default function homeScreen() {
         el('span', { class: 'topic-go', 'aria-hidden': 'true', text: '›' }),
       ])
     );
-  }
-
-  body.push(el('div', { class: 'stack' }, cards));
-
-  if (summary.answered > 0) {
-    body.push(
-      el('section', { class: 'dash-section' }, [
-        el('div', { class: 'dash-heading' }, [
-          el('h2', { text: 'Your progress' }),
-          el('a', { href: '#/progress', text: 'See all' }),
-        ]),
-        statRow(progress),
-      ])
-    );
-  } else {
-    body.push(hint());
   }
 
   if (account.kind === 'guest') body.push(guestNote());
@@ -146,19 +106,50 @@ export default function homeScreen() {
   });
 }
 
-function greeting(account, summary) {
-  const name = firstName(account.student?.name);
-  const hello = name ? `Hi, ${name}!` : 'Hi there!';
-  const line =
-    summary.answered > 0
-      ? 'Good to see you again. Ready for a little more practice?'
-      : 'Let’s get started with your first practice session.';
-
+function greeting(account) {
+  const { greeting: hello, question } = welcome(firstName(account.student?.name));
   return el('div', { class: 'greeting' }, [
     avatar(account.student || {}, 'lg'),
     el('div', {}, [
       el('p', { class: 'greeting-hello', text: hello }),
-      el('p', { class: 'greeting-line', text: line }),
+      el('p', { class: 'greeting-line', text: question }),
+    ]),
+  ]);
+}
+
+function resumeCard(saved) {
+  if (!saved) return null;
+  const topic = getTopic(saved.topicId);
+  const activity = ACTIVITY_TYPES.find((a) => a.id === saved.type);
+  if (!topic || !activity) return null;
+
+  return el('button', {
+    type: 'button',
+    class: 'card card-resume',
+    onClick: () => navigate(`/practice/${saved.topicId}/${saved.type}`),
+  }, [
+    el('span', { class: 'card-eyebrow', text: 'Pick up where you left off' }),
+    el('span', { class: 'card-title', text: `${topic.title} — ${activity.name}` }),
+    el('span', {
+      class: 'card-meta',
+      text: `Round ${Math.min(saved.roundIndex + 1, ROUNDS_PER_SESSION)} of ${ROUNDS_PER_SESSION}`,
+    }),
+  ]);
+}
+
+function startButton(hasResume) {
+  return el('button', {
+    type: 'button',
+    class: 'start-btn',
+    onClick: () => navigate('/topics'),
+  }, [
+    el('span', { class: 'start-btn-icon', 'aria-hidden': 'true', text: '▶' }),
+    el('span', { class: 'start-btn-text' }, [
+      el('span', {
+        class: 'start-btn-title',
+        text: hasResume ? 'Start something new' : 'Start practising',
+      }),
+      el('span', { class: 'start-btn-meta', text: 'Choose a topic, then an activity' }),
     ]),
   ]);
 }
@@ -186,14 +177,11 @@ function upNext(progress) {
   ]);
 }
 
-function hint() {
-  return el('div', { class: 'note' }, [
-    el('p', {
-      text: 'Each session is 12 questions, in three short rounds. You check your answers at the end of every round, and nothing is timed.',
-    }),
-    el('p', {
-      text: 'Tap the bookmark on any question you want to ask about in your next lesson.',
-    }),
+function tile(icon, label, onClick, badge = null) {
+  return el('button', { type: 'button', class: 'tile', onClick }, [
+    el('span', { class: 'tile-icon', 'aria-hidden': 'true', text: icon }),
+    el('span', { class: 'tile-label', text: label }),
+    badge ? el('span', { class: 'tile-badge', 'aria-label': `${badge} saved`, text: String(badge) }) : null,
   ]);
 }
 

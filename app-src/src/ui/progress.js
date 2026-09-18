@@ -3,7 +3,7 @@
  * teacher's view of a student.
  */
 import { el } from '../lib/dom.js';
-import { summarise, seenInTopic } from '../lib/storage.js';
+import { summarise, seenInTopic, daysThisWeek } from '../lib/storage.js';
 import { topics, isPlayable, lessonLabel } from '../data/topics.js';
 
 /** How many questions a topic has, across all four activities. */
@@ -28,13 +28,28 @@ export function stat(value, label) {
 }
 
 /** The three headline numbers. */
-export function statRow(progress) {
+export function statRow(progress, days) {
   const s = summarise(progress);
   const firstTry = s.answered ? Math.round((s.firstTry / s.answered) * 100) : 0;
+  const week = daysThisWeek(days);
   return el('div', { class: 'stat-row' }, [
     stat(s.answered, 'questions answered'),
-    stat(s.sessions, s.sessions === 1 ? 'session finished' : 'sessions finished'),
     stat(`${firstTry}%`, 'right first time'),
+    stat(`${week}/7`, 'days practised this week'),
+  ]);
+}
+
+/** One bar for the whole course: how many different questions they've met. */
+export function courseBar(progress) {
+  const playable = topics.filter(isPlayable);
+  const total = playable.reduce((sum, t) => sum + totalIn(t), 0);
+  const seen = playable.reduce((sum, t) => sum + seenInTopic(progress, t.id), 0);
+  return el('div', { class: 'course-bar' }, [
+    el('p', { class: 'course-bar-label' }, [
+      el('span', { text: 'Whole course' }),
+      el('strong', { text: `${seen} of ${total} questions` }),
+    ]),
+    progressBar(seen, total),
   ]);
 }
 
