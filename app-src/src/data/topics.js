@@ -59,6 +59,11 @@ export function getTopic(id) {
   return topics.find((t) => t.id === id) || null;
 }
 
+/** "Lesson 6B", from the topic's first course lesson. */
+export function lessonLabel(topic) {
+  return topic.lessons?.[0]?.label || `Lesson ${topic.order}`;
+}
+
 export function isPlayable(topic) {
   return Boolean(topic && topic.items);
 }

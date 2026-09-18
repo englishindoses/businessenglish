@@ -1,7 +1,7 @@
 import { el } from '../lib/dom.js';
 import { navigate } from '../lib/router.js';
 import { renderScreen } from '../ui/shell.js';
-import { topics, isPlayable } from '../data/topics.js';
+import { topics, isPlayable, lessonLabel } from '../data/topics.js';
 
 export default function topicsScreen() {
   const cards = topics.map((topic) => {
@@ -10,7 +10,7 @@ export default function topicsScreen() {
     const inner = [
       el('span', { class: 'topic-icon', 'aria-hidden': 'true', text: topic.icon }),
       el('span', { class: 'topic-text' }, [
-        el('span', { class: 'card-eyebrow', text: `Lesson ${topic.order}` }),
+        el('span', { class: 'card-eyebrow', text: lessonLabel(topic) }),
         el('span', { class: 'card-title', text: topic.title }),
         el('span', { class: 'card-meta', text: topic.subtitle }),
       ]),
