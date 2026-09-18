@@ -58,7 +58,7 @@ export default function homeScreen() {
           ])
         : el('div', { class: 'note' }, [
             el('p', {
-              text: 'Your progress will show here after your first round. Each session is 12 questions in three short rounds, and nothing is timed.',
+              text: 'Each session has 3 sets of 4 questions (12 in total). There is no timer, so take your time to think. Remember you can save a question to ask your teacher later!',
             }),
           ]),
     ])
