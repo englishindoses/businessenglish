@@ -18,7 +18,7 @@ const SECTIONS = [
     title: 'How a session works',
     text: [
       'A session has 12 questions in 3 short rounds of 4.',
-      'Answer all 4, then tap Check answers. Nothing is timed.',
+      'Answer all 4, then tap Check answers. There is no timer, so take your time.',
     ],
   },
   {
@@ -27,7 +27,7 @@ const SECTIONS = [
     list: [
       ['Gap-fill', 'choose the word that completes the sentence.'],
       ['Right or Wrong', 'decide if the sentence is correct.'],
-      ['Matching', 'tap a phrase, then tap the place it belongs.'],
+      ['Matching', 'tap a meaning, then tap the phrase it goes with. You can also drag it.'],
       ['Word Order', 'tap the words to build the sentence.'],
     ],
   },
