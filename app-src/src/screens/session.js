@@ -272,6 +272,8 @@ function renderRound() {
       saveBankProgress(topic.id, type, {
         answered: (bank.answered || 0) + questions.length,
         firstTry: (bank.firstTry || 0) + rightCount,
+        // Only now, once the round is checked, do these count as practised.
+        seen: [...new Set([...bank.seen, ...questions.map((q) => q.item.id)])],
       });
       checkedOnce = true;
     }

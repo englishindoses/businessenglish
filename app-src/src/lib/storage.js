@@ -131,7 +131,7 @@ export function mergeGuestIntoAccount() {
       const mine = progress[topicId][type] || {};
       progress[topicId][type] = {
         used: union(mine.used, bank.used),
-        seen: union(mine.seen || mine.used, bank.seen || bank.used),
+        seen: union(practised(mine), practised(bank)),
         sessions: (mine.sessions || 0) + (bank.sessions || 0),
         answered: (mine.answered || 0) + (bank.answered || 0),
         firstTry: (mine.firstTry || 0) + (bank.firstTry || 0),
@@ -172,8 +172,9 @@ export function saveSettings(patch) {
 // ---------- progress ----------
 // progress[topicId][activityType] =
 //   { used: [itemId], seen: [itemId], sessions: n, answered: n, firstTry: n }
-// `used` empties again once a whole pool has been seen, so questions repeat
-// fairly. `seen` never empties: it is what the progress screen counts.
+// `used` is what has been dealt out, and empties again once a whole pool has
+// been dealt, so questions repeat fairly. `seen` is what has actually been
+// checked, and never empties: it is what the progress screen counts.
 
 export function getProgress() {
   return read(key('progress'), {});
@@ -183,7 +184,19 @@ export function getBankProgress(topicId, type) {
   const all = getProgress();
   const bank = all[topicId]?.[type];
   if (!bank) return { used: [], seen: [], sessions: 0, answered: 0, firstTry: 0 };
-  return { ...bank, seen: bank.seen || bank.used || [] };
+  return { ...bank, seen: practised(bank) };
+}
+
+/**
+ * The questions in one bank the student has checked. Until 19 September a
+ * question counted as soon as it was dealt, even if the round was never
+ * checked, so older records can list more than were answered. Nobody can have
+ * practised more different questions than they answered, so trim to that.
+ */
+function practised(bank) {
+  const seen = bank.seen || bank.used || [];
+  const answered = bank.answered || 0;
+  return seen.length > answered ? seen.slice(0, answered) : seen;
 }
 
 export function saveBankProgress(topicId, type, patch) {
@@ -191,7 +204,6 @@ export function saveBankProgress(topicId, type, patch) {
   if (!all[topicId]) all[topicId] = {};
   const current = getBankProgress(topicId, type);
   const next = { ...current, ...patch };
-  if (patch.used) next.seen = union(current.seen, patch.used);
   all[topicId][type] = next;
   writeSynced('progress', all);
   if (patch.answered !== undefined) notePracticeDay();
@@ -257,7 +269,7 @@ export function summarise(all) {
 export function seenInTopic(all, topicId) {
   const banks = (all || {})[topicId] || {};
   let seen = 0;
-  for (const bank of Object.values(banks)) seen += (bank.seen || bank.used || []).length;
+  for (const bank of Object.values(banks)) seen += practised(bank).length;
   return seen;
 }
 

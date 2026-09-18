@@ -32,7 +32,7 @@ export default function activitiesScreen({ id }) {
         ]),
         el('span', {
           class: 'card-note',
-          text: seen === 0 ? `${total} questions in this set` : `${seen} of ${total} seen`,
+          text: seen === 0 ? `${total} questions in this set` : `${seen} of ${total} practised`,
         }),
       ]),
       el('span', { class: 'topic-go', 'aria-hidden': 'true', text: '›' }),

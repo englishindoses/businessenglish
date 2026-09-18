@@ -53,7 +53,7 @@ export function drawItems(topic, type, count) {
 /** How far through the pool the student is, for the activity screen. */
 export function poolStatus(topic, type) {
   const pool = topic.items?.[type] || [];
-  const { used } = getBankProgress(topic.id, type);
-  const seen = (used || []).filter((id) => pool.some((i) => i.id === id)).length;
+  const { seen: practised } = getBankProgress(topic.id, type);
+  const seen = practised.filter((id) => pool.some((i) => i.id === id)).length;
   return { seen, total: pool.length };
 }
