@@ -41,15 +41,21 @@ file up to date with what changed in the session.
 - Four activity types: gap-fill (dropdown), right or wrong, matching (tap to place),
   word order (tap words). Category sorting is parked for later. **No flashcards or
   speaking prompts** — everything is auto-marked with instant feedback.
-- The student checks at the end of each round. Wrong answers show a short clue and can
-  be edited and re-checked as often as needed. **It's practice, not a test:** a question
-  counts as right once it checks green, however many tries it took.
+- The student checks at the end of each round. Wrong answers can be edited and
+  re-checked as often as needed. **It's practice, not a test:** a question counts as
+  right once it checks green, however many tries it took.
+- **The app does not show clues.** A wrong answer says "Try again or save the question
+  to ask your teacher" and nothing more — no hint, on the round or on the review screen.
+  The clue text is still written and kept in the content files (see below), so turning
+  clues back on is a display change, not a content job.
 - Checking with blanks opens a dialog: *Finish them* or *Check anyway*.
 - Word order reveals the correct sentence after 3 failed checks.
 - Review screen: right/wrong for all 12, a link back to the lesson on the site, and three
   ways out — *Try these again* (same 12 questions), *Another activity*, *Choose a topic*.
 - **"Ask my teacher" bookmark** on every question builds a *My questions* list the
-  student can show the teacher in class.
+  student can show the teacher in class. *Send to my teacher* hands that list to the
+  phone's own share menu (WhatsApp, email, whatever they use); on a laptop, with no
+  share menu, it copies the list instead.
 - Every question in a pool is used before any repeats.
 - Topics are listed and built **in lesson order**.
 - Top bar on every screen: back, title, My questions, Settings.
@@ -75,7 +81,8 @@ Content lives in `app-src/src/data/`, one file per topic, listed in `topics.js`.
   `alternatives`. Attached punctuation often rules this out.
 - **Clues are short hints that never contain the answer.** Point at where to look
   ("Look at the preposition", "What form follows 'involve'?"), never at what's right.
-  Aim for under 70 characters.
+  Aim for under 70 characters. Keep writing them even though the app no longer shows
+  them — the checker still tests them, and they are there if clues come back.
 - Right/wrong sets should stay balanced between correct and incorrect sentences.
 
 Before committing content, run `node tools/check-content.js` in `app-src`. It catches
@@ -85,18 +92,27 @@ unbuildable word-order alternatives, and clues that leak their answer.
 `node tools/make-review-page.js` produces a proofreading page of every question, for the
 owner to read on a phone.
 
-**Both tools are hardcoded to `lesson1.js`** — generalise them when topic 2 is added.
+Both tools take a topic id: `node tools/check-content.js lesson3`. The checker with no
+id checks every written topic; the review page defaults to `lesson1`.
 
 ---
 
-## Current status (as of 2026-09-10)
+## Current status (as of 2026-09-17)
 
-- **Done and live:** the app, with Lesson 1 complete (96 questions), audited for ambiguous
-  distractors, with short clues, and the blank-answer dialog.
-- **Next:** Lesson 2 content (Building Professional Relationships), then 3, 4, 5, 6, 6b,
-  7, 8 in order.
-- **Also live:** Review 2's Lesson 5 grammar card now matches what Lesson 5 actually
-  teaches (don't / doesn't + base verb) — it used to say "future forms". And
+- **Done and live:** the app, with **all nine topics written** — lessons 1, 2, 3, 4, 5, 6,
+  6b, 7, 8, at 96 questions each (864 in total). Lesson 1 has been audited for ambiguous
+  distractors; **lessons 2 to 8 have not been through that audit yet.**
+- **Also live:** hold-and-drag on matching and word order; *Send to my teacher*, which
+  shares the *My questions* list through the phone's share menu; the blank-answer dialog;
+  and the content tools, which now run on any topic instead of only lesson 1.
+- **Clues are switched off in the app** (16 September). A wrong answer just invites
+  another try or saving the question for the teacher. The clue text stays in the content
+  files, and the *Show clues* setting was removed from Settings.
+- **Also live on the site:** Review 2's Lesson 5 grammar card now matches what Lesson 5
+  actually teaches (don't / doesn't + base verb) — it used to say "future forms". And
   `course-language-summary.md` is published.
+- **Next:** proofreading lessons 2 to 8, a topic at a time — `node tools/make-review-page.js
+  lesson2` builds the page to read on a phone.
 - **Waiting on the owner:** the logo for the app icon.
-- **Later:** student logins; a link to the app from the course homepage.
+- **Later:** student logins; a link to the app from the course homepage; category sorting
+  as a fifth activity type.
