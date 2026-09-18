@@ -28,7 +28,7 @@ const SECTIONS = [
       ['Gap-fill', 'choose the word that completes the sentence.'],
       ['Right or Wrong', 'decide if the sentence is correct.'],
       ['Matching', 'tap a meaning, then tap the phrase it goes with. You can also drag it.'],
-      ['Word Order', 'tap the words to build the sentence.'],
+      ['Word Order', 'tap the words in the correct order, or tap and hold to drag the words into place.'],
     ],
   },
   {
@@ -37,7 +37,6 @@ const SECTIONS = [
     text: [
       'If an answer is wrong, change it and check again. You can try as many times as you like.',
       'In Word Order, the right sentence appears after 3 tries.',
-      'This is practice, not a test: an answer counts as right when you get it right.',
     ],
   },
   {
