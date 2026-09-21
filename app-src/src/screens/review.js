@@ -2,7 +2,7 @@ import { el, markup, announce } from '../lib/dom.js';
 import { navigate } from '../lib/router.js';
 import { renderScreen } from '../ui/shell.js';
 import { getActiveSession } from './session.js';
-import { getSavedSession, toggleQuestion, isFlagged } from '../lib/storage.js';
+import { getAttempt, getLastActivity, toggleQuestion, isFlagged } from '../lib/storage.js';
 import { getTopic, ACTIVITY_TYPES } from '../data/topics.js';
 import { getEngine } from '../engines/index.js';
 
@@ -92,18 +92,21 @@ function resolveSession() {
     return { topic: live.topic, type: live.type, items: live.items, results: live.results };
   }
 
-  // Coming back after a refresh — rebuild from what was saved.
-  const saved = getSavedSession();
+  // Coming back after a refresh — rebuild the last activity's finished attempt.
+  const last = getLastActivity();
+  if (!last) return null;
+
+  const saved = getAttempt(last.topicId, last.type);
   if (!saved || !saved.finished) return null;
 
-  const topic = getTopic(saved.topicId);
+  const topic = getTopic(last.topicId);
   if (!topic || !topic.items) return null;
 
-  const byId = new Map((topic.items[saved.type] || []).map((i) => [i.id, i]));
+  const byId = new Map((topic.items[last.type] || []).map((i) => [i.id, i]));
   const items = (saved.itemIds || []).map((id) => byId.get(id)).filter(Boolean);
   if (!items.length) return null;
 
-  return { topic, type: saved.type, items, results: saved.results || {} };
+  return { topic, type: last.type, items, results: saved.results || {} };
 }
 
 function reviewFlag(item, topicId, type, engine) {

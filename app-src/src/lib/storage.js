@@ -14,8 +14,15 @@
 const PREFIX = 'bizeng.';
 const SETTINGS_KEY = PREFIX + 'settings';
 
-/** The parts of a student's practice that follow them between devices. */
-export const SYNCED = ['progress', 'questions', 'session', 'days'];
+/**
+ * The parts of a student's practice that follow them between devices.
+ *
+ * `session` is the old single-attempt key. Attempts are now kept per activity,
+ * inside `progress`, so `session` is only read once, to move an unfinished
+ * attempt across, and then cleared. `last` remembers the activity they were on
+ * so the dashboard can offer to pick it up again.
+ */
+export const SYNCED = ['progress', 'questions', 'session', 'days', 'last'];
 
 let namespace = PREFIX; // guest until told otherwise
 let syncListener = null;
@@ -71,6 +78,7 @@ function writeSynced(name, value) {
 /** Switch to a signed-in student's data, or back to the guest's with null. */
 export function useAccount(uid) {
   namespace = uid ? `${PREFIX}u.${uid}.` : PREFIX;
+  migrateLegacySession();
 }
 
 /** Called after every change to a signed-in student's practice. */
@@ -92,6 +100,33 @@ export function importSynced(data) {
     else write(key(name), data[name]);
   }
   write(key('updatedAt'), data.updatedAt || 0);
+  migrateLegacySession();
+}
+
+/**
+ * Move an unfinished attempt saved by an older version into its own activity,
+ * so nobody loses their place when the app updates. Runs once: the old key is
+ * cleared afterwards.
+ */
+function migrateLegacySession() {
+  const legacy = read(key('session'), null);
+  if (!legacy) return;
+
+  if (legacy.topicId && legacy.type) {
+    const bank = getBankProgress(legacy.topicId, legacy.type);
+    if (!bank.attempt) {
+      saveBankProgress(legacy.topicId, legacy.type, {
+        attempt: {
+          itemIds: legacy.itemIds || [],
+          roundIndex: legacy.roundIndex || 0,
+          results: legacy.results || {},
+          finished: Boolean(legacy.finished),
+        },
+      });
+      writeSynced('last', { topicId: legacy.topicId, type: legacy.type });
+    }
+  }
+  writeSynced('session', null);
 }
 
 export function localUpdatedAt() {
@@ -135,6 +170,10 @@ export function mergeGuestIntoAccount() {
         sessions: (mine.sessions || 0) + (bank.sessions || 0),
         answered: (mine.answered || 0) + (bank.answered || 0),
         firstTry: (mine.firstTry || 0) + (bank.firstTry || 0),
+        correct: (mine.correct || 0) + (bank.correct || 0),
+        scored: (mine.scored || 0) + (bank.scored || 0),
+        // An attempt in play belongs to one device; keep the account's.
+        attempt: mine.attempt || bank.attempt || null,
       };
     }
   }
@@ -171,10 +210,27 @@ export function saveSettings(patch) {
 
 // ---------- progress ----------
 // progress[topicId][activityType] =
-//   { used: [itemId], seen: [itemId], sessions: n, answered: n, firstTry: n }
+//   { used, seen, sessions, answered, firstTry, correct, scored, attempt }
+//
 // `used` is what has been dealt out, and empties again once a whole pool has
 // been dealt, so questions repeat fairly. `seen` is what has actually been
-// checked, and never empties: it is what the progress screen counts.
+// checked, and never empties. `sessions` is how many times this activity has
+// been completed. `correct` over `scored` is the student's current score: of
+// every question they have finished an activity with, how many stand right.
+// `attempt` is the set of 12 in play, or the finished one, until they start
+// again.
+
+/** What a bank looks like before anybody has practised it. */
+const EMPTY_BANK = {
+  used: [],
+  seen: [],
+  sessions: 0,
+  answered: 0,
+  firstTry: 0,
+  correct: 0,
+  scored: 0,
+  attempt: null,
+};
 
 export function getProgress() {
   return read(key('progress'), {});
@@ -183,8 +239,8 @@ export function getProgress() {
 export function getBankProgress(topicId, type) {
   const all = getProgress();
   const bank = all[topicId]?.[type];
-  if (!bank) return { used: [], seen: [], sessions: 0, answered: 0, firstTry: 0 };
-  return { ...bank, seen: practised(bank) };
+  if (!bank) return { ...EMPTY_BANK };
+  return { ...EMPTY_BANK, ...bank, seen: practised(bank) };
 }
 
 /**
@@ -252,6 +308,9 @@ export function summarise(all) {
   let sessions = 0;
   let answered = 0;
   let firstTry = 0;
+  let correct = 0;
+  let scored = 0;
+  let completed = 0;
   const topicsTouched = new Set();
 
   for (const [topicId, banks] of Object.entries(all || {})) {
@@ -259,10 +318,32 @@ export function summarise(all) {
       sessions += bank.sessions || 0;
       answered += bank.answered || 0;
       firstTry += bank.firstTry || 0;
+      correct += bank.correct || 0;
+      scored += bank.scored || 0;
+      if (bank.sessions) completed += 1;
       if (bank.answered) topicsTouched.add(topicId);
     }
   }
-  return { sessions, answered, firstTry, topicsTouched: topicsTouched.size };
+  return {
+    sessions,
+    answered,
+    firstTry,
+    correct,
+    scored,
+    completed,
+    topicsTouched: topicsTouched.size,
+  };
+}
+
+/**
+ * The student's score right now: of every question they have finished an
+ * activity with, the percentage standing correct. Null until they finish one,
+ * so nobody is shown 0% before they have had a chance.
+ */
+export function currentScore(all) {
+  const { correct, scored } = summarise(all);
+  if (!scored) return null;
+  return Math.round((correct / scored) * 100);
 }
 
 /** How many different questions in one topic the student has met. */
@@ -271,6 +352,12 @@ export function seenInTopic(all, topicId) {
   let seen = 0;
   for (const bank of Object.values(banks)) seen += practised(bank).length;
   return seen;
+}
+
+/** How many of a topic's activities have been completed at least once. */
+export function completedInTopic(all, topicId) {
+  const banks = (all || {})[topicId] || {};
+  return Object.values(banks).filter((bank) => bank.sessions).length;
 }
 
 // ---------- the student's questions list ----------
@@ -306,18 +393,50 @@ export function clearQuestions() {
   writeSynced('questions', []);
 }
 
-// ---------- an unfinished session ----------
+// ---------- the attempt in play, one per activity ----------
+// An attempt is the 12 questions the student is working through:
+//   { itemIds, roundIndex, results, finished }
+// It stays after they finish, so the activity shows as completed until they
+// choose to start again, which draws a fresh 12.
 
-export function getSavedSession() {
-  return read(key('session'), null);
+export function getAttempt(topicId, type) {
+  return getBankProgress(topicId, type).attempt || null;
 }
 
-export function saveSession(session) {
-  writeSynced('session', session);
+export function saveAttempt(topicId, type, attempt) {
+  saveBankProgress(topicId, type, { attempt });
+  writeSynced('last', { topicId, type });
 }
 
-export function clearSavedSession() {
-  writeSynced('session', null);
+export function clearAttempt(topicId, type) {
+  saveBankProgress(topicId, type, { attempt: null });
+}
+
+/** The activity they were on last, for the dashboard's resume card. */
+export function getLastActivity() {
+  return read(key('last'), null);
+}
+
+/** How many of an attempt's questions have been checked so far. */
+export function attemptAnswered(attempt) {
+  return attempt ? Object.keys(attempt.results || {}).length : 0;
+}
+
+/**
+ * Finishing an activity: count the completion, and add this attempt's final
+ * standing to the score. Called once, when they tap through to their results.
+ */
+export function recordCompletion(topicId, type, attempt) {
+  const bank = getBankProgress(topicId, type);
+  const results = attempt.results || {};
+  const right = Object.values(results).filter(Boolean).length;
+
+  saveBankProgress(topicId, type, {
+    sessions: bank.sessions + 1,
+    correct: bank.correct + right,
+    scored: bank.scored + (attempt.itemIds || []).length,
+    attempt: { ...attempt, finished: true },
+  });
 }
 
 // ---------- reset ----------
@@ -325,6 +444,7 @@ export function clearSavedSession() {
 export function resetProgress() {
   writeSynced('progress', null);
   writeSynced('session', null);
+  writeSynced('last', null);
 }
 
 export function resetEverything() {

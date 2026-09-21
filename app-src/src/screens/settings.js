@@ -51,9 +51,9 @@ export default function settingsScreen() {
           el('p', { class: 'setting-label', text: 'Progress so far' }),
           el('p', {
             class: 'setting-desc',
-            text: `${summary.answered} questions answered across ${summary.sessions} ${
-              summary.sessions === 1 ? 'session' : 'sessions'
-            }.`,
+            text: `${summary.answered} questions answered, ${summary.sessions} ${
+              summary.sessions === 1 ? 'activity' : 'activities'
+            } completed.`,
           }),
         ]),
       ]),

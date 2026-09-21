@@ -21,7 +21,7 @@ export default function progressScreen() {
       ]),
       el('div', { class: 'note' }, [
         el('p', {
-          text: '“Practised” counts each different question you’ve answered at least once. Questions repeat after you’ve seen them all, so keep going!',
+          text: 'An activity is complete once you have answered all 12 of its questions. Start one again whenever you like — you will get different questions, and your score keeps counting.',
         }),
       ]),
     ],

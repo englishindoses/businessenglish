@@ -49,11 +49,3 @@ export function drawItems(topic, type, count) {
   saveBankProgress(topic.id, type, { used: [...used, ...items.map((i) => i.id)] });
   return { items, cycled };
 }
-
-/** How far through the pool the student is, for the activity screen. */
-export function poolStatus(topic, type) {
-  const pool = topic.items?.[type] || [];
-  const { seen: practised } = getBankProgress(topic.id, type);
-  const seen = practised.filter((id) => pool.some((i) => i.id === id)).length;
-  return { seen, total: pool.length };
-}

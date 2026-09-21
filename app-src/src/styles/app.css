@@ -368,6 +368,29 @@ a {
   box-shadow: none;
 }
 
+/* A completed activity, or a topic with every activity done. */
+.card.is-complete {
+  border: 1px solid var(--color-success);
+  background: var(--color-success-light);
+}
+
+.card.is-complete .progress-fill {
+  background: var(--color-success);
+}
+
+.tick {
+  margin-left: 0.4rem;
+  color: var(--color-success);
+  font-weight: 700;
+}
+
+.times-done {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--color-text-light);
+  font-weight: 600;
+}
+
 .pill {
   display: inline-block;
   padding: 0.15rem 0.55rem;

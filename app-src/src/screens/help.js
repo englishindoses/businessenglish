@@ -15,10 +15,11 @@ const SECTIONS = [
   },
   {
     icon: '🔁',
-    title: 'How a session works',
+    title: 'How an activity works',
     text: [
-      'A session has 12 questions in 3 short rounds of 4.',
+      'An activity has 12 questions, in 3 short rounds of 4.',
       'Answer all 4, then tap Check answers. There is no timer, so take your time.',
+      'Finish all 12 and the activity is complete. Start it again whenever you like and you get different questions.',
     ],
   },
   {
@@ -36,7 +37,7 @@ const SECTIONS = [
     title: 'Wrong answers',
     text: [
       'If an answer is wrong, change it and check again. You can try as many times as you like.',
-      'In Word Order, the right sentence appears after 3 tries.',
+      'If you still cannot get it, tap Ask my teacher and save it for your next lesson.',
     ],
   },
   {
@@ -51,8 +52,8 @@ const SECTIONS = [
     icon: '📈',
     title: 'Your progress',
     text: [
-      'Your dashboard shows how many questions you’ve answered and how many days you practised this week.',
-      'Tap See all for every topic.',
+      'Your dashboard shows how many of your answers stand correct, and how many days you practised this week.',
+      'The bar counts activities you have completed. Tap See all for every topic.',
     ],
   },
   {

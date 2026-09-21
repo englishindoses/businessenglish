@@ -8,15 +8,17 @@ import { renderScreen } from '../ui/shell.js';
 import { installCard } from '../ui/install.js';
 import { avatar, firstName } from '../ui/avatar.js';
 import { welcome } from '../ui/greetings.js';
-import { totalIn, progressBar, statRow, courseBar } from '../ui/progress.js';
+import { activitiesIn, progressBar, statRow, courseBar } from '../ui/progress.js';
 import { getAccount, logOut } from '../lib/account.js';
 import {
   getSummary,
-  getSavedSession,
+  getAttempt,
+  getLastActivity,
+  attemptAnswered,
   getQuestions,
   getProgress,
   getPracticeDays,
-  seenInTopic,
+  completedInTopic,
 } from '../lib/storage.js';
 import {
   topics,
@@ -25,12 +27,12 @@ import {
   lessonLabel,
   ACTIVITY_TYPES,
   ROUNDS_PER_SESSION,
+  SESSION_LENGTH,
 } from '../data/topics.js';
 
 export default function homeScreen() {
   const account = getAccount();
   const summary = getSummary();
-  const saved = getSavedSession();
   const questions = getQuestions();
   const progress = getProgress();
 
@@ -38,7 +40,7 @@ export default function homeScreen() {
 
   // ---- practice ----
   const practice = [];
-  const resume = resumeCard(saved);
+  const resume = resumeCard(unfinished());
   if (resume) practice.push(resume);
   practice.push(startButton(Boolean(resume)));
   body.push(el('div', { class: 'stack' }, practice));
@@ -58,7 +60,7 @@ export default function homeScreen() {
           ])
         : el('div', { class: 'note' }, [
             el('p', {
-              text: 'Each session has 3 sets of 4 questions (12 in total). There is no timer, so take your time to think. Remember you can save a question to ask your teacher later!',
+              text: 'Each activity has 12 questions, in 3 rounds of 4. There is no timer, so take your time to think. Remember you can save a question to ask your teacher later!',
             }),
           ]),
     ])
@@ -117,11 +119,22 @@ function greeting(account) {
   ]);
 }
 
+/** The activity they were last on, if they did not finish it. */
+function unfinished() {
+  const last = getLastActivity();
+  if (!last) return null;
+  const attempt = getAttempt(last.topicId, last.type);
+  if (!attempt || attempt.finished) return null;
+  return { ...last, attempt };
+}
+
 function resumeCard(saved) {
   if (!saved) return null;
   const topic = getTopic(saved.topicId);
   const activity = ACTIVITY_TYPES.find((a) => a.id === saved.type);
   if (!topic || !activity) return null;
+
+  const answered = attemptAnswered(saved.attempt);
 
   return el('button', {
     type: 'button',
@@ -132,7 +145,9 @@ function resumeCard(saved) {
     el('span', { class: 'card-title', text: `${topic.title} — ${activity.name}` }),
     el('span', {
       class: 'card-meta',
-      text: `Round ${Math.min(saved.roundIndex + 1, ROUNDS_PER_SESSION)} of ${ROUNDS_PER_SESSION}`,
+      text: answered
+        ? `${answered} of ${SESSION_LENGTH} questions answered`
+        : `Round ${Math.min(saved.attempt.roundIndex + 1, ROUNDS_PER_SESSION)} of ${ROUNDS_PER_SESSION}`,
     }),
   ]);
 }
@@ -154,12 +169,14 @@ function startButton(hasResume) {
   ]);
 }
 
-/** The first topic, in lesson order, with questions the student hasn't met yet. */
+/** The first topic, in lesson order, with an activity still to complete. */
 function upNext(progress) {
-  const topic = topics.find((t) => isPlayable(t) && seenInTopic(progress, t.id) < totalIn(t));
+  const topic = topics.find(
+    (t) => isPlayable(t) && completedInTopic(progress, t.id) < activitiesIn(t)
+  );
   if (!topic) return null;
-  const seen = seenInTopic(progress, topic.id);
-  const total = totalIn(topic);
+  const seen = completedInTopic(progress, topic.id);
+  const total = activitiesIn(topic);
 
   return el('button', {
     type: 'button',
@@ -171,7 +188,7 @@ function upNext(progress) {
       el('span', { class: 'card-eyebrow', text: `Up next · ${lessonLabel(topic)}` }),
       el('span', { class: 'card-title', text: topic.title }),
       progressBar(seen, total),
-      el('span', { class: 'card-meta', text: `${seen} of ${total} questions practised` }),
+      el('span', { class: 'card-meta', text: `${seen} of ${total} activities completed` }),
     ]),
     el('span', { class: 'topic-go', 'aria-hidden': 'true', text: '›' }),
   ]);

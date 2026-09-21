@@ -19,11 +19,11 @@ import {
 } from '../data/topics.js';
 import { drawItems } from '../lib/pool.js';
 import {
-  saveSession,
-  clearSavedSession,
-  getSavedSession,
+  saveAttempt,
+  getAttempt,
   getBankProgress,
   saveBankProgress,
+  recordCompletion,
   toggleQuestion,
   isFlagged,
 } from '../lib/storage.js';
@@ -37,9 +37,7 @@ export function getActiveSession() {
 
 function persist() {
   if (!active) return;
-  saveSession({
-    topicId: active.topic.id,
-    type: active.type,
+  saveAttempt(active.topic.id, active.type, {
     itemIds: active.items.map((i) => i.id),
     roundIndex: active.roundIndex,
     results: active.results,
@@ -76,13 +74,10 @@ export default function sessionScreen({ id, type, mode }) {
     return;
   }
 
-  const resumable = getSavedSession();
-  const canResume =
-    mode !== 'replay' &&
-    resumable &&
-    !resumable.finished &&
-    resumable.topicId === topic.id &&
-    resumable.type === type;
+  // The attempt this activity was left on, if it was not finished. A finished
+  // one is left alone: starting again is meant to draw a fresh 12.
+  const resumable = getAttempt(topic.id, type);
+  const canResume = mode !== 'replay' && resumable && !resumable.finished;
 
   const sameSession =
     active && active.topic.id === topic.id && active.type === type && !active.finished;
@@ -261,8 +256,9 @@ function renderRound() {
       if (right) active.results[q.item.id] = true;
       else if (active.results[q.item.id] !== true) active.results[q.item.id] = false;
 
-      // After a few tries, stop letting them flounder and show the answer.
-      if (!right && q.attempts >= 3 && q.question?.reveal) q.question.reveal();
+      // Nothing is revealed, however many tries it takes: a question they
+      // cannot get is one to save and ask their teacher about. The engines
+      // keep their reveal() for the Show answer button planned later.
 
       showFeedback(q, right);
     });
@@ -302,9 +298,12 @@ function renderRound() {
     onClick() {
       if (isLastRound) {
         active.finished = true;
-        const bank = getBankProgress(topic.id, type);
-        saveBankProgress(topic.id, type, { sessions: (bank.sessions || 0) + 1 });
-        persist();
+        recordCompletion(topic.id, type, {
+          itemIds: active.items.map((i) => i.id),
+          roundIndex: active.roundIndex,
+          results: active.results,
+          finished: true,
+        });
         navigate('/review');
       } else {
         active.roundIndex += 1;
