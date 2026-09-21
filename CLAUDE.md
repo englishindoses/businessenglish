@@ -49,7 +49,16 @@ file up to date with what changed in the session.
   The clue text is still written and kept in the content files (see below), so turning
   clues back on is a display change, not a content job.
 - Checking with blanks opens a dialog: *Finish them* or *Check anyway*.
-- Word order reveals the correct sentence after 3 failed checks.
+- **Nothing is ever revealed.** However many tries it takes, the app does not show the
+  answer — a question they cannot get is one to save and ask the teacher about. A
+  *Show answer* button that does not count as correct is planned, not built.
+- **An activity is 12 questions.** Finish them and it shows as completed, with the option
+  to start again, which draws 12 they have not seen. Each activity keeps its own
+  unfinished attempt, so moving between activities loses nothing.
+- **Progress is counted in activities completed**, not questions met: the lesson list and
+  the course bar both read "x of 4 activities". The dashboard's headline stat is the
+  student's score — of every question they have finished an activity with, how many
+  stand correct. It shows a dash until their first completion.
 - Review screen: right/wrong for all 12, a link back to the lesson on the site, and three
   ways out — *Try these again* (same 12 questions), *Another activity*, *Choose a topic*.
 - **"Ask my teacher" bookmark** on every question builds a *My questions* list the
@@ -59,8 +68,9 @@ file up to date with what changed in the session.
 - Every question in a pool is used before any repeats.
 - Topics are listed and built **in lesson order**.
 - Top bar on every screen: back, title, My questions, Settings.
-- Progress is saved on the device only. Logins come later — `app-src/src/lib/storage.js`
-  is the only file that should need to change.
+- Progress is saved on the device, and copied to the student's account when they sign in
+  with Google. Guests keep everything on the device. Everything that is saved goes
+  through `app-src/src/lib/storage.js`.
 - Name: "Business English in Doses — Practice makes Perfect!", shown as **BizEng** on a
   phone. The icon is a placeholder until the owner sends the course logo.
 - **The site does not link to the app yet.** Don't add a link until asked.
@@ -97,7 +107,7 @@ id checks every written topic; the review page defaults to `lesson1`.
 
 ---
 
-## Current status (as of 2026-09-17)
+## Current status (as of 2026-09-21)
 
 - **Done and live:** the app, with **all nine topics written** — lessons 1, 2, 3, 4, 5, 6,
   6b, 7, 8, at 96 questions each (864 in total). Lesson 1 has been audited for ambiguous
@@ -108,11 +118,23 @@ id checks every written topic; the review page defaults to `lesson1`.
 - **Clues are switched off in the app** (16 September). A wrong answer just invites
   another try or saving the question for the teacher. The clue text stays in the content
   files, and the *Show clues* setting was removed from Settings.
+- **Progress was rebuilt around completing activities** (21 September), because a student
+  who finished all 12 questions still saw a half-empty bar counting the 24-question bank.
+  Now: 12 questions per activity, a full bar and a tick when it is done, *start again* for
+  12 fresh ones, and "x of 4 activities completed" on the lesson list, the up-next card
+  and the course bar. The dashboard's "questions answered" became **% answers correct**,
+  counted only from completed activities, so it starts fresh for everyone. Word order no
+  longer reveals its sentence after 3 tries. Nothing was lost: completions were already
+  being counted, and any attempt in play was migrated into its activity.
+- **Students, saved questions and practice days were untouched** by that change. Only the
+  score starts from zero, because the app had never recorded it.
 - **Also live on the site:** Review 2's Lesson 5 grammar card now matches what Lesson 5
   actually teaches (don't / doesn't + base verb) — it used to say "future forms". And
   `course-language-summary.md` is published.
 - **Next:** proofreading lessons 2 to 8, a topic at a time — `node tools/make-review-page.js
   lesson2` builds the page to read on a phone.
 - **Waiting on the owner:** the logo for the app icon.
-- **Later:** student logins; a link to the app from the course homepage; category sorting
-  as a fifth activity type.
+- **Later:** a *Show answer* button that does not count as a correct answer; a link to the
+  app from the course homepage; category sorting as a fifth activity type.
+- **`bizeng-build-spec.md`** at the root explains how the whole app was built, for
+  rebuilding it on another course. It has not been updated for the 21 September changes.
