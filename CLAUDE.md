@@ -107,7 +107,7 @@ id checks every written topic; the review page defaults to `lesson1`.
 
 ---
 
-## Current status (as of 2026-09-21)
+## Current status (as of 2026-09-23)
 
 - **Done and live:** the app, with **all nine topics written** — lessons 1, 2, 3, 4, 5, 6,
   6b, 7, 8, at 96 questions each (864 in total). Lesson 1 has been audited for ambiguous
@@ -128,6 +128,14 @@ id checks every written topic; the review page defaults to `lesson1`.
   being counted, and any attempt in play was migrated into its activity.
 - **Students, saved questions and practice days were untouched** by that change. Only the
   score starts from zero, because the app had never recorded it.
+- **"How do you do?" is no longer taught** (23 September). It came out of Lesson 1's
+  sorting activity, the language summary and the app's matching bank together, replaced by
+  "Very pleased to meet you, Ms Alves." on the lesson page and "It's a pleasure to meet
+  you." in the app. Four other phrases were reworded — see `CHANGELOG.md`.
+- **Before changing a question's wording, check the lesson.** A phrase that reads oddly in
+  the app is often taught word for word in the lesson page and in
+  `course-language-summary.md`; the app's job is to drill what was taught, so the lesson
+  is what has to change first. Two of five suggested fixes on 23 September were like this.
 - **Also live on the site:** Review 2's Lesson 5 grammar card now matches what Lesson 5
   actually teaches (don't / doesn't + base verb) — it used to say "future forms". And
   `course-language-summary.md` is published.

@@ -6,6 +6,43 @@ reasoning behind a decision has been forgotten.
 
 ---
 
+## 23 September 2026 — five phrases reworded, and "How do you do?" retired
+
+A check on how natural the app's sentences sound flagged five of them. Four were
+reworded. The fifth turned out to be a question about the course itself.
+
+**In the app**
+
+- Lesson 1: "I moved across from the Warsaw office" → "I **transferred** from the
+  Warsaw office", in both the matching and the word-order question.
+- Lesson 3: "This led to much happier customers" → "This led to much **higher
+  customer satisfaction**", which is what people actually say about a result.
+- Lesson 6b: "The translation is a bit off" → "a **little** off".
+
+**In the lesson as well as the app**
+
+"How do you do?" is no longer taught. It was in Lesson 1's formal introductions,
+in the formal/informal sorting activity, and in the app's matching bank — so it
+came out of all three at once:
+
+- `lesson1.html`, Activity 2 — replaced with **"Very pleased to meet you, Ms
+  Alves."** Title and surname mark the formality, which is what that activity is
+  for, and it keeps the 4 formal / 4 informal balance.
+- `course-language-summary.md` — the same swap.
+- The app's matching question — now **"It's a pleasure to meet you."**, a phrase
+  the lesson does still teach.
+
+**One flagged change was not made.** "You're breaking up. Let me try
+reconnecting" is taught word for word in Lesson 5, so the app was right to drill
+it. It was changed, then put back.
+
+**Worth remembering.** The app exists to practise what the lessons teach, so a
+suggestion about the app's wording is often really a suggestion about a lesson.
+Check the lesson page and `course-language-summary.md` before changing a
+question — otherwise the practice quietly drifts away from the teaching.
+
+---
+
 ## 21 September 2026 — an activity is 12 questions
 
 **The problem.** A student answered all 12 questions of an activity, got their
