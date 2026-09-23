@@ -405,9 +405,9 @@ const matching = [
   },
   {
     id: 'l1-mt-11',
-    left: 'How do you do?',
-    right: 'a very formal greeting, used only on first meeting',
-    clue: 'This is not really a question about health. When is it said?',
+    left: "It's a pleasure to meet you.",
+    right: 'a formal greeting when you meet someone for the first time',
+    clue: 'Is this said at the start of a conversation, or at the end?',
   },
   {
     id: 'l1-mt-12',
@@ -471,9 +471,9 @@ const matching = [
   },
   {
     id: 'l1-mt-22',
-    left: 'I moved across from the Warsaw office.',
+    left: 'I transferred from the Warsaw office.',
     right: 'explaining an internal change of location',
-    clue: "Look at 'across' and 'office'. Did the speaker change employer?",
+    clue: "Look at 'transferred'. Did the speaker change employer?",
   },
   {
     id: 'l1-mt-23',
@@ -633,7 +633,7 @@ const wordorder = [
   {
     id: 'l1-wo-24',
     context: 'Explaining a change of office',
-    answer: 'I moved across from the Warsaw office last year.',
+    answer: 'I transferred from the Warsaw office last year.',
     clue: 'Where does the time expression go?',
   },
 ];

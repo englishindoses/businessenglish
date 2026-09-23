@@ -15,7 +15,7 @@ formality contrast (formal vs. informal register) and fixed phrases for describi
 *Formal introductions*
 - It's a pleasure to meet you.
 - Allow me to introduce myself.
-- How do you do?
+- Very pleased to meet you, Ms Alves. (title and surname signal formality)
 - I don't believe we've been introduced.
 
 *Informal introductions*

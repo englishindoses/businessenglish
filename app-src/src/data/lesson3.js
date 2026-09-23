@@ -83,7 +83,7 @@ const gapfill = [
   {
     id: 'l3-gf-11',
     context: 'Explaining the effect of a new process',
-    sentence: 'The new system cut errors by half. This {1} to much happier customers.',
+    sentence: 'The new system cut errors by half. This {1} to much higher customer satisfaction.',
     gaps: { 1: { options: ['led', 'lead', 'leading'], answer: 'led' } },
     clue: 'This is a finished past event. Which past form is spelled correctly?',
   },

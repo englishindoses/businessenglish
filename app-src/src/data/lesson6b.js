@@ -351,9 +351,9 @@ const matching = [
   },
   {
     id: 'l6b-mt-02',
-    left: 'The translation is a bit off.',
+    left: 'The translation is a little off.',
     right: "a gentler way to say 'the translation has mistakes'",
-    clue: "Look at 'a bit off'. What is the speaker really criticising?",
+    clue: "Look at 'a little off'. What is the speaker really criticising?",
   },
   {
     id: 'l6b-mt-03',
