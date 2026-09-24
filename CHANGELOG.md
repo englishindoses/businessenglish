@@ -6,6 +6,25 @@ reasoning behind a decision has been forgotten.
 
 ---
 
+## 24 September 2026 — Lesson 9 is now Project Updates and Deadlines
+
+Persuasive Writing was dropped from the course. Much of it repeated earlier lessons: polite
+requests were already in Lesson 4, and softeners like "It might be worth…" in Lesson 6B.
+Its place as Lesson 9 went to a new lesson, **Project Updates and Deadlines**, which follows
+naturally from presenting (Lesson 8) and leads into difficult conversations (Lesson 10).
+
+- `lesson9.html` is new, built with the same sections and activity types as Lesson 8.
+- The key language is plain business English rather than idioms. The project vocabulary
+  (deadline, milestone, deliverable, schedule, scope, resources…) is taught inside useful
+  phrases, grouped as done / in progress / next / delays / asking for what you need.
+- Grammar: present perfect simple vs. continuous, plus **by** vs. **until** for deadlines,
+  since Portuguese "até" covers both.
+- `index.html`: the Lesson 9 card now links to the new lesson. `lesson8.html`: "Coming next"
+  points to it. `course-language-summary.md` has a Lesson 9 section.
+- The practice app has no Lesson 9 topic yet.
+
+---
+
 ## 23 September 2026 — five phrases reworded, and "How do you do?" retired
 
 A check on how natural the app's sentences sound flagged five of them. Four were
