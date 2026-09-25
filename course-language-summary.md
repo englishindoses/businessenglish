@@ -1,7 +1,7 @@
 # Business English Course — Grammar and Language Summary
 
 A record of every grammar point and every key term or phrase taught in the lessons built so far
-(Lessons 1–8, plus Review 1, Review 2 and the bonus conversation lesson).
+(Lessons 1–9, plus Review 1, Review 2 and the bonus conversation lesson).
 
 ---
 
@@ -404,3 +404,51 @@ sensitive topics; less with close colleagues in informal settings, where over-he
 - That's a really good question.
 - Let me come back to that in a moment.
 - Just to clarify your question — are you asking whether...?
+
+---
+
+## Lesson 9 — Project Updates and Deadlines
+
+**Grammar points reviewed: Present perfect simple vs. continuous**
+
+- **Simple (have / has + past participle)** — the result: finished work ("We've completed the testing phase"), how many or how much ("We've recorded four of the ten videos"), with already / just / yet / so far.
+- **Continuous (have / has + been + -ing)** — the activity: work still going on ("We've been working on the training videos"), how long with for / since / all week ("The team has been interviewing candidates since Monday"), a recent activity that explains the situation now ("The supplier has been having technical problems").
+- Quick test: how many? → simple; how long? → continuous.
+- State verbs (know, understand, need, belong, have = own) are not usually continuous: "I've known about the delay since Monday."
+- Common errors: "I work on this project since Monday" → "I've been working on this project since Monday"; "We are waiting for two weeks" → "We've been waiting for two weeks".
+
+**By vs. until (deadlines)**
+- **by** = no later than; something happens once, at or before that time: "Please send me the figures by Friday."
+- **until** = up to that time; a situation continues, then stops: "The office is closed until Monday"; "The launch has been postponed until March."
+- Portuguese "até" covers both. Test: if you can say "no later than", use by.
+
+**Key terms and phrases taught** — vocabulary is taught inside the phrases, not as idioms.
+
+*What's done*
+- We've reached the first milestone.
+- We've completed the testing phase.
+- The first deliverable has been sent to...
+
+*In progress*
+- We've been making good progress on...
+- We've been working on... since Monday.
+- We're on schedule for...
+
+*What's next*
+- Our main priority this week is...
+- We estimate that it will take...
+- We expect to finish by...
+
+*Delays and problems*
+- We're behind schedule because of...
+- ... has been postponed until...
+- There's been a delay due to...
+
+*Asking for what you need*
+- Would it be possible to extend the deadline?
+- Could we allocate more resources to...?
+- We may need to reduce the scope of...
+- Can we agree to prioritise...?
+
+*Word partnerships*
+- meet / miss / extend a deadline; reach a milestone; make progress (not "do progress"); on / behind / ahead of schedule; allocate resources to something; reduce the scope of a project.

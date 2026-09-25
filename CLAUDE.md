@@ -18,7 +18,10 @@ file up to date with what changed in the session.
 
 - One HTML file per lesson, plus shared modules in `css/` and `js/`.
 - Lesson order on the site: 1, 2, 3, Review 1, 4, 5, Bonus (Time to Recharge), 6, 6b, 7,
-  Review 2, 8. Lessons 9–12 are "coming soon" on `index.html`.
+  Review 2, 8, 9. Lessons 10–12 are "coming soon" on `index.html`.
+- **Key language is plain, useful business English, not idioms** (owner's decision, 24
+  September, from Lesson 9 on): vocabulary is taught inside useful phrases, and the phrases
+  use the vocabulary, so students learn each word with the words it goes with.
 - Activity engines in `js/` read their content from the HTML markup.
 - Login is username-only, stored in Firestore (`js/firebase-config.js`).
 - `course-language-summary.md` lists every grammar point and key phrase taught so far.
