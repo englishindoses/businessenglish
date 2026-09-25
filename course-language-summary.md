@@ -411,44 +411,25 @@ sensitive topics; less with close colleagues in informal settings, where over-he
 
 **Grammar points reviewed: Present perfect simple vs. continuous**
 
-- **Simple (have / has + past participle)** — the result: finished work ("We've completed the testing phase"), how many or how much ("We've recorded four of the ten videos"), with already / just / yet / so far.
-- **Continuous (have / has + been + -ing)** — the activity: work still going on ("We've been working on the training videos"), how long with for / since / all week ("The team has been interviewing candidates since Monday"), a recent activity that explains the situation now ("The supplier has been having technical problems").
-- Quick test: how many? → simple; how long? → continuous.
-- State verbs (know, understand, need, belong, have = own) are not usually continuous: "I've known about the delay since Monday."
-- Common errors: "I work on this project since Monday" → "I've been working on this project since Monday"; "We are waiting for two weeks" → "We've been waiting for two weeks".
+- The **simple** form talks about the result of a finished activity; the **continuous** form talks about an activity still in progress now.
+- **Present perfect simple (have / has + past participle)** — focus on the result: "We've completed the testing phase"; "We've recorded four of the ten training videos"; "HR has just sent the new contracts."
+- **Present perfect continuous (have / has + been + -ing)** — focus on the activity in progress: "We've been working on the training videos"; "The team has been interviewing candidates since Monday"; "The supplier has been having technical problems."
+- Compare: "I've written the report" (it's finished, you can read it now) / "I've been writing the report" (I'm in the process of writing, it's not ready yet); "Ana has interviewed six candidates" (the result) / "Ana has been interviewing candidates all morning" (the duration of a process that is still happening).
 
-**By vs. until (deadlines)**
-- **by** = no later than; something happens once, at or before that time: "Please send me the figures by Friday."
-- **until** = up to that time; a situation continues, then stops: "The office is closed until Monday"; "The launch has been postponed until March."
-- Portuguese "até" covers both. Test: if you can say "no later than", use by.
+**Key vocabulary:** milestone, deliverable, delay, estimate, scope, postpone, extend, allocate.
 
-**Key terms and phrases taught** — vocabulary is taught inside the phrases, not as idioms.
+**Key phrases taught**
 
 *What's done*
 - We've reached the first milestone.
-- We've completed the testing phase.
-- The first deliverable has been sent to...
+- We've sent the first deliverable to...
+- We've extended the deadline to...
 
 *In progress*
+- We've been working on... since...
 - We've been making good progress on...
-- We've been working on... since Monday.
-- We're on schedule for...
+- We've been dealing with a delay on...
 
 *What's next*
-- Our main priority this week is...
+- The next step is to...
 - We estimate that it will take...
-- We expect to finish by...
-
-*Delays and problems*
-- We're behind schedule because of...
-- ... has been postponed until...
-- There's been a delay due to...
-
-*Asking for what you need*
-- Would it be possible to extend the deadline?
-- Could we allocate more resources to...?
-- We may need to reduce the scope of...
-- Can we agree to prioritise...?
-
-*Word partnerships*
-- meet / miss / extend a deadline; reach a milestone; make progress (not "do progress"); on / behind / ahead of schedule; allocate resources to something; reduce the scope of a project.

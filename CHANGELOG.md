@@ -6,6 +6,27 @@ reasoning behind a decision has been forgotten.
 
 ---
 
+## 25 September 2026 — Lesson 9 cut back to its essentials
+
+The first version of Lesson 9 tried to do too much. It was reduced:
+
+- **Gone:** the reading and its true/false questions, *by* vs. *until* as a teaching point
+  (the words can still appear in sentences), the "Words that go together" box, and the
+  quick test, common errors and deadlines boxes in the grammar section.
+- **Key phrases:** down from 16 to 8, covering only what's done, what's in progress and
+  what's next, and built on the grammar of the lesson.
+- **Key vocabulary:** eight words — milestone, deliverable, delay, estimate, scope,
+  postpone, extend, allocate — with a new definition-matching activity.
+- **Grammar wording fixed.** The first version labelled examples "how many or how much"
+  and "how long", which wrongly suggested the tenses are about quantity and time. They are
+  about **result** (simple) and **activity in progress** (continuous), and the section now
+  says so.
+- **New order:** objectives, warm-up, grammar, a quick discussion (something you've
+  finished / something you've been doing), key phrases, vocabulary matching, then practice:
+  gap-fill, word order and the spoken update.
+
+---
+
 ## 24 September 2026 — Lesson 9 is now Project Updates and Deadlines
 
 Persuasive Writing was dropped from the course. Much of it repeated earlier lessons: polite
