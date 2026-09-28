@@ -291,12 +291,7 @@ window.resetSentenceOrder = function() {
             });
             
             // Reorder based on original shuffled order
-            originalOrder.forEach(text => {
-                const word = Array.from(words).find(w => w.textContent === text);
-                if (word) {
-                    wordBank.appendChild(word);
-                }
-            });
+            restoreWordOrder(wordBank, words, originalOrder);
         }
         
         exercise.classList.remove('sentence-correct', 'sentence-incorrect');
@@ -307,6 +302,18 @@ window.resetSentenceOrder = function() {
     // Clear saved state
     saveSentenceState();
 };
+
+// Put the word tiles back in the given order. Each tile is used once, so a
+// word that appears twice in a sentence (e.g. "the") restores correctly.
+function restoreWordOrder(wordBank, words, order) {
+    const unused = Array.from(words);
+    order.forEach(text => {
+        const i = unused.findIndex(w => w.textContent === text);
+        if (i !== -1) {
+            wordBank.appendChild(unused.splice(i, 1)[0]);
+        }
+    });
+}
 
 // ===== State Persistence =====
 
@@ -344,12 +351,7 @@ async function loadSavedSentenceState() {
                 const words = wordBank.querySelectorAll('.draggable-word');
                 
                 // Reorder based on saved state
-                wordOrder.forEach(text => {
-                    const word = Array.from(words).find(w => w.textContent === text);
-                    if (word) {
-                        wordBank.appendChild(word);
-                    }
-                });
+                restoreWordOrder(wordBank, words, wordOrder);
             });
             
             console.log('Loaded saved sentence ordering state');
