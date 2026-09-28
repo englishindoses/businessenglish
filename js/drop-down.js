@@ -51,8 +51,8 @@ function handleDropdownChange(dropdown) {
         dropdown.classList.remove('answered');
     }
     
-    // Clear any previous correct/incorrect styling
-    dropdown.classList.remove('correct', 'incorrect');
+    // Clear any previous correct/incorrect/unanswered styling
+    dropdown.classList.remove('correct', 'incorrect', 'unanswered');
     
     // Clear sentence styling too
     const sentence = dropdown.closest('.dropdown-sentence');
@@ -89,20 +89,22 @@ window.checkDropdownAnswers = function(activityId) {
         total++;
         
         // Clear previous states
-        dropdown.classList.remove('correct', 'incorrect');
+        dropdown.classList.remove('correct', 'incorrect', 'unanswered');
         if (sentence) {
             sentence.classList.remove('correct', 'incorrect');
         }
-        
+
         if (selectedValue !== '') {
             answered++;
-            
+
             if (selectedValue === correctAnswer) {
                 dropdown.classList.add('correct');
                 correct++;
             } else {
                 dropdown.classList.add('incorrect');
             }
+        } else {
+            dropdown.classList.add('unanswered');
         }
     });
     
@@ -144,7 +146,7 @@ window.resetDropdownActivity = function(activityId) {
     
     dropdowns.forEach(dropdown => {
         dropdown.value = '';
-        dropdown.classList.remove('correct', 'incorrect', 'answered');
+        dropdown.classList.remove('correct', 'incorrect', 'answered', 'unanswered');
         
         const sentence = dropdown.closest('.dropdown-sentence');
         if (sentence) {
