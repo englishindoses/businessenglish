@@ -700,6 +700,72 @@
     }
 }
 
+/* Phone */
+@media (max-width: 600px) {
+    .hero {
+        padding: 2.5rem 1rem 3.5rem;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .overview {
+        padding: 0 0.75rem;
+    }
+
+    .overview-card {
+        padding: 1.25rem 1rem;
+    }
+
+    .overview-card > p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .overview-features {
+        gap: 1rem;
+    }
+
+    .lessons-section,
+    .progress-section {
+        padding: 2.5rem 0;
+    }
+
+    .lessons-title {
+        font-size: 1.7rem;
+    }
+
+    .lessons-subtitle {
+        margin-bottom: 1.75rem;
+    }
+
+    .lessons-grid {
+        gap: 1rem;
+    }
+
+    .lesson-card {
+        padding: 1.25rem;
+    }
+
+    .lesson-card:hover {
+        transform: none;
+    }
+
+    .progress-card {
+        padding: 1.25rem 1rem 3.5rem;
+    }
+
+    .progress-details {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .login-modal {
+        padding: 1.75rem 1.25rem;
+    }
+}
+
 /* Animation on scroll */
 .lesson-card {
     opacity: 0;

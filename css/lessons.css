@@ -1558,3 +1558,163 @@ h1, h2, h3, h4 {
 .section.grammar-tip .reset-btn:hover {
     background: #EFE7DC;
 }
+/* =====================================================
+   PHONE LAYOUT
+   Desktop padding is stacked three deep (page, section,
+   activity), which left phones a narrow strip of text.
+   ===================================================== */
+@media (max-width: 600px) {
+    .header {
+        padding: 1.5rem 1rem 1.75rem;
+    }
+
+    .header h1 {
+        font-size: 1.85rem;
+    }
+
+    .header-subtitle {
+        font-size: 1rem;
+    }
+
+    .header-decoration {
+        width: 260px;
+        height: 260px;
+    }
+
+    .container {
+        padding: 1rem 0.75rem;
+    }
+
+    .section {
+        padding: 1.25rem 1rem;
+        margin-bottom: 1.25rem;
+        border-radius: var(--radius-md);
+    }
+
+    /* Label on its own line, title full width underneath */
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .section-header h2 {
+        font-size: 1.4rem;
+    }
+
+    .section-intro {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .activity {
+        padding: 1rem 0.75rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .activity-header {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .activity-header h3 {
+        font-size: 1.1rem;
+    }
+
+    /* Boxes inside sections and activities */
+    .discussion-card,
+    .discussion-grid.single-column .discussion-card,
+    .language-box,
+    .reflection-card,
+    .planning-card,
+    .scenario-card,
+    .sentence-exercise,
+    .question-card {
+        padding: 1rem;
+    }
+
+    .practice-prompt,
+    .discussion-note,
+    .roleplay-tips,
+    .tip-box,
+    .special-case {
+        padding: 0.85rem 1rem;
+    }
+
+    .reveal-header {
+        padding: 0.85rem 1rem;
+    }
+
+    .reveal-content,
+    .reveal-box.revealed .reveal-content {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .phrase-bank,
+    .sort-zone,
+    .draggable-responses {
+        padding: 0.75rem;
+    }
+
+    .dropdown-sentence {
+        padding: 0.85rem;
+    }
+
+    .scenario-box {
+        padding: 1.25rem 1rem;
+    }
+
+    .subsection {
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+    }
+
+    /* Card grids go to one column instead of squeezing */
+    .discussion-grid,
+    .reflection-grid,
+    .scenario-cards,
+    .planning-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .discussion-questions li,
+    .discussion-grid.single-column .discussion-questions li {
+        font-size: 0.95rem;
+        padding-top: 0.4rem;
+        padding-bottom: 0.4rem;
+    }
+
+    /* Bigger tap targets */
+    .check-btn,
+    .reset-btn {
+        padding: 0.7rem 1.25rem;
+    }
+
+    .completion-buttons {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+
+    .nav-btn,
+    .complete-lesson-btn {
+        justify-content: center;
+    }
+
+    .footer {
+        padding: 1.5rem 1rem;
+    }
+
+    /* Hover lifts stick after a tap on touch screens */
+    .discussion-card:hover,
+    .topic-card:hover,
+    .scenario-card:hover,
+    .question-card:hover,
+    .nav-btn:hover,
+    .complete-lesson-btn:hover {
+        transform: none;
+    }
+}
